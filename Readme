@@ -1,0 +1,13 @@
+JDP 1. Bitmap Frenzy
+
+Purpose
+-	Improve skills of working with specification
+-	Improve TDD skills
+Description
+Given 2 command line parameters (input_file_path , output_file_path), program should read the BMP file from input_file_path , reverse the image by 180 degrees and save the result  to output_file_path. The code should be written using TDD approach.
+Restrictions
+No image processing libraries should be used.
+Resources
+BMP Bitmap file format specification http://www.dragonwins.com/domains/getteched/bmp/bmpfileformat.htm
+References
+Steve Freeman: "Growing Object-Oriented Software, Guided by Tests"
