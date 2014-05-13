@@ -64,3 +64,4 @@ public class BmpOperation256Colors implements BmpOperation {
 	}
 
 }
+

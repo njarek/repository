@@ -32,3 +32,4 @@ public class BmpOperation256ColorsTest {
 		
 	}
 }
+
