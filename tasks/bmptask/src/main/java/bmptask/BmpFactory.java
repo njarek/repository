@@ -23,14 +23,15 @@ public class BmpFactory {
 
 		switch (type) {
 		
-		//case 1:return new BmpOperationMonochrome() ;
-		//case 4:return new BmpOperation16Color();	
+		case 1:throw new RuntimeException("Not immplemeted") ;
+		case 4:throw new RuntimeException("Not immplemeted") ;//return new BmpOperation16Color();	
 		case 8:
 			return new BmpOperation256Colors(bs,bmpHeaderValues);	
+		
+		case 16:throw new RuntimeException("Not immplemeted") ;//return new BmpOperation16Bit();	
+		case 24:throw new RuntimeException("Not immplemeted") ;//return new BmpOperation24Bit();	
+		case 32:throw new RuntimeException("Not immplemeted") ;//return new BmpOperation32Bit();	
 		}
-		//case 16:return new BmpOperation16Bit();	
-		//case 24:return new BmpOperation24Bit();	
-		//case 32:return new BmpOperation32Bit();	
 		return null;
 
 	}
