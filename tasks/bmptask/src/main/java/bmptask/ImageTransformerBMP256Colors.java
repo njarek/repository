@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
-public class BmpOperation256Colors implements BmpOperation {
+public class ImageTransformerBMP256Colors implements ImageTransformer {
 
 	private byte[] bmpPicture;
 	private Map<String, Integer> headrValues;
 
-	public BmpOperation256Colors(byte[] bs, Map<String, Integer> bmpHeaderValues) {
+	public ImageTransformerBMP256Colors(byte[] bs, Map<String, Integer> bmpHeaderValues) {
 		this.bmpPicture = bs;
 		this.headrValues = bmpHeaderValues;
 	}
@@ -31,10 +31,8 @@ public class BmpOperation256Colors implements BmpOperation {
 		byte[] revertedPicutre = bmp;
 		reversePicture(bfOffBits, reversePixelArray, revertedPicutre);
 
-		FileUtility.writeFile(revertedPicutre,output);
+		FileUtility.writeFile(revertedPicutre, output);
 	}
-
-	
 
 	private void reversePixelArray(int height, int widith, int newWidith, byte[] picture2, byte[] reversePicture) {
 		int o = 0;
@@ -54,6 +52,7 @@ public class BmpOperation256Colors implements BmpOperation {
 
 		}
 	}
+
 	private void reversePicture(int bfOffBits, byte[] reversePixelArray, byte[] revertedPicutre) {
 		int c = bfOffBits;
 
@@ -64,4 +63,3 @@ public class BmpOperation256Colors implements BmpOperation {
 	}
 
 }
-

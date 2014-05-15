@@ -17,7 +17,7 @@ public class Main {
 		}
 
 		try {
-			BmpOperation bmpOperation = BmpFactory.getOperation(inputFile);
+			ImageTransformer bmpOperation = ImageTransformerFactory.getOperation(inputFile);
 			bmpOperation.rotate(outputFile);
 
 		} catch (IOException e) {
