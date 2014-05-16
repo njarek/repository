@@ -13,10 +13,10 @@ public class NetClientGet {
  
 	  try {
  
-		URL url = new URL("http://localhost:8082/cos/rest/hello/3");
+		URL url = new URL("http://localhost:8082/HiberService/rest/hello/3");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Accept", "application/txt");
+		conn.setRequestProperty("Accept", "application/xml");
  
 		if (conn.getResponseCode() != 200) {
 			throw new RuntimeException("Failed : HTTP error code : "
