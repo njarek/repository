@@ -6,7 +6,7 @@
     <class name="pl.jojco.pojo.Pojo" table="POJO">
         <id name="id" type="int">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="name" type="java.lang.String">
             <column name="NAME" />

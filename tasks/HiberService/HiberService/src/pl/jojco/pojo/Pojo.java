@@ -1,5 +1,6 @@
 package pl.jojco.pojo;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Pojo")
@@ -13,7 +14,8 @@ public class Pojo {
 		return id;
 	}
 
-	public void setId(int id) {
+	@XmlAttribute
+	private void setId(int id) {
 		this.id = id;
 	}
 
@@ -31,6 +33,11 @@ public class Pojo {
 
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	@Override
+	public String toString() {
+		return "Pojo [id=" + id + ", name=" + name + ", number=" + number + "]";
 	}
 
 }

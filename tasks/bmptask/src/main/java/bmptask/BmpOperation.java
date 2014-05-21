@@ -9,3 +9,4 @@ public interface BmpOperation {
 	public void rotate(String outputFile) throws FileNotFoundException, IOException;
 	
 }
+

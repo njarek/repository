@@ -1,7 +1,8 @@
 drop table pojo if exists;
 create table pojo(
 id bigint auto_increment, 
-name varchar(255),
+name varchar2(255),
 number  bigint);
 
-insert into pojo(name,number) values("elo",22);
+insert into pojo(number,name) values(22,'elo');
+

@@ -9,14 +9,14 @@ http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
 
 	<bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer"
 		init-method="start" destroy-method="stop">
-		<constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,8043" />
+		<constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9043" />
 	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.h2.Driver" />
 		<property name="url"
-			value="jdbc:h2:tcp://localhost:8043/./test;MODE=Oracle" />
+			value="jdbc:h2:tcp://localhost:9043/./test;MODE=Oracle" />
 		<property name="username" value="sa" />
 		<property name="password" value="sa" />
 	</bean>

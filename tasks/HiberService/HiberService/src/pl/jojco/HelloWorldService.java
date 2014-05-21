@@ -1,24 +1,81 @@
 package pl.jojco;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Response;
 
-import org.eclipse.jdt.internal.compiler.codegen.IntegerCache;
- 
+import java.io.StringWriter;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
+import org.apache.http.entity.StringEntity;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
+
+import pl.jojco.pojo.Pojo;
+
 @Path("/hello")
 public class HelloWorldService {
- 
-	@GET
-	@Path("/{param}")
-	public Response getMsg(@PathParam("param") String msg) {
- 
-		int suma=Integer.parseInt(msg)+20;
+
+	private SessionFactory factory;
+	private Session session;
+	@POST
+	@Path("/siema")
+	//@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+	public Pojo create(Pojo pojo) throws Exception {
 		
-		String output = "Jersey say : " + suma;
+	System.out.println(pojo);
+		Pojo returnPojo=addPojo(pojo);
+		System.out.println(returnPojo);
+		JAXBContext jaxbContext = JAXBContext.newInstance(Pojo.class);
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
  
-		return Response.status(200).entity(output).build();
- 
+		// output pretty printed
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		StringWriter stringWriter = new StringWriter();
+		
+		jaxbMarshaller.marshal(returnPojo, stringWriter);
+		
+		StringEntity input = new StringEntity(stringWriter.getBuffer().toString());
+		System.out.println(stringWriter.getBuffer().toString());
+		System.out.println(returnPojo.getId());
+		return returnPojo;
 	}
- 
+
+	@Transactional
+	public Pojo addPojo(Pojo pojo) {
+		
+		session=factory.openSession();
+	
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+
+			session.save(pojo);
+			System.out.println(pojo);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+			
+		} finally {
+			session.close();
+		}
+		return pojo;
+	}
+
+	public SessionFactory getFactory() {
+		return factory;
+	}
+
+	public void setFactory(SessionFactory factory) {
+		this.factory = factory;
+	}
+
 }
