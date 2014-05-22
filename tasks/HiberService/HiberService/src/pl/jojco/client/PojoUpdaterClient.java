@@ -17,7 +17,7 @@ import org.apache.http.util.EntityUtils;
 
 import pl.jojco.pojo.Pojo;
 
-public class NetClientGet {
+public class PojoUpdaterClient {
 
 	// http://localhost:8080/RESTfulExample/json/product/get
 	public static void main(String[] args) throws Exception {
