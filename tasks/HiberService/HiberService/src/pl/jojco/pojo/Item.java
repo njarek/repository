@@ -6,6 +6,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Item {
 
+	public Item(){
+		
+	}
 	private int id;
 	private String description;
 	private int quantity;

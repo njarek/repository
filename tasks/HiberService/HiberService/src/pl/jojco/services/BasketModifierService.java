@@ -6,23 +6,39 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import com.sun.jersey.spi.inject.Inject;
 
 import pl.jojco.pojo.Basket;
 
-@Path("/baket")
+@Path("/basket")
 public class BasketModifierService {
 
 	private SessionFactory factory;
 	
 	@POST
 	@Path("/get")
-	@Consumes(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_XML)
-	public Basket getBasket(int id){
-		return null;
+	public Basket getBasket(String id){
+		System.out.println(id);
+		int basketId=Integer.parseInt(id);
+		Session session = null;
+        Basket basket = null;
+        try {
+            session =factory.openSession();
+            basket =  (Basket) session.load(Basket.class,
+            		basketId);
+            Hibernate.initialize(basket);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return basket;
 		
 	}
 	
