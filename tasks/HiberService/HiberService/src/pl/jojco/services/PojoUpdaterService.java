@@ -22,7 +22,7 @@ public class PojoUpdaterService {
 	private Session session;
 	@POST
 	@Path("/siema")
-	@Consumes(MediaType.APPLICATION_XML)
+	//@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.APPLICATION_XML)
 	public Pojo create(Pojo pojo) throws Exception {		
 	System.out.println(pojo);
