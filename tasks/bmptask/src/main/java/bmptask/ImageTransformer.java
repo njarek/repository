@@ -3,10 +3,8 @@ package bmptask;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
-public interface BmpOperation {
+public interface ImageTransformer {
 
 	public void rotate(String outputFile) throws FileNotFoundException, IOException;
-	
-}
 
+}

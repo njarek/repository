@@ -17,9 +17,10 @@ public class Main {
 		}
 
 		try {
-			BmpOperation bmpOperation = BmpFactory.getOperation(inputFile);
+			System.out.println("Start transforming");
+			ImageTransformer bmpOperation = ImageTransformerFactory.getOperation(inputFile);
 			bmpOperation.rotate(outputFile);
-
+			System.out.println("Transforming finished");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
