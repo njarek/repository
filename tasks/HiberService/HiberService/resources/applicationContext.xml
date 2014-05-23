@@ -11,11 +11,7 @@
 	<import resource="classpath:pl/jojco/database/h2.xml" />
 	<import resource="classpath:pl/jojco/database/hibernate.xml" />
 
-	<bean id="jersey-serlvet" class="pl.jojco.services.PojoUpdaterService">
-		<property name="factory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="basketService" class="pl.jojco.services.BasketModifierService">
+	<bean id="jersey-serlvet" class="pl.jojco.HelloWorldService">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
 </beans>

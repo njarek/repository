@@ -24,8 +24,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<property name="mappingResources">
 			<list>
 				<value>/pl/jojco/pojo/Pojo.hbm.xml</value>
-				<value>/pl/jojco/pojo/Item.hbm.xml</value>
-				<value>/pl/jojco/pojo/Basket.hbm.xml</value>
+				
+			
 			</list>
 		</property>
 
