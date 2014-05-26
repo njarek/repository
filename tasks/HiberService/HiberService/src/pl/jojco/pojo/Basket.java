@@ -14,6 +14,7 @@ public class Basket {
 	}
 	@XmlAttribute
 	private int id;
+	private long version;
 	private String name;
 	private Set<Item> currentBasket=new HashSet<Item>(0);;
 
@@ -29,6 +30,14 @@ public class Basket {
 	
 	private void setId(int id) {
 		this.id = id;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 	public String getName() {
@@ -54,8 +63,7 @@ public class Basket {
 
 	@Override
 	public String toString() {
-		return "Basket [id=" + id + ", name=" + name + ", currentBasket="
-				+ currentBasket + "]";
+		return "Basket [id=" + id + ", version=" + version + ", name=" + name + "]";
 	}
 
 }

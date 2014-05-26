@@ -3,19 +3,23 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2014-05-22 05:37:07 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="pl.jojco.pojo.Item" table="ITEM">
-        <id name="idItem" type="int">
-            <column name="I_ID" />
-            <generator class="native" />
-        </id>
-        <many-to-one name="basket" class="pl.jojco.pojo.Basket" fetch="select">
-            <column name="B_ID"  />
-        </many-to-one>
-        <property name="description" type="java.lang.String">
-            <column name="I_DESCRIPTION" />
-        </property>
-        <property name="quantity" type="int">
-            <column name="I_QUANTITY" />
-        </property>
-    </class>
+	<class name="pl.jojco.pojo.Item" table="ITEM">
+		<id name="idItem" type="int">
+			<column name="I_ID" />
+			<generator class="native" />
+		</id>
+		<version name="version" type="long" generated="always" column="i_version"/>
+			<!-- <column name="i_version" />
+		</version> -->
+		<many-to-one name="basket" class="pl.jojco.pojo.Basket"
+			fetch="select">
+			<column name="B_ID" />
+		</many-to-one>
+		<property name="description" type="java.lang.String">
+			<column name="I_DESCRIPTION" />
+		</property>
+		<property name="quantity" type="int">
+			<column name="I_QUANTITY" />
+		</property>
+	</class>
 </hibernate-mapping>

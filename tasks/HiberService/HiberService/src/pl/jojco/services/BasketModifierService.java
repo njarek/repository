@@ -11,61 +11,75 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import pl.jojco.pojo.Basket;
+import pl.jojco.pojo.Pojo;
 
 @Path("/basket")
 public class BasketModifierService {
 
 	private SessionFactory factory;
-	
+
 	@POST
 	@Path("/get")
-//	@Consumes(MediaType.TEXT_PLAIN)
-//	@Produces(MediaType.APPLICATION_XML)
-	public Basket getBasket(String id) throws Exception{
+	public Basket getBasket(String id) throws Exception {
 		System.out.println("jetem ti");
 		System.out.println(id);
-//		System.out.println(id);
-//		int basketId=Integer.parseInt(id);
-//		int basketId=id;
-//		Session session = null;
-//        Basket basket = null;
-//        try {
-//            session =factory.openSession();
-//            basket =  (Basket) session.load(Basket.class,
-//            		basketId);
-//            Hibernate.initialize(basket);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (session != null && session.isOpen()) {
-//                session.close();
-//            }
-//        }
-//        JAXBContext jaxbContext2 = JAXBContext.newInstance(Basket.class);
-//		Marshaller jaxbMarshaller = jaxbContext2.createMarshaller();
-//
-//		// output pretty printed
-//		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//		StringWriter stringWriter = new StringWriter();
-//
-//		jaxbMarshaller.marshal(basket, stringWriter);
-//		System.out.println(stringWriter.getBuffer().toString());
-		
-        return new Basket();
-		
+		int basketId = Integer.parseInt(id);
+
+		Basket basket = getBasketById(basketId);
+
+		return basket;
 	}
-	
+
+	private Basket getBasketById(int basketId) {
+		Session session1 = null;
+		Basket basket = null;
+		try {
+			session1 = factory.openSession();
+			basket = (Basket) session1.get(Basket.class, basketId);
+			basket.getCurrentBasket().size();
+			Hibernate.initialize(basket);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session1 != null && session1.isOpen()) {
+				session1.close();
+			}
+		}
+		return basket;
+	}
+
 	@POST
 	@Path("/update")
-	@Consumes(MediaType.APPLICATION_XML)
-	@Produces(MediaType.APPLICATION_XML)
-	public boolean  updateBaket(Basket basket){
-		
-		return true;
+//	@Consumes(MediaType.APPLICATION_XML)
+//	@Produces(MediaType.APPLICATION_XML)
+	public Basket updateBaket(Basket basket) {
+		System.out.println(basket);
+		Basket returnBasket=addBasket(basket);	
+		return returnBasket;
+	}
+	
+	public Basket addBasket(Basket basket) {	
+		Session session=factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(basket);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();	
+		} finally {
+			session.close();
+		}
+		return basket;
 	}
 
 	public SessionFactory getFactory() {

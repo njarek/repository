@@ -10,11 +10,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(value = XmlAccessType.FIELD)
 public class Item {
 
-	public Item(){
-		
+	public Item() {
+
 	}
-	@XmlAttribute(required=true)
+
+	@XmlAttribute(required = true)
 	private int idItem;
+	private long version;
 	private String description;
 	private int quantity;
 	@XmlTransient
@@ -26,16 +28,21 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-
 	public int getIdItem() {
 		return idItem;
 	}
-	
+
 	private void setIdItem(int idItem) {
 		this.idItem = idItem;
 	}
 
+	public long getVersion() {
+		return version;
+	}
 
+	public void setVersion(long version) {
+		this.version = version;
+	}
 
 	public String getDescription() {
 		return description;
@@ -63,7 +70,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [id=" + idItem + ", description=" + description + ", quantity=" + quantity  + "]";
+		return "Item [idItem=" + idItem + ", version=" + version + ", description=" + description + ", quantity=" + quantity + "]";
 	}
-	
+
 }

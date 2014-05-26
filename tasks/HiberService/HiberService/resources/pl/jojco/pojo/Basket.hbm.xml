@@ -8,10 +8,13 @@
 			<column name="B_ID" />
 			<generator class="native" />
 		</id>
+		<version name="version" type="long" generated="always" column="b_version"/>
+			<!-- <column name="b_version" />
+		</version> -->
 		<property name="name" type="java.lang.String">
 			<column name="B_NAME" />
 		</property>
-		<set name="currentBasket"  table="ITEM"  cascade="all" >
+		<set name="currentBasket" table="ITEM" cascade="all">
 			<key>
 				<column name="B_ID" />
 			</key>
