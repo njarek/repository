@@ -16,6 +16,7 @@ public class Item {
 
 	@XmlAttribute(required = true)
 	private int idItem;
+	@XmlAttribute(required = true)
 	private long version;
 	private String description;
 	private int quantity;

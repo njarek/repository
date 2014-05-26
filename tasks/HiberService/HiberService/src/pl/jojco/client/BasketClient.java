@@ -28,35 +28,36 @@ import pl.jojco.pojo.Pojo;
 public class BasketClient {
 
 	private static final String MEDIA_TYPE_PLAIN_TEXT = "plain/text";
-	private static final String MEDIA_TYPE_APPLICATION_XML = "appliacation/xml";
+	private static final String MEDIA_TYPE_APPLICATION_XML = "application/xml";
 	private static final String HOST_GET = "http://localhost:8082/hiber.task/rest/basket/get";
 	private static final String HOST_UPADTE = "http://localhost:8082/hiber.task/rest/basket/update";
 	private SessionFactory factory;
 	HttpClient httpClient;
-	static JAXBContext jaxbContext ;
-	public BasketClient() throws JAXBException{
+	static JAXBContext jaxbContext;
+
+	public BasketClient() throws JAXBException {
 		httpClient = HttpClientBuilder.create().build();
 		jaxbContext = JAXBContext.newInstance(Basket.class);
 	}
 
 	public Basket getBasket(int id) throws Exception {
-		HttpPost postRequest = preapreStringPostRequest(""+id,MEDIA_TYPE_PLAIN_TEXT,HOST_GET);
+		HttpPost postRequest = preapreStringPostRequest("" + id, MEDIA_TYPE_PLAIN_TEXT, HOST_GET);
 		HttpResponse response = httpClient.execute(postRequest);
 
 		Basket basket = unamrshalResponse(response);
 		return basket;
 	}
-	
-	public Basket updateBasket(Basket basket) throws PropertyException, JAXBException, IOException{
-		String basketXml=createBasketXml(basket);
-		HttpPost postRequest=preapreStringPostRequest(basketXml, MEDIA_TYPE_APPLICATION_XML,HOST_UPADTE);
+
+	public Basket updateBasket(Basket basket) throws PropertyException, JAXBException, IOException {
+		String basketXml = createBasketXml(basket);
+		HttpPost postRequest = preapreStringPostRequest(basketXml, MEDIA_TYPE_APPLICATION_XML, HOST_UPADTE);
 		HttpResponse response = httpClient.execute(postRequest);
-		basket = unamrshalResponse( response);
+		basket = unamrshalResponse(response);
 		return basket;
-				
+
 	}
-	
-	private  String createBasketXml(Basket basket) throws JAXBException, PropertyException {
+
+	private String createBasketXml(Basket basket) throws JAXBException, PropertyException {
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		StringWriter stringWriter = new StringWriter();
@@ -64,8 +65,8 @@ public class BasketClient {
 		String basketXml = stringWriter.getBuffer().toString();
 		return basketXml;
 	}
-	
-	private HttpPost preapreStringPostRequest(String message,String mediaType,String Host) throws UnsupportedEncodingException {
+
+	private HttpPost preapreStringPostRequest(String message, String mediaType, String Host) throws UnsupportedEncodingException {
 		HttpPost postRequest = new HttpPost(Host);
 		StringEntity input = new StringEntity(message);
 		input.setContentType(mediaType);
@@ -74,6 +75,7 @@ public class BasketClient {
 	}
 
 	private Basket unamrshalResponse(HttpResponse response) throws IOException, JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(Basket.class);
 		HttpEntity httpEntity = response.getEntity();
 		String apiOutput = EntityUtils.toString(httpEntity);
 
@@ -84,22 +86,18 @@ public class BasketClient {
 		return basket;
 	}
 
-
-
 	public static void main(String[] args) throws Exception {
 		BasketClient basketClient = new BasketClient();
-		Basket basket=basketClient.getBasket(1);
-System.out.println(basket);
+		Basket basket = basketClient.getBasket(1);
+		System.out.println(basket);
 
-
-Random generator = new Random(); 
-int i = generator.nextInt(10) + 1;
-
-
-Thread.sleep(i*1000);
-basket.setName("nowy");
-basket=basketClient.updateBasket(basket);
-System.out.println(basket);
+//		Random generator = new Random();
+//		int i = generator.nextInt(10) + 1;
+//
+//		Thread.sleep(i * 1000);
+		basket.setName("nowy");
+		basket = basketClient.updateBasket(basket);
+		System.out.println(basket);
 
 	}
 

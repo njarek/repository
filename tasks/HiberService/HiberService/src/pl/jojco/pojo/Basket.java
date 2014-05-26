@@ -3,18 +3,23 @@ package pl.jojco.pojo;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Basket")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Basket {
 
 	public Basket(){
 		
 	}
-	@XmlAttribute
+	@XmlAttribute(required = true)
 	private int id;
+	@XmlAttribute(required = true)
 	private long version;
+	
 	private String name;
 	private Set<Item> currentBasket=new HashSet<Item>(0);;
 
@@ -63,7 +68,9 @@ public class Basket {
 
 	@Override
 	public String toString() {
-		return "Basket [id=" + id + ", version=" + version + ", name=" + name + "]";
+		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", currentBasket=" + currentBasket + "]";
 	}
+
+	
 
 }

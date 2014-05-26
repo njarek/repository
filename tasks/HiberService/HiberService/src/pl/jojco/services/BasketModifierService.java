@@ -61,16 +61,20 @@ public class BasketModifierService {
 //	@Produces(MediaType.APPLICATION_XML)
 	public Basket updateBaket(Basket basket) {
 		System.out.println(basket);
+		
+		//Basket basket2=getBasketById(basket.getId());
 		Basket returnBasket=addBasket(basket);	
 		return returnBasket;
 	}
 	
+	@Transactional
 	public Basket addBasket(Basket basket) {	
 		Session session=factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.save(basket);
+			session.merge(basket);
+			//session.flush();
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
