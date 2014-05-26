@@ -46,7 +46,7 @@ public class BasketClient {
 //			session.close();
 //		}
 		
-		//elo	asd as ssadf
+		//elo	asd as ssadf aaa
 		int id2=12;
 		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost postRequest = new HttpPost(
