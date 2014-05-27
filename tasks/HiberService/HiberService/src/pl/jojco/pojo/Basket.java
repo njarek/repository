@@ -1,8 +1,18 @@
 package pl.jojco.pojo;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -10,17 +20,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Basket")
 @XmlAccessorType(XmlAccessType.FIELD)
+
+@Entity
+@Table(name = "basket", catalog = "TEST" )
 public class Basket {
 
 	public Basket(){
 		
 	}
 	@XmlAttribute(required = true)
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "b_id", unique = true, nullable = false)
 	private int id;
+	
 	@XmlAttribute(required = true)
+	@Version
+	@Column(name="b_version")
 	private long version;
 	
+	@Column(name = "b_name",  nullable = false, length = 20)
 	private String name;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "item")
 	private Set<Item> currentBasket=new HashSet<Item>(0);;
 
 	public Basket(String name) {

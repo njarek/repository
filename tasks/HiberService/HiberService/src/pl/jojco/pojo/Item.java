@@ -1,5 +1,16 @@
 package pl.jojco.pojo;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -8,6 +19,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement(name = "Item")
 @XmlAccessorType(value = XmlAccessType.FIELD)
+
+@Entity
+@Table(name = "item", catalog = "TEST" )
 public class Item {
 
 	public Item() {
@@ -15,12 +29,23 @@ public class Item {
 	}
 
 	@XmlAttribute(required = true)
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "i_id", unique = true, nullable = false)
 	private int idItem;
 	@XmlAttribute(required = true)
+	@Version
+	@Column(name="i_version")
 	private long version;
+	
+	@Column(name="I_DESCRIPTION")
 	private String description;
+	@Column(name="I_QUANTITY")
 	private int quantity;
+	
 	@XmlTransient
+	@ManyToOne()
+	@JoinColumn(name = "b_id", nullable = false)
 	private Basket basket;
 
 	public Item(String description, int quantity) {
