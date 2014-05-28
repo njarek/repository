@@ -81,11 +81,13 @@
 
 
 		<!-- Hibernate framework -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate</artifactId>
-			<version>3.2.3.ga</version>
-		</dependency>
+	<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-core</artifactId>
+	<version>4.0.1.Final</version>
+</dependency>
+
+
 
 		<!-- Hibernate library dependecy start -->
 		<dependency>
@@ -164,8 +166,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>

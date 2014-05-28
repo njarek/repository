@@ -19,11 +19,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import pl.jojco.pojo.Basket;
-import pl.jojco.pojo.Pojo;
+import pl.jojco.pojo.Item;
 
 public class BasketClient {
 
@@ -91,11 +90,18 @@ public class BasketClient {
 		Basket basket = basketClient.getBasket(1);
 		System.out.println(basket);
 
-//		Random generator = new Random();
-//		int i = generator.nextInt(10) + 1;
-//
-//		Thread.sleep(i * 1000);
+		Random generator = new Random();
+		int i = generator.nextInt(10) + 1;
+
+		Thread.sleep(i * 1000);
 		basket.setName("nowy");
+		for(Item item:basket.getCurrentBasket()){
+			
+			int i2 = generator.nextInt(10) + 1;
+				
+				item.setQuantity(i2);
+			
+		}
 		basket = basketClient.updateBasket(basket);
 		System.out.println(basket);
 

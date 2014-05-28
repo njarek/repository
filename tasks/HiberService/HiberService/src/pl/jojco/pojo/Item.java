@@ -4,7 +4,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(value = XmlAccessType.FIELD)
 
 @Entity
-@Table(name = "item", catalog = "TEST" )
+@Table(name = "item" )
 public class Item {
 
 	public Item() {
@@ -33,6 +32,7 @@ public class Item {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "i_id", unique = true, nullable = false)
 	private int idItem;
+	
 	@XmlAttribute(required = true)
 	@Version
 	@Column(name="i_version")
@@ -40,12 +40,14 @@ public class Item {
 	
 	@Column(name="I_DESCRIPTION")
 	private String description;
+	
 	@Column(name="I_QUANTITY")
 	private int quantity;
 	
-	@XmlTransient
+	
 	@ManyToOne()
 	@JoinColumn(name = "b_id", nullable = false)
+	@XmlTransient
 	private Basket basket;
 
 	public Item(String description, int quantity) {
@@ -90,6 +92,7 @@ public class Item {
 		return basket;
 	}
 
+	
 	public void setBasket(Basket basket) {
 		this.basket = basket;
 	}

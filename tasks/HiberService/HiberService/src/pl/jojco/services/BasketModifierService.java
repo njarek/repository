@@ -1,24 +1,18 @@
 package pl.jojco.services;
 
-import java.io.StringWriter;
-
-import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.StaleObjectStateException;
 import org.hibernate.Transaction;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.jojco.pojo.Basket;
-import pl.jojco.pojo.Pojo;
+import pl.jojco.pojo.Item;
 
 @Path("/basket")
 public class BasketModifierService {
@@ -60,11 +54,21 @@ public class BasketModifierService {
 //	@Consumes(MediaType.APPLICATION_XML)
 //	@Produces(MediaType.APPLICATION_XML)
 	public Basket updateBaket(Basket basket) {
+		
+		for(Item item:basket.getCurrentBasket()){
+			item.setBasket(basket);
+		}
+		
 		System.out.println(basket);
 		
 		//Basket basket2=getBasketById(basket.getId());
+		try{
 		Basket returnBasket=addBasket(basket);	
 		return returnBasket;
+		}catch(StaleObjectStateException e){
+			return   basket;
+		}
+		
 	}
 	
 	@Transactional
