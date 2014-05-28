@@ -93,12 +93,12 @@ public class BasketClient {
 		Random generator = new Random();
 		int i = generator.nextInt(10) + 1;
 
-		Thread.sleep(i * 1000);
+		//Thread.sleep(i * 1000);
 		basket.setName("nowy");
 		for(Item item:basket.getCurrentBasket()){
 			
 			int i2 = generator.nextInt(10) + 1;
-				
+			System.out.println(item.getDescription()+" "+ i2);	
 				item.setQuantity(i2);
 			
 		}

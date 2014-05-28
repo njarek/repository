@@ -14,7 +14,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 @XmlRootElement(name = "Item")
 @XmlAccessorType(value = XmlAccessType.FIELD)
@@ -45,10 +46,10 @@ public class Item {
 	private int quantity;
 	
 	
-	@ManyToOne()
-	@JoinColumn(name = "b_id", nullable = false)
-	@XmlTransient
-	private Basket basket;
+//	@ManyToOne()
+//	@JoinColumn(name = "b_id", nullable = false)
+//	@XmlInverseReference(mappedBy = "basket")
+//	private Basket basket;
 
 	public Item(String description, int quantity) {
 		super();
@@ -88,14 +89,14 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public Basket getBasket() {
-		return basket;
-	}
-
-	
-	public void setBasket(Basket basket) {
-		this.basket = basket;
-	}
+//	public Basket getBasket() {
+//		return basket;
+//	}
+//
+//	
+//	public void setBasket(Basket basket) {
+//		this.basket = basket;
+//	}
 
 	@Override
 	public String toString() {

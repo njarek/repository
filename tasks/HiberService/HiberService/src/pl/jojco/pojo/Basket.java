@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -42,7 +43,9 @@ public class Basket {
 	@Column(name = "b_name",  nullable = false, length = 20)
 	private String name;
 	
-	@OneToMany( mappedBy = "basket", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	//( mappedBy = "basket", cascade = CascadeType.ALL)
+	@JoinColumn(name="b_id")
 	private Set<Item> currentBasket=new HashSet<Item>(0);;
 
 	public Basket(String name) {

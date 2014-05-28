@@ -55,9 +55,9 @@ public class BasketModifierService {
 //	@Produces(MediaType.APPLICATION_XML)
 	public Basket updateBaket(Basket basket) {
 		
-		for(Item item:basket.getCurrentBasket()){
-			item.setBasket(basket);
-		}
+//		for(Item item:basket.getCurrentBasket()){
+//			item.setBasket(basket);
+//		}
 		
 		System.out.println(basket);
 		
