@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,11 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
-
 @XmlRootElement(name = "Item")
-@XmlAccessorType(value = XmlAccessType.FIELD)
-
 @Entity
 @Table(name = "item" )
 public class Item {
@@ -44,12 +38,6 @@ public class Item {
 	
 	@Column(name="I_QUANTITY")
 	private int quantity;
-	
-	
-//	@ManyToOne()
-//	@JoinColumn(name = "b_id", nullable = false)
-//	@XmlInverseReference(mappedBy = "basket")
-//	private Basket basket;
 
 	public Item(String description, int quantity) {
 		super();
@@ -88,15 +76,6 @@ public class Item {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-//	public Basket getBasket() {
-//		return basket;
-//	}
-//
-//	
-//	public void setBasket(Basket basket) {
-//		this.basket = basket;
-//	}
 
 	@Override
 	public String toString() {

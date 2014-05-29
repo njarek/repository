@@ -20,8 +20,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Basket")
-@XmlAccessorType(XmlAccessType.FIELD)
-
 @Entity
 @Table(name = "basket" )
 public class Basket {
@@ -44,7 +42,6 @@ public class Basket {
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	//( mappedBy = "basket", cascade = CascadeType.ALL)
 	@JoinColumn(name="b_id")
 	private Set<Item> currentBasket=new HashSet<Item>(0);;
 
