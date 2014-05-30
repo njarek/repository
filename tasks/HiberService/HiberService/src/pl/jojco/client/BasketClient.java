@@ -87,15 +87,28 @@ public class BasketClient {
 
 	public static void main(String[] args) throws Exception {
 		BasketClient basketClient = new BasketClient();
+		Basket basket1=new Basket();
+		basket1.setName(HOST_GET);
+		basket1.setVersion(1);
+		basket1.addItem(new Item("elo", 3));
+		basket1.addItem(new Item("elo4", 34));
+		basket1.addItem(new Item("elo5", 35));
+		basket1.addItem(new Item("elo6", 36));
+		
+		System.out.println(basketClient.createBasketXml(basket1));
+		
+		
+		
+		
 		Basket basket = basketClient.getBasket(1);
 		System.out.println(basket);
 
 		Random generator = new Random();
 		int i = generator.nextInt(10) + 1;
 
-		//Thread.sleep(i * 1000);
+		Thread.sleep( 1000);
 		basket.setName("nowy");
-		for(Item item:basket.getCurrentBasket()){
+		for(Item item:basket.getItems()){
 			
 			int i2 = generator.nextInt(10) + 1;
 			System.out.println(item.getDescription()+" "+ i2);	

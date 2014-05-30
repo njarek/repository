@@ -11,9 +11,12 @@ import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 @XmlRootElement(name = "Item")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "item" )
 public class Item {
@@ -33,9 +36,11 @@ public class Item {
 	@Column(name="i_version")
 	private long version;
 	
+	@XmlElement(required = true)
 	@Column(name="I_DESCRIPTION")
 	private String description;
 	
+	@XmlElement(required = true)
 	@Column(name="I_QUANTITY")
 	private int quantity;
 

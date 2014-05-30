@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,9 +18,14 @@ import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @XmlRootElement(name = "Basket")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "basket" )
 public class Basket {
@@ -38,12 +44,15 @@ public class Basket {
 	@Column(name="b_version")
 	private long version;
 	
+	@XmlElement(required = true)
 	@Column(name = "b_name",  nullable = false, length = 20)
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@XmlElement(required = true)
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name="b_id")
-	private Set<Item> currentBasket=new HashSet<Item>(0);;
+	private Set<Item> items=new HashSet<Item>(0);;
 
 	public Basket(String name) {
 		super();
@@ -79,24 +88,23 @@ public class Basket {
 	}
 
 	
-	public Set<Item> getCurrentBasket() {
-		return currentBasket;
+	public Set<Item> getItems() {
+		return items;
 	}
 	
 	
-	public Set<Item> addItem(Item item) {
-		currentBasket.add(item);
-		return currentBasket;
+	public void addItem(Item item) {
+		items.add(item);
 	}
 
 	
-	public void setCurrentBasket(Set<Item> currentBasket) {
-		this.currentBasket = currentBasket;
+	public void setItems(Set<Item> Items) {
+		this.items = Items;
 	}
 
 	@Override
 	public String toString() {
-		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", currentBasket=" + currentBasket + "]";
+		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", items=" + items + "]";
 	}
 
 	

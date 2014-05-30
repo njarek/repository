@@ -1,16 +1,17 @@
 package pl.jojco.services;
 
+import java.io.StringWriter;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.StaleObjectStateException;
 import org.hibernate.Transaction;
-import org.springframework.transaction.annotation.Transactional;
 
 import pl.jojco.pojo.Basket;
 
@@ -21,15 +22,21 @@ public class BasketModifierService {
 
 	@POST
 	@Path("/get")
-	//@Produces(MediaType.APPLICATION_XML)
+//	@Produces(MediaType.APPLICATION_XML)
 	public Basket getBasket(String id) throws Exception {
 		System.out.println("jetem ti");
 		System.out.println(id);
 		int basketId = Integer.parseInt(id);
 
-		Basket basket = getBasketById(basketId);
-
-		return basket;
+		Basket basket23 = getBasketById(basketId);
+		JAXBContext jaxbContext = JAXBContext.newInstance(Basket.class);
+		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+		//jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		StringWriter stringWriter = new StringWriter();
+		jaxbMarshaller.marshal(basket23, stringWriter);
+		String basketXml = stringWriter.getBuffer().toString();
+		System.out.println(basketXml);
+		return basket23;
 	}
 
 	private Basket getBasketById(int basketId) {
@@ -37,7 +44,11 @@ public class BasketModifierService {
 		Basket basket = null;
 		try {
 			session1 = factory.openSession();
+			//basket = (Basket) session1.load(Basket.class, basketId);
 			basket = (Basket) session1.load(Basket.class, basketId);
+//			basket = (Basket) session1.load(Basket.class, basketId);
+//			basket.getItems().size();
+//			Hibernate.initialize(basket);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -52,7 +63,7 @@ public class BasketModifierService {
 	@Path("/update")
 //	@Consumes(MediaType.APPLICATION_XML)
 //	@Produces(MediaType.APPLICATION_XML)
-	public Basket updateBaket(Basket basket) throws Exception {
+	public Basket updateBaket(Basket basket){
 		
 //		for(Item item:basket.getCurrentBasket()){
 //			item.setBasket(basket);
@@ -65,13 +76,13 @@ public class BasketModifierService {
 		try{
 		Basket returnBasket=addBasket(basket);	
 		return returnBasket;
-		}catch(StaleObjectStateException e){
+		}catch(Exception e){
 			return   basket;
 		}
 		
 	}
 	
-	@Transactional
+	//@Transactional
 	public Basket addBasket(Basket newBasket) throws Exception {	
 		Session session=factory.openSession();
 		Transaction tx = null;
