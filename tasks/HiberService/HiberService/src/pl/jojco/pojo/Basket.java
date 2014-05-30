@@ -27,49 +27,43 @@ import org.hibernate.annotations.FetchMode;
 @XmlRootElement(name = "Basket")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-@Table(name = "basket" )
+@Table(name = "basket")
 public class Basket {
 
-	public Basket(){
-		
+	public Basket() {
+
 	}
+
 	@XmlAttribute(required = true)
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "b_id", unique = true, nullable = false)
 	private int id;
-	
+
 	@XmlAttribute(required = true)
-	@Version
-	@Column(name="b_version")
 	private long version;
-	
+
 	@XmlElement(required = true)
-	@Column(name = "b_name",  nullable = false, length = 20)
 	private String name;
-	
+
 	@XmlElement(required = true)
-	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-	@Fetch(FetchMode.JOIN)
-	@JoinColumn(name="b_id")
-	private Set<Item> items=new HashSet<Item>(0);;
+	private Set<Item> items = new HashSet<Item>(0);;
 
 	public Basket(String name) {
 		super();
 		this.name = name;
 	}
 
-	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "b_id", unique = true, nullable = false)
 	public int getId() {
 		return id;
 	}
 
-	
 	private void setId(int id) {
 		this.id = id;
 	}
 
-	
+	@Version
+	@Column(name = "b_version")
 	public long getVersion() {
 		return version;
 	}
@@ -78,7 +72,7 @@ public class Basket {
 		this.version = version;
 	}
 
-	
+	@Column(name = "b_name", nullable = false, length = 20)
 	public String getName() {
 		return name;
 	}
@@ -87,17 +81,17 @@ public class Basket {
 		this.name = name;
 	}
 
-	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	@JoinColumn(name = "b_id")
 	public Set<Item> getItems() {
 		return items;
 	}
-	
-	
+
 	public void addItem(Item item) {
 		items.add(item);
 	}
 
-	
 	public void setItems(Set<Item> Items) {
 		this.items = Items;
 	}
@@ -106,7 +100,5 @@ public class Basket {
 	public String toString() {
 		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", items=" + items + "]";
 	}
-
-	
 
 }

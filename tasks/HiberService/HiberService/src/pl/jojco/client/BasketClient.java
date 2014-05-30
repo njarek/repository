@@ -106,7 +106,7 @@ public class BasketClient {
 		Random generator = new Random();
 		int i = generator.nextInt(10) + 1;
 
-		Thread.sleep( 1000);
+		Thread.sleep(i* 1000);
 		basket.setName("nowy");
 		for(Item item:basket.getItems()){
 			

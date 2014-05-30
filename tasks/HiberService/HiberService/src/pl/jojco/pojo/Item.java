@@ -25,23 +25,16 @@ public class Item {
 
 	}
 
-	@XmlAttribute(required = true)
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "i_id", unique = true, nullable = false)
+	@XmlAttribute(required = true)	
 	private int idItem;
 	
-	@XmlAttribute(required = true)
-	@Version
-	@Column(name="i_version")
+	@XmlAttribute(required = true)	
 	private long version;
 	
-	@XmlElement(required = true)
-	@Column(name="I_DESCRIPTION")
+	@XmlElement(required = true)	
 	private String description;
 	
-	@XmlElement(required = true)
-	@Column(name="I_QUANTITY")
+	@XmlElement(required = true)	
 	private int quantity;
 
 	public Item(String description, int quantity) {
@@ -50,6 +43,9 @@ public class Item {
 		this.quantity = quantity;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "i_id", unique = true, nullable = false)
 	public int getIdItem() {
 		return idItem;
 	}
@@ -58,6 +54,8 @@ public class Item {
 		this.idItem = idItem;
 	}
 
+	@Version
+	@Column(name="i_version")
 	public long getVersion() {
 		return version;
 	}
@@ -66,6 +64,7 @@ public class Item {
 		this.version = version;
 	}
 
+	@Column(name="I_DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
@@ -74,6 +73,7 @@ public class Item {
 		this.description = description;
 	}
 
+	@Column(name="I_QUANTITY")
 	public int getQuantity() {
 		return quantity;
 	}

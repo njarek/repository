@@ -29,13 +29,13 @@ public class BasketModifierService {
 		int basketId = Integer.parseInt(id);
 
 		Basket basket23 = getBasketById(basketId);
-		JAXBContext jaxbContext = JAXBContext.newInstance(Basket.class);
-		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		//jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		StringWriter stringWriter = new StringWriter();
-		jaxbMarshaller.marshal(basket23, stringWriter);
-		String basketXml = stringWriter.getBuffer().toString();
-		System.out.println(basketXml);
+//		JAXBContext jaxbContext = JAXBContext.newInstance(Basket.class);
+//		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+//		//jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+//		StringWriter stringWriter = new StringWriter();
+//		jaxbMarshaller.marshal(basket23, stringWriter);
+//		String basketXml = stringWriter.getBuffer().toString();
+//		System.out.println(basketXml);
 		return basket23;
 	}
 
@@ -45,7 +45,7 @@ public class BasketModifierService {
 		try {
 			session1 = factory.openSession();
 			//basket = (Basket) session1.load(Basket.class, basketId);
-			basket = (Basket) session1.load(Basket.class, basketId);
+			basket = (Basket) session1.get(Basket.class, basketId);
 //			basket = (Basket) session1.load(Basket.class, basketId);
 //			basket.getItems().size();
 //			Hibernate.initialize(basket);
@@ -77,6 +77,7 @@ public class BasketModifierService {
 		Basket returnBasket=addBasket(basket);	
 		return returnBasket;
 		}catch(Exception e){
+			basket.setName("popraw");
 			return   basket;
 		}
 		
@@ -89,7 +90,7 @@ public class BasketModifierService {
 		try {
 			tx = session.beginTransaction();
 			long prevVersion=newBasket.getVersion();
-			Basket basket = (Basket) session.load(Basket.class, newBasket.getId());
+			Basket basket = (Basket) session.get(Basket.class, newBasket.getId());
 			
 			if ( prevVersion != basket.getVersion() ) throw new Exception();
 			
