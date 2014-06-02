@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/tesco" xmlns:tns="http://www.example.org/tesco" elementFormDefault="qualified">
+
+    <complexType name="orderer">
+    	<sequence>
+    		<element name="contracting" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="tradeDate" type="date" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+    
+    <complexType name="order">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="type" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<enumeration value="RTV"></enumeration>
+    					<enumeration value="AGD"></enumeration>
+    					<enumeration value="GRC"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="quatity" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="int">
+    					<minInclusive value="1"></minInclusive>
+    					<maxInclusive value="10"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="price" type="double" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    	<attribute name="id" type="int"></attribute>
+    </complexType>
+    
+</schema>

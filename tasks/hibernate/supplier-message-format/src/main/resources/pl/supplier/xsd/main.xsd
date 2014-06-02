@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/main"
+	xmlns:tns="http://www.example.org/main"
+	elementFormDefault="qualified" xmlns:pref="http://www.example.org/tesco">
+
+
+
+	<import schemaLocation="tesco.xsd" namespace="http://www.example.org/tesco"></import>
+
+	<complexType name="Order">
+		<sequence>
+			<element name="OrdererDetails" type="pref:orderer"></element>
+			<element name="OrderDetails" type="pref:order"></element>
+			<element name="deliveryProprytet">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Low"></enumeration>
+						<enumeration value="Medium"></enumeration>
+						<enumeration value="Critical"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

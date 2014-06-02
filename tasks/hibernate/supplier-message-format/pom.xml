@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>pl.supplier</groupId>
+	<artifactId>supplier-message-format</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<dependencies>
+	
+<dependency>
+	<groupId>org.jvnet.jaxb2_commons</groupId>
+	<artifactId>jaxb2-commons-lang</artifactId>
+	<version>2.4</version>
+</dependency>
+ <dependency>
+        <groupId>org.jvnet.jaxb2_commons</groupId>
+        <artifactId>jaxb2-basics-runtime</artifactId>
+        <version>0.6.4</version>
+    </dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<!-- Changes the default schema directory -->
+							<schemaDirectory>src/main/resources/pl/supplier/xsd</schemaDirectory>
+							<schemaIncludes>
+								<!-- <include>main.xsd</include> -->
+							<include>main.xsd</include> 
+							</schemaIncludes>
+							<generatePackage>pl.supplier.domain</generatePackage>
+							<generateDirectory>${basedir}/src/main/java</generateDirectory>
+							<args>
+								<arg>-XtoString</arg>								
+								<arg>-Xequals</arg>
+								<arg>-XhashCode</arg>
+							</args>
+							<plugins>
+								<plugin>
+									<groupId>org.jvnet.jaxb2_commons</groupId>
+									<artifactId>jaxb2-basics</artifactId>
+									<version>0.6.0
+									</version>
+								</plugin>
+							</plugins>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
