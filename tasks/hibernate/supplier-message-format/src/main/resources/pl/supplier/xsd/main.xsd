@@ -5,14 +5,14 @@
 	elementFormDefault="qualified" xmlns:pref="http://www.example.org/tesco">
 
 
+ <!-- <include schemaLocation="tesco.xsd" /> -->
+	 <import schemaLocation="tesco.xsd" namespace="http://www.example.org/tesco"></import>
 
-	<import schemaLocation="tesco.xsd" namespace="http://www.example.org/tesco"></import>
-
-	<complexType name="Order">
+ 	<complexType name="Requirements">
 		<sequence>
-			<element name="OrdererDetails" type="pref:orderer"></element>
-			<element name="OrderDetails" type="pref:order"></element>
-			<element name="deliveryProprytet">
+			<element name="buyerDetails" type="pref:buyer"></element>
+			<element name="orderDetails" type="pref:order"></element>
+			<element name="deliveryPriorytet">
 				<simpleType>
 					<restriction base="string">
 						<enumeration value="Low"></enumeration>
@@ -22,5 +22,7 @@
 				</simpleType>
 			</element>
 		</sequence>
-	</complexType>
+ 	</complexType> 
+
+    <element name="NewElement" type="string"></element>
 </schema>
