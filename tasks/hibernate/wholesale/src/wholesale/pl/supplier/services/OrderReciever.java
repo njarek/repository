@@ -3,8 +3,12 @@ package wholesale.pl.supplier.services;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import wholesale.pl.supplier.business.Order;
-import wholesale.pl.supplier.business.TescoOrder;
+import org.xml.sax.SAXException;
+
+import wholesale.pl.supplier.business.OrderProcesor;
+import wholesale.pl.supplier.business.TescoOrderProcesor;
+
+
 
 
 @Path("/suplier")
@@ -13,11 +17,11 @@ public class OrderReciever {
 
 	@POST
 	@Path("/order")
-	public String getOreder(String order){
+	public String getOreder(String order) throws SAXException{
 		
-		Order tescoOrder = new TescoOrder();
+		OrderProcesor tescoOrder = new TescoOrderProcesor();
 		
-		return tescoOrder.processOreder(order);
+		return tescoOrder.processOrder(order)+"";
 		
 	}
 }

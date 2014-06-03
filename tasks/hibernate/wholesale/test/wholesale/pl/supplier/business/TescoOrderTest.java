@@ -3,27 +3,23 @@ package wholesale.pl.supplier.business;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 import testUtility.ExampleMessages;
 
 public class TescoOrderTest {
 	
 	@Test
-	public void orderProcessedOK() {
-		boolean isPrccesedOk = preapreTest(ExampleMessages.MESSAGE_OK.getMessage());
+	public void orderProcessedOK() throws SAXException {
+		OrderProcesor order=new TescoOrderProcesor();
+		boolean isPrccesedOk=order.processOrder(ExampleMessages.MESSAGE_OK.getMessage()) ;
 		assertTrue(isPrccesedOk);	
 	}
 	
 	@Test
-	public void orderProcessedFalse() {
-		boolean isPrccesedOk = preapreTest(ExampleMessages.BAD_MESSAGE.getMessage());
+	public void orderProcessedFalse() throws SAXException {
+		OrderProcesor order=new TescoOrderProcesor();
+		boolean isPrccesedOk=order.processOrder(ExampleMessages.BAD_MESSAGE.getMessage()) ;
 		assertTrue(!isPrccesedOk);		
 	}
-
-	private boolean preapreTest(String message) {
-		Order order=new TescoOrder();
-		boolean isPrccesedOk=Boolean.parseBoolean(order.processOreder(message)) ;
-		return isPrccesedOk;
-	}
-
 }
