@@ -1,4 +1,4 @@
-package pl.store.implementation.outbound;
+package pl.store.business.outbound;
 
 import java.io.UnsupportedEncodingException;
 

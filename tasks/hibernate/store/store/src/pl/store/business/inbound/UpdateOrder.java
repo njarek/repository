@@ -1,4 +1,4 @@
-package pl.store.implementation.inbound;
+package pl.store.business.inbound;
 
 public interface UpdateOrder {
 	
