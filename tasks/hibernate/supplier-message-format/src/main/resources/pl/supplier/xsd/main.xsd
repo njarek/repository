@@ -8,7 +8,7 @@
  <!-- <include schemaLocation="tesco.xsd" /> -->
 	 <import schemaLocation="tesco.xsd" namespace="http://www.example.org/tesco"></import>
 
- 	<complexType name="Requirements">
+ 	<complexType name="requirements">
 		<sequence>
 			<element name="buyerDetails" type="pref:buyer"></element>
 			<element name="orderDetails" type="pref:order"></element>
@@ -24,5 +24,6 @@
 		</sequence>
  	</complexType> 
 
-    <element name="NewElement" type="string"></element>
+
+ 	<element name="tesco" type="tns:requirements"></element>
 </schema>
