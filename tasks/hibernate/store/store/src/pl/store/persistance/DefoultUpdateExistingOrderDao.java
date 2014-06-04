@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 import pl.store.domain.Basket;
 
-public class SimpleUpdateExistingOrderDao implements UpdateOrderDao {
+public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
 
 	private SessionFactory factory;
 
@@ -53,5 +53,11 @@ public class SimpleUpdateExistingOrderDao implements UpdateOrderDao {
 			}
 		}
 		return basket;
+	}
+
+	@Override
+	public Basket blockBasketWhileUpdating(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

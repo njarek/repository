@@ -1,8 +1,10 @@
 package pl.store.business.inbound;
 
+import pl.store.domain.Basket;
+
 public interface UpdateOrder {
 	
-	String updateBasket(String basket);
+	Basket updateBasket(Basket basket) throws Exception;
 
-	String findBasketById(String basket);
+	Basket blockBasketForUpdate(Basket basket);
 }

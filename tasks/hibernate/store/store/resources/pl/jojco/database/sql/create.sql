@@ -8,7 +8,8 @@ drop table basket if exists;
 create table basket(
 b_id bigint primary key auto_increment , 
 b_version bigint,
-b_name varchar2(255)
+b_name varchar2(255),
+b_is_updated boolean
 );
 
 drop table item if exists;

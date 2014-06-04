@@ -42,6 +42,9 @@ public class Basket {
 
 	@XmlElement(required = true)
 	private String name;
+	
+	@XmlElement(required = true)
+	private boolean isUpdated=false;
 
 	@XmlElement(required = true)
 	private Set<Item> items = new HashSet<Item>(0);
@@ -79,6 +82,15 @@ public class Basket {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Column(name = "b_is_updated", nullable = false, length = 20)
+	public boolean isUpdated() {
+		return isUpdated;
+	}
+
+	public void setUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
 	}
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)

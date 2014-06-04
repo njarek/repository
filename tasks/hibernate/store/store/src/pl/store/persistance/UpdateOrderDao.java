@@ -6,4 +6,6 @@ public interface UpdateOrderDao {
 	Basket updateBasket(Basket basket) throws Exception;
 
 	Basket getBasketById(int id);
+	
+	Basket blockBasketWhileUpdating(int id);
 }

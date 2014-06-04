@@ -5,15 +5,17 @@ import org.hibernate.SessionFactory;
 
 import pl.store.domain.Basket;
 
-public class SimpleNewOrderDao implements NewOrderDao{
+public class DefoultFindOrderDao implements FindOrderDao {
 
 	private SessionFactory factory;
+	
 	@Override
-	public Basket saveBasket(Basket basket) {
-		Session hibernateSession = null;		
+	public Basket findBasketById(int id) {
+		Session hibernateSession = null;
+		Basket basket = null;
 		try {
-			hibernateSession = factory.openSession();	
-			basket = (Basket) hibernateSession.save(Basket.class);
+			hibernateSession = factory.openSession();
+			basket = (Basket) hibernateSession.get(Basket.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -23,7 +25,5 @@ public class SimpleNewOrderDao implements NewOrderDao{
 		}
 		return basket;
 	}
-
-	
 
 }
