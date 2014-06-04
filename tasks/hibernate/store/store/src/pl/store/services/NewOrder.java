@@ -8,7 +8,7 @@ import pl.store.business.inbound.DefoultNewOrderProcesor;
 import pl.store.domain.Basket;
 
 
-@Path("/store")
+@Path("/storeorder")
 public class NewOrder {
 
 	@POST

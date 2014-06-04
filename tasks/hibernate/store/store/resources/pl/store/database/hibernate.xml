@@ -23,8 +23,10 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			</list> </property> -->
 		<property name="annotatedClasses">
 			<list>
-			 <value>pl.jojco.pojo.Item</value> 
-			 	<value>pl.jojco.pojo.Basket</value>
+			 
+			 	<value>pl.store.domain.Basket</value>
+			 	<value>pl.store.domain.Item</value>
+			 	<value>pl.store.domain.LifeCycle</value>
 				
 			</list>
 		</property>

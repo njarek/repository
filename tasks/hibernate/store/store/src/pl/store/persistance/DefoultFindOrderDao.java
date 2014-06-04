@@ -14,7 +14,7 @@ public class DefoultFindOrderDao implements FindOrderDao {
 		Session hibernateSession = null;
 		Basket basket = null;
 		try {
-			hibernateSession = factory.openSession();
+			hibernateSession = getFactory().openSession();
 			basket = (Basket) hibernateSession.get(Basket.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -24,6 +24,14 @@ public class DefoultFindOrderDao implements FindOrderDao {
 			}
 		}
 		return basket;
+	}
+
+	public SessionFactory getFactory() {
+		return factory;
+	}
+
+	public void setFactory(SessionFactory factory) {
+		this.factory = factory;
 	}
 
 }

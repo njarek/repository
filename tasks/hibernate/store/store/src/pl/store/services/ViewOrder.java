@@ -7,7 +7,7 @@ import pl.store.business.inbound.DefoultFindOrder;
 import pl.store.business.inbound.FindOrder;
 import pl.store.domain.Basket;
 
-@Path("/store")
+@Path("/storefind")
 public class ViewOrder {
 
 	private FindOrder findOrder;
@@ -17,7 +17,7 @@ public class ViewOrder {
 	}
 	
 	@POST
-	@Path("/update")
+	@Path("/find")
 	public Basket findBasket(Basket basket) throws Exception {
 		return findOrder.findBasket(basket);
 

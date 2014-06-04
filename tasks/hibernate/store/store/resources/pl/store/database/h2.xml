@@ -22,7 +22,7 @@ http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
 	<jdbc:initialize-database data-source="dataSource"
 		ignore-failures="DROPS">
-		<jdbc:script location="classpath:pl/jojco/database/sql/create.sql" />
+		<jdbc:script location="classpath:pl/store/database/sql/create.sql" />
 		
 	</jdbc:initialize-database>
  

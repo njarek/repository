@@ -8,7 +8,19 @@
 	<!-- <import resource="classpath:pl/com/active-mq-connection-factory.xml" 
 		/> -->
 	<tx:annotation-driven />
-	<import resource="classpath:pl/store/database/h2.xml" />
+	<!-- <import resource="classpath:applicationContext.xml" /> -->
+		
+<!-- <bean id="h2Server" class="pl.store.persistance.DefoulFindObjectTest"></bean>
+		
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.h2.Driver" />
+		<property name="url"
+			value="jdbc:h2:mem:testdb;MODE=Oracle;DB_CLOSE_DELAY=-1" />
+		<property name="username" value="sa" />
+		<property name="password" value="sa" />
+	</bean> -->
+	
 	<import resource="classpath:pl/store/database/hibernate.xml" />
 
 	<bean id="findBasketDao" class="pl.store.persistance.DefoultFindOrderDao">
@@ -22,4 +34,6 @@
 	<bean id="updateBasketDao" class="pl.store.persistance.DefoultUpdateExistingOrderDao">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
+
+	
 </beans>

@@ -7,7 +7,7 @@ import pl.store.business.inbound.DefoultUpdateOrder;
 import pl.store.business.inbound.UpdateOrder;
 import pl.store.domain.Basket;
 
-@Path("/store")
+@Path("/storeupdate")
 public class UpdateExistingOrder {
 
 	private UpdateOrder order;
