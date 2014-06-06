@@ -8,9 +8,7 @@
 	<!-- <import resource="classpath:pl/com/active-mq-connection-factory.xml" 
 		/> -->
 	<tx:annotation-driven />
-	<!-- <import resource="classpath:applicationContext.xml" /> -->
-		
-<!-- <bean id="h2Server" class="pl.store.persistance.DefoulFindObjectTest"></bean>
+	 <import resource="classpath:applicationContext.xml" /> 
 		
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
@@ -19,9 +17,7 @@
 			value="jdbc:h2:mem:testdb;MODE=Oracle;DB_CLOSE_DELAY=-1" />
 		<property name="username" value="sa" />
 		<property name="password" value="sa" />
-	</bean> -->
-	
-	<import resource="classpath:pl/store/database/hibernate.xml" />
+	</bean> 
 
 	<bean id="findBasketDao" class="pl.store.persistance.DefoultFindOrderDao">
 		<property name="factory" ref="sessionFactory"></property>

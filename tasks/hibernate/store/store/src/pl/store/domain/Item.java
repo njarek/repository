@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,7 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement(name = "Item")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -24,6 +26,9 @@ public class Item {
 	public Item() {
 
 	}
+	
+	@XmlTransient
+	private Basket basket;
 
 	@XmlAttribute(required = true)	
 	private int idItem;
@@ -133,6 +138,16 @@ public class Item {
 		if (quantity != other.quantity)
 			return false;
 		return true;
+	}
+
+	@ManyToOne ()
+	@JoinColumn(name = "b_id",nullable = false)
+	public Basket getBasket() {
+		return basket;
+	}
+
+	public void setBasket(Basket basket) {
+		this.basket = basket;
 	}
 
 	

@@ -8,47 +8,52 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import pl.store.domain.Basket;
-import pl.store.domain.LifeCycle;
+import pl.store.domain.LifeCycleState;
 import pl.store.domain.LifeCycleEnum;
 
 public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
 
 	private SessionFactory factory;
 
-	private LifeCycle lifeCycle = new LifeCycle();;
+	private LifeCycleState lifeCycleState = new LifeCycleState();;
 
 	@Override
 	public Basket updateBasket(Basket newBasket) throws Exception {
-		Session session = getFactory().openSession();
+		Session hibernateSession = getFactory().openSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			long prevVersion = newBasket.getVersion();
-			Basket basket = (Basket) session.get(Basket.class,
-					newBasket.getId());
+			tx = hibernateSession.beginTransaction();
 
-			session.merge(newBasket);
+			lifeCycleState = getLifeCycleByBasketId(hibernateSession, newBasket);
+			lifeCycleState.setLifecycleEnum(LifeCycleEnum.NEW);
+			hibernateSession.merge(newBasket);
+			hibernateSession.merge(lifeCycleState);
 			tx.commit();
-			return basket;
+			return newBasket;
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			e.printStackTrace();
+			throw new PersistaceException("Persitane problem", e); 
 		} finally {
-			session.close();
+			hibernateSession.close();
 
 		}
-		return newBasket;
+		
 	}
 
 	@Override
 	public Basket getBasketById(int id) {
 		Session hibernateSession = null;
 		Basket basket = null;
+		Transaction tx = null;
 		try {
 			hibernateSession = getFactory().openSession();
+			tx = hibernateSession.beginTransaction();
+
 			basket = (Basket) hibernateSession.get(Basket.class, id);
 		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
 			e.printStackTrace();
 		} finally {
 			if (hibernateSession != null && hibernateSession.isOpen()) {
@@ -60,14 +65,26 @@ public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
 
 	@Override
 	public Basket blockBasketWhileUpdating(int id) {
-		Session hibernateSession = null;
+
 		Basket basket = null;
+		Session hibernateSession = factory.openSession();
+		Transaction tx = null;
 		try {
-			hibernateSession = getFactory().openSession();
+			tx = hibernateSession.beginTransaction();
+
 			basket = (Basket) hibernateSession.get(Basket.class, id);
 
+			lifeCycleState = getLifeCycleByBasketId(hibernateSession, basket);
+			lifeCycleState.setLifecycleEnum(LifeCycleEnum.MODIFIED);
+			System.out.println(lifeCycleState);
+			// lifeCycle.setBasket(basket);
+			hibernateSession.merge(lifeCycleState);
+
 			System.out.println(basket);
+			tx.commit();
 		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
 			e.printStackTrace();
 		} finally {
 			if (hibernateSession != null && hibernateSession.isOpen()) {
@@ -75,6 +92,14 @@ public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
 			}
 		}
 		return basket;
+	}
+
+	private LifeCycleState getLifeCycleByBasketId(Session hibernateSession,
+			Basket basket) {
+		Criteria criteria = hibernateSession.createCriteria(LifeCycleState.class)
+				.add(Restrictions.eq("basket.id", basket.getId()));
+
+		return lifeCycleState = (LifeCycleState) criteria.uniqueResult();
 	}
 
 	public SessionFactory getFactory() {
@@ -85,11 +110,11 @@ public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
 		this.factory = factory;
 	}
 
-	public LifeCycle getLifeCycle() {
-		return lifeCycle;
+	public LifeCycleState getLifeCycleState() {
+		return lifeCycleState;
 	}
 
-	public void setLifeCycle(LifeCycle lifeCycle) {
-		this.lifeCycle = lifeCycle;
+	public void setLifeCycleState(LifeCycleState lifeCycle) {
+		this.lifeCycleState = lifeCycle;
 	}
 }

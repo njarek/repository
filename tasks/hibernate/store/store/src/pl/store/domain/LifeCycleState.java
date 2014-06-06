@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "LIFECYCLE" )
-public class LifeCycle {
+public class LifeCycleState {
 
 	@XmlAttribute(required = true)	
 	private int id;
@@ -69,6 +69,11 @@ public class LifeCycle {
 	}
 	public void setBasket(Basket basket) {
 		this.basket = basket;
+	}
+	@Override
+	public String toString() {
+		return "LifeCycle [id=" + id + ", lifecycle=" + lifecycle
+				+ ", version=" + version + "]";
 	}
 	
 }

@@ -1,7 +1,7 @@
 package pl.store.persistance;
 
 import pl.store.domain.Basket;
-import pl.store.domain.LifeCycle;
+import pl.store.domain.LifeCycleState;
 
 public interface UpdateOrderDao {
 	Basket updateBasket(Basket basket) throws Exception;
@@ -10,5 +10,5 @@ public interface UpdateOrderDao {
 	
 	Basket blockBasketWhileUpdating(int id);
 
-	LifeCycle getLifeCycle();
+	LifeCycleState getLifeCycleState();
 }

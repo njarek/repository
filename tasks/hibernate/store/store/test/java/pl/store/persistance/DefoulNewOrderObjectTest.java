@@ -22,32 +22,37 @@ public class DefoulNewOrderObjectTest {
 	@Inject
 	private NewOrderDao newOrderDao;
 	
+	@Inject
+	private FindOrderDao findOrderDao;
+	
 	@Test
-	public void properDaveToDb(){
+	public void properDaveToDb() throws PersistaceException{
 		Basket basket=new Basket("new");
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
-		
+				
 		Basket basketnew = newOrderDao.saveBasket(basket);
 		System.out.println(basket);
 		assertEquals(basket,basketnew);
 	}
 	
 	@Test
-	public void checkLifeCycleState(){
+	public void checkLifeCycleState() throws PersistaceException{
 		
 		for(int i=0;i<4;i++){
 		Basket basket=new Basket("new");
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
-		
-		Basket basketnew = newOrderDao.saveBasket(basket);
+			
+		basket= newOrderDao.saveBasket(basket);
+		Basket basketnew =findOrderDao.findBasketById(basket.getId());
 		System.out.println(basket);
-		System.out.println(newOrderDao.getLifeCycle().getLifecycle());
-		assertEquals("new",newOrderDao.getLifeCycle().getLifecycle());
-		assertEquals(basketnew.getId(),newOrderDao.getLifeCycle().getBasket().getId());
+		System.out.println(basketnew);
+		System.out.println(newOrderDao.getLifeCycleState().getLifecycle());
+		assertEquals("new",newOrderDao.getLifeCycleState().getLifecycle());
+		assertEquals(basketnew.getId(),newOrderDao.getLifeCycleState().getBasket().getId());
 		}
 	}
 }

@@ -2,30 +2,33 @@ package pl.store.persistance;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import pl.store.domain.Basket;
-import pl.store.domain.LifeCycle;
+import pl.store.domain.LifeCycleState;
 import pl.store.domain.LifeCycleEnum;
 
-public class DefoultNewOrderDao implements NewOrderDao{
+public class DefoultNewOrderDao implements NewOrderDao {
 
 	private SessionFactory factory;
-	
-	private LifeCycle lifeCycle=new LifeCycle();
-	
+
+	private LifeCycleState lifeCycleState = new LifeCycleState();
+
 	@Override
-	public Basket saveBasket(Basket basket) {
-		Session hibernateSession = null;		
+	public Basket saveBasket(Basket basket) throws PersistaceException {
+		Session hibernateSession = factory.openSession();
+		Transaction tx = null;
 		try {
-			hibernateSession = getFactory().openSession();	
-			//basket = (Basket) hibernateSession.save(Basket.class);
-			
-			getLifeCycle().setLifecycleEnum(LifeCycleEnum.NEW);
-			getLifeCycle().setBasket(basket);
-		    hibernateSession.save(basket);
-			hibernateSession.save(getLifeCycle());
+			tx = hibernateSession.beginTransaction();
+			lifeCycleState.setLifecycleEnum(LifeCycleEnum.NEW);
+			lifeCycleState.setBasket(basket);
+			hibernateSession.save(basket);
+			hibernateSession.save(lifeCycleState);
+			tx.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (tx != null)
+				tx.rollback();
+			throw new PersistaceException("Persitane problem", e); 
 		} finally {
 			if (hibernateSession != null && hibernateSession.isOpen()) {
 				hibernateSession.close();
@@ -33,19 +36,21 @@ public class DefoultNewOrderDao implements NewOrderDao{
 		}
 		return basket;
 	}
+
 	public SessionFactory getFactory() {
 		return factory;
 	}
+
 	public void setFactory(SessionFactory factory) {
 		this.factory = factory;
 	}
-	public LifeCycle getLifeCycle() {
-		return lifeCycle;
-	}
-	public void setLifeCycle(LifeCycle lifeCycle) {
-		this.lifeCycle = lifeCycle;
+
+	public LifeCycleState getLifeCycleState() {
+		return lifeCycleState;
 	}
 
-	
+	public void setLifeCycleState(LifeCycleState lifeCycle) {
+		this.lifeCycleState = lifeCycle;
+	}
 
 }

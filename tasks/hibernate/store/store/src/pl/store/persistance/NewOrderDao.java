@@ -1,13 +1,13 @@
 package pl.store.persistance;
 
 import pl.store.domain.Basket;
-import pl.store.domain.LifeCycle;
+import pl.store.domain.LifeCycleState;
 
 public interface NewOrderDao {
 
-	Basket saveBasket(Basket basket);
+	Basket saveBasket(Basket basket) throws PersistaceException;
 
-	LifeCycle getLifeCycle();
+	LifeCycleState getLifeCycleState();
 
 	
 }

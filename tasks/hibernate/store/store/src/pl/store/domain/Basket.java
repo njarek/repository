@@ -12,7 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,9 +22,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @XmlRootElement(name = "Basket")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -81,14 +80,25 @@ public class Basket {
 		this.name = name;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "b_id")
+//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER,mappedBy="basket")
+//	//@Fetch(FetchMode.SELECT) inverseJoinColumns = @JoinColumn( name="i_id")
+//	//@JoinColumn(name = "b_id")
+//	@IndexColumn(name="i_id")
+//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+//	@JoinTable(
+//            name="basket",
+//            joinColumns = @JoinColumn( name="b_id")
+//           
+//    )
+//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+//	@JoinColumn(name="i_id")
+	@OneToMany(fetch=FetchType.EAGER, targetEntity=Item.class, cascade=CascadeType.ALL, mappedBy="basket")
 	public Set<Item> getItems() {
 		return items;
 	}
 
 	public void addItem(Item item) {
+		item.setBasket(this);
 		items.add(item);
 	}
 

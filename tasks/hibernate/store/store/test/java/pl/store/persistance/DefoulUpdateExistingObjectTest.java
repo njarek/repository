@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.inject.Inject;
 
+import org.hibernate.StaleObjectStateException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,26 +31,42 @@ public class DefoulUpdateExistingObjectTest {
 	private int lifecycleId;
 	
 	@Before
-	public void init(){
+	public void init() throws PersistaceException{
 		Basket basket=new Basket("new");
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
-		
-		
+				
 		Basket basketnew = newOrderDao.saveBasket(basket);
 		basketId=basketnew.getId();
-		lifecycleId=newOrderDao.getLifeCycle().getId();
+		lifecycleId=newOrderDao.getLifeCycleState().getId();
 	}
 	
 	@Test
 	public void properUpdateBasket() throws Exception{
-		Basket basket=updateOrderDao.blockBasketWhileUpdating(1);
-		assertEquals("modified",updateOrderDao.getLifeCycle().getLifecycle());
+		Basket basket=updateOrderDao.blockBasketWhileUpdating(basketId);
+		assertEquals("modified",updateOrderDao.getLifeCycleState().getLifecycle());
 		basket.setName("new name");
+		Item item =new Item("baterie",3);
+		basket.addItem(item);
 		basket=updateOrderDao.updateBasket(basket);
 		
 		System.out.println(basket);
-		assertEquals("new",updateOrderDao.getLifeCycle().getLifecycle());
+				
+		assertEquals("new",updateOrderDao.getLifeCycleState().getLifecycle());
+	}
+	
+	@Test(expected=Exception.class)
+	public void transactionLock() throws Exception{
+		Basket basket=updateOrderDao.blockBasketWhileUpdating(basketId);
+		assertEquals("modified",updateOrderDao.getLifeCycleState().getLifecycle());
+		basket.setName("new name");
+		Item item =new Item("baterie",3);
+		basket.addItem(item);
+			
+		Basket basket2=updateOrderDao.updateBasket(basket);
+		Basket basket3=updateOrderDao.updateBasket(basket);
+		System.out.println(basket);
+
 	}
 }
