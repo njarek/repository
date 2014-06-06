@@ -1,9 +1,7 @@
 package pl.store.business.inbound;
 
 import pl.store.domain.Basket;
-import pl.store.domain.DefoulItemVisitor;
-import pl.store.domain.Item;
-import pl.store.domain.ItemVisitor;
+import pl.store.domain.BasketVisitor;
 import pl.store.persistance.NewOrderDao;
 import pl.store.persistance.PersistaceException;
 
@@ -12,11 +10,7 @@ public class DefoultNewOrderProcesor implements ProcessNewOrder {
 	
 	@Override
 	public Basket addNewBasket(Basket basket) throws PersistaceException {
-		ItemVisitor itemVisitor=new DefoulItemVisitor(basket);
-		for(Item item:basket.getItems()){
-			item.accept(itemVisitor);
-		}
-		
+		new BasketVisitor().VisitBaksket(basket);	
 		return newOrderDao.saveBasket(basket);
 	}
 

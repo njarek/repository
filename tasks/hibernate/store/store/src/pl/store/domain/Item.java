@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "item" )
-public class Item implements ItemElement{
+public class Item {
 
 	public Item() {
 
@@ -148,11 +148,6 @@ public class Item implements ItemElement{
 
 	public void setBasket(Basket basket) {
 		this.basket = basket;
-	}
-
-	public void accept(ItemVisitor v) {
-		v.visit(this);
-		
 	}
 
 	
