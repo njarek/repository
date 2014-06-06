@@ -17,7 +17,7 @@ import pl.store.domain.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
-public class DefoulNewOrderObjectTest {
+public class DefoulNewOrderDaoTest {
 
 	@Inject
 	private NewOrderDao newOrderDao;
@@ -31,6 +31,7 @@ public class DefoulNewOrderObjectTest {
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
+		item.setBasket(basket);
 				
 		Basket basketnew = newOrderDao.saveBasket(basket);
 		System.out.println(basket);
@@ -45,7 +46,7 @@ public class DefoulNewOrderObjectTest {
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
-			
+		item.setBasket(basket);	
 		basket= newOrderDao.saveBasket(basket);
 		Basket basketnew =findOrderDao.findBasketById(basket.getId());
 		System.out.println(basket);

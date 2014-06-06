@@ -25,6 +25,10 @@ public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
 			tx = hibernateSession.beginTransaction();
 
 			lifeCycleState = getLifeCycleByBasketId(hibernateSession, newBasket);
+			if(!lifeCycleState.getLifecycle().equals("modified")){
+				throw new PersistaceException("You have to block basket for update first"); 
+			}
+			
 			lifeCycleState.setLifecycleEnum(LifeCycleEnum.NEW);
 			hibernateSession.merge(newBasket);
 			hibernateSession.merge(lifeCycleState);
@@ -33,7 +37,7 @@ public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			throw new PersistaceException("Persitane problem", e); 
+			throw new PersistaceException("Object has bean already modified by someone else", e); 
 		} finally {
 			hibernateSession.close();
 

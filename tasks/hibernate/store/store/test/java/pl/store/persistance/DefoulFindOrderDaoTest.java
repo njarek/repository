@@ -17,7 +17,7 @@ import pl.store.domain.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
-public class DefoulFindObjectTest {
+public class DefoulFindOrderDaoTest {
 
 	@Inject
 	private FindOrderDao findBasketDao;

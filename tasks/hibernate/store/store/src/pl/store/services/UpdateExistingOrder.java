@@ -24,8 +24,13 @@ public class UpdateExistingOrder {
 
 	@POST
 	@Path("/update")
-	public Basket updateBasket(Basket basket) throws Exception {
-		return order.updateBasket(basket);
+	public Basket updateBasket(Basket basket) {
+		try {
+			return order.updateBasket(basket);
+		} catch (Exception e) {
+			return null;
+		}
+	
 
 	}
 }

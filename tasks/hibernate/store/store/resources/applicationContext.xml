@@ -22,4 +22,8 @@
 	<bean id="updateBasketDao" class="pl.store.persistance.DefoultUpdateExistingOrderDao">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
+	
+	<bean id="saveNewBasket" class="pl.store.business.inbound.DefoultNewOrderProcesor">
+		<property name="newOrderDao" ref="saveNewBasketDao"></property>
+	</bean>
 </beans>

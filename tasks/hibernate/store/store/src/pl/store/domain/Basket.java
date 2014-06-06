@@ -80,29 +80,16 @@ public class Basket {
 		this.name = name;
 	}
 
-//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER,mappedBy="basket")
-//	//@Fetch(FetchMode.SELECT) inverseJoinColumns = @JoinColumn( name="i_id")
-//	//@JoinColumn(name = "b_id")
-//	@IndexColumn(name="i_id")
-//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-//	@JoinTable(
-//            name="basket",
-//            joinColumns = @JoinColumn( name="b_id")
-//           
-//    )
-//	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-//	@JoinColumn(name="i_id")
 	@OneToMany(fetch=FetchType.EAGER, targetEntity=Item.class, cascade=CascadeType.ALL, mappedBy="basket")
 	public Set<Item> getItems() {
 		return items;
 	}
 
 	public void addItem(Item item) {
-		item.setBasket(this);
 		items.add(item);
 	}
 
-	public void setItems(Set<Item> Items) {
+	private void setItems(Set<Item> Items) {
 		this.items = Items;
 	}
 

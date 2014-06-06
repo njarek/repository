@@ -19,13 +19,16 @@ import pl.store.domain.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
-public class DefoulUpdateExistingObjectTest {
+public class DefoulUpdateExistingOrderDaoTest {
 
 	@Inject
 	private UpdateOrderDao updateOrderDao;
 	
 	@Inject
 	private NewOrderDao newOrderDao;
+	
+	@Inject
+	private FindOrderDao findOrderDao;
 	
 	private int basketId;
 	private int lifecycleId;
@@ -36,7 +39,7 @@ public class DefoulUpdateExistingObjectTest {
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
-				
+		item.setBasket(basket);		
 		Basket basketnew = newOrderDao.saveBasket(basket);
 		basketId=basketnew.getId();
 		lifecycleId=newOrderDao.getLifeCycleState().getId();
@@ -49,6 +52,7 @@ public class DefoulUpdateExistingObjectTest {
 		basket.setName("new name");
 		Item item =new Item("baterie",3);
 		basket.addItem(item);
+		item.setBasket(basket);
 		basket=updateOrderDao.updateBasket(basket);
 		
 		System.out.println(basket);
@@ -63,10 +67,20 @@ public class DefoulUpdateExistingObjectTest {
 		basket.setName("new name");
 		Item item =new Item("baterie",3);
 		basket.addItem(item);
-			
+		item.setBasket(basket);	
 		Basket basket2=updateOrderDao.updateBasket(basket);
 		Basket basket3=updateOrderDao.updateBasket(basket);
 		System.out.println(basket);
+
+	}
+	
+	@Test(expected=Exception.class)
+	public void transactionLifeCycle() throws Exception{
+		Basket basket=findOrderDao.findBasketById(basketId);
+		basket.setName("new name");
+		Item item =new Item("baterie",3);
+		basket.addItem(item);	
+		Basket basket2=updateOrderDao.updateBasket(basket);
 
 	}
 }
