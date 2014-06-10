@@ -9,6 +9,7 @@
 	<bean id="lifecycleUpdater" class="pl.store.persistance.DefoultLifecycleStatusUpdaterDao" />
 	<bean id="reuestSender" class="pl.store.business.outbound.TescoRequestSender"/>
 	<bean id="requestTask" class="pl.store.business.outbound.RequestScheduler" />
+	<bean id="orderFinder" class="pl.store.persistance.DefoultOrderFinderDao"/>
 
 	<!-- Spring Quartz -->
 	<bean id="requestJob"

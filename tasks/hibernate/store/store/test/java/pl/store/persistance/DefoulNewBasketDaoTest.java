@@ -17,13 +17,13 @@ import pl.store.domain.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
-public class DefoulNewOrderDaoTest {
+public class DefoulNewBasketDaoTest {
 
 	@Inject
-	private NewOrderDao newOrderDao;
+	private NewBasketDao newOrderDao;
 	
 	@Inject
-	private FindOrderDao findOrderDao;
+	private FindBasketDao findOrderDao;
 	
 	@Test
 	public void properDaveToDb() throws PersistaceException{

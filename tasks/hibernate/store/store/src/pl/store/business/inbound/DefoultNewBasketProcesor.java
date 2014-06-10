@@ -2,11 +2,11 @@ package pl.store.business.inbound;
 
 import pl.store.domain.Basket;
 import pl.store.domain.BasketVisitor;
-import pl.store.persistance.NewOrderDao;
+import pl.store.persistance.NewBasketDao;
 import pl.store.persistance.PersistaceException;
 
-public class DefoultNewOrderProcesor implements ProcessNewOrder {
-	private NewOrderDao newOrderDao;
+public class DefoultNewBasketProcesor implements ProcessNewBasket {
+	private NewBasketDao newOrderDao;
 	
 	@Override
 	public Basket addNewBasket(Basket basket) throws PersistaceException {
@@ -14,11 +14,11 @@ public class DefoultNewOrderProcesor implements ProcessNewOrder {
 		return newOrderDao.saveBasket(basket);
 	}
 
-	public NewOrderDao getNewOrderDao() {
+	public NewBasketDao getNewOrderDao() {
 		return newOrderDao;
 	}
 
-	public void setNewOrderDao(NewOrderDao newOrderDao) {
+	public void setNewOrderDao(NewBasketDao newOrderDao) {
 		this.newOrderDao = newOrderDao;
 	}
 

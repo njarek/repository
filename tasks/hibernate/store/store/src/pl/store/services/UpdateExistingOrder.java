@@ -3,17 +3,17 @@ package pl.store.services;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import pl.store.business.inbound.DefoultUpdateOrder;
-import pl.store.business.inbound.UpdateOrder;
+import pl.store.business.inbound.DefoultUpdateBasket;
+import pl.store.business.inbound.UpdateBasket;
 import pl.store.domain.Basket;
 
 @Path("/storeupdate")
 public class UpdateExistingOrder {
 
-	private UpdateOrder order;
+	private UpdateBasket order;
 
 	public UpdateExistingOrder() {
-		order = new DefoultUpdateOrder();
+		order = new DefoultUpdateBasket();
 	}
 
 	@POST

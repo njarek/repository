@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
-import pl.store.persistance.FindOrderDao;
-import pl.store.persistance.NewOrderDao;
+import pl.store.persistance.FindBasketDao;
+import pl.store.persistance.NewBasketDao;
 import pl.store.persistance.PersistaceException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,13 +20,13 @@ import pl.store.persistance.PersistaceException;
 public class DefoulNewOrderTest {
 
 	@Inject
-	private ProcessNewOrder processNewOrder;
+	private ProcessNewBasket processNewOrder;
 
 	@Inject
-	private NewOrderDao newOrderDao;
+	private NewBasketDao newOrderDao;
 
 	@Inject
-	private FindOrderDao findOrderDao;
+	private FindBasketDao findOrderDao;
 	
 	@Test
 	public void properDaveToDb() throws PersistaceException {

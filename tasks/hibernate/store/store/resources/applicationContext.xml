@@ -10,20 +10,21 @@
 	<tx:annotation-driven />
 	<import resource="classpath:pl/store/database/h2.xml" />
 	<import resource="classpath:pl/store/database/hibernate.xml" />
+	<import resource="classpath:requestScheduler.xml" />
 
-	<bean id="findBasketDao" class="pl.store.persistance.DefoultFindOrderDao">
+	<bean id="findBasketDao" class="pl.store.persistance.DefoultFindBasketDao">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean id="saveNewBasketDao" class="pl.store.persistance.DefoultNewOrderDao">
+	<bean id="saveNewBasketDao" class="pl.store.persistance.DefoultNewBasketDao">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean id="updateBasketDao" class="pl.store.persistance.DefoultUpdateExistingOrderDao">
+	<bean id="updateBasketDao" class="pl.store.persistance.DefoultUpdateExistingBasketDao">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean id="saveNewBasket" class="pl.store.business.inbound.DefoultNewOrderProcesor">
+	<bean id="saveNewBasket" class="pl.store.business.inbound.DefoultNewBasketProcesor">
 		<property name="newOrderDao" ref="saveNewBasketDao"></property>
 	</bean>
 </beans>

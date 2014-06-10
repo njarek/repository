@@ -17,13 +17,13 @@ import pl.store.domain.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
-public class DefoulFindOrderDaoTest {
+public class DefoulFindBasketDaoTest {
 
 	@Inject
-	private FindOrderDao findBasketDao;
+	private FindBasketDao findBasketDao;
 	
 	@Inject 
-	private NewOrderDao newOrderDao;
+	private NewBasketDao newOrderDao;
 	
 	private int basketId;
 	

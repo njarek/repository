@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import pl.store.domain.Basket;
 import pl.store.persistance.LifecycleStatusUpdaterDao;
+import pl.supplier.domain.Order;
 import pl.supplier.domain.Requirements;
 
 
@@ -28,14 +29,14 @@ public class RequestScheduler {
 	
 	
 	public void createAnsSendRequest(){
-		List<Basket> baskets=dataCollector.getBaskets();
-		Requirements requirements=dataTransformer.transform(baskets);
-		
-		String message=unmarshallRequirements(requirements);
-		try {
-			lifecycleDao.updateLifecycle(baskets,requestSender.sendRequest(message));
-		} catch (Exception e) {
-		}
+		List<Order> baskets=dataCollector.getOrders();
+//		Requirements requirements=dataTransformer.transform(baskets);
+//		
+//		String message=unmarshallRequirements(requirements);
+//		try {
+//			lifecycleDao.updateLifecycle(baskets,requestSender.sendRequest(message));
+//		} catch (Exception e) {
+//		}
 		
 		System.out.println("i'm working");
 		

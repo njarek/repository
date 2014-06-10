@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 
 import pl.store.domain.Basket;
 
-public class DefoultFindOrderDao implements FindOrderDao {
+public class DefoultFindBasketDao implements FindBasketDao {
 
 	private SessionFactory factory;
 

@@ -8,7 +8,7 @@ import pl.store.domain.Basket;
 import pl.store.domain.LifeCycleState;
 import pl.store.domain.LifeCycleEnum;
 
-public class DefoultNewOrderDao implements NewOrderDao {
+public class DefoultNewBasketDao implements NewBasketDao {
 
 	private SessionFactory factory;
 

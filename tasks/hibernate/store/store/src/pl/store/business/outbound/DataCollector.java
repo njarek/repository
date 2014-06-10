@@ -2,10 +2,10 @@ package pl.store.business.outbound;
 
 import java.util.List;
 
-import pl.store.domain.Basket;
+import pl.supplier.domain.Order;
 
 public interface DataCollector {
 
-	List<Basket> getBaskets();
+	List<Order> getOrders();
 
 }

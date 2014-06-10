@@ -1,15 +1,15 @@
 package pl.store.business.inbound;
 
 import pl.store.domain.Basket;
-import pl.store.persistance.DefoultUpdateExistingOrderDao;
-import pl.store.persistance.UpdateOrderDao;
+import pl.store.persistance.DefoultUpdateExistingBasketDao;
+import pl.store.persistance.UpdateBasketDao;
 
-public class DefoultUpdateOrder implements UpdateOrder {
+public class DefoultUpdateBasket implements UpdateBasket {
 
-	private UpdateOrderDao orderDao;
+	private UpdateBasketDao orderDao;
 
-	public DefoultUpdateOrder() {
-		orderDao = new DefoultUpdateExistingOrderDao();
+	public DefoultUpdateBasket() {
+		orderDao = new DefoultUpdateExistingBasketDao();
 	}
 
 	@Override

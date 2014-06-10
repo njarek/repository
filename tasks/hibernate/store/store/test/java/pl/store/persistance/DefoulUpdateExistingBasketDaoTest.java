@@ -19,16 +19,16 @@ import pl.store.domain.Item;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
-public class DefoulUpdateExistingOrderDaoTest {
+public class DefoulUpdateExistingBasketDaoTest {
 
 	@Inject
-	private UpdateOrderDao updateOrderDao;
+	private UpdateBasketDao updateOrderDao;
 	
 	@Inject
-	private NewOrderDao newOrderDao;
+	private NewBasketDao newOrderDao;
 	
 	@Inject
-	private FindOrderDao findOrderDao;
+	private FindBasketDao findOrderDao;
 	
 	private int basketId;
 	private int lifecycleId;

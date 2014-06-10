@@ -11,7 +11,7 @@ import pl.store.domain.Basket;
 import pl.store.domain.LifeCycleState;
 import pl.store.domain.LifeCycleEnum;
 
-public class DefoultUpdateExistingOrderDao implements UpdateOrderDao {
+public class DefoultUpdateExistingBasketDao implements UpdateBasketDao {
 
 	private SessionFactory factory;
 

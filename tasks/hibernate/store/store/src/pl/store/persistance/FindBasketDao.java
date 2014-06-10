@@ -2,7 +2,7 @@ package pl.store.persistance;
 
 import pl.store.domain.Basket;
 
-public interface FindOrderDao {
+public interface FindBasketDao {
 
 	Basket findBasketById(int id);
 }

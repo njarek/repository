@@ -1,0 +1,32 @@
+package pl.store.persistance;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import pl.store.domain.Basket;
+import pl.store.domain.Item;
+import pl.store.domain.OrderDrainer;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContextTest.xml")
+public class DefoultPredaerFinderDaoTest {
+
+
+	
+	@Inject
+	private OrderFinderDao orderFinderDao;
+	
+	@Test
+	public void properDaveToDb() throws PersistaceException{
+		List<OrderDrainer> drainers=orderFinderDao.getOrders();
+		System.out.println(drainers);
+	}
+}
