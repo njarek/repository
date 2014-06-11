@@ -11,7 +11,7 @@
  	<complexType name="requirements">
 		<sequence>
 			<element name="buyerDetails" type="pref:buyer"></element>
-			<element name="orderDetails" type="pref:order"></element>
+			<element name="orderDetails" type="pref:order" maxOccurs="unbounded" minOccurs="0"></element>
 			<element name="deliveryPriorytet">
 				<simpleType>
 					<restriction base="string">
