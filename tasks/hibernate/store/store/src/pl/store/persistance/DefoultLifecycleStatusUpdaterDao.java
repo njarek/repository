@@ -3,6 +3,7 @@ package pl.store.persistance;
 import java.util.List;
 
 import pl.store.domain.Basket;
+import pl.store.persistance.Interface.LifecycleStatusUpdaterDao;
 
 public class DefoultLifecycleStatusUpdaterDao implements LifecycleStatusUpdaterDao{
 

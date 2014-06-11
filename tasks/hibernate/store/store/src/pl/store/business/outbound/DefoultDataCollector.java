@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.store.domain.OrderDrainer;
-import pl.store.persistance.OrderFinderDao;
+import pl.store.persistance.Interface.OrderFinderDao;
 import pl.supplier.domain.Order;
 
 public class DefoultDataCollector implements DataCollector{
@@ -16,6 +16,14 @@ public class DefoultDataCollector implements DataCollector{
 	@Override
 	public List<OrderDrainer> getOrders() {
 		
-		return findOrdersDao.getOrders();
+		return getFindOrdersDao().getOrders();
+	}
+
+	public OrderFinderDao getFindOrdersDao() {
+		return findOrdersDao;
+	}
+
+	public void setFindOrdersDao(OrderFinderDao findOrdersDao) {
+		this.findOrdersDao = findOrdersDao;
 	}
 }

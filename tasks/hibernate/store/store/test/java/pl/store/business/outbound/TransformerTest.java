@@ -25,20 +25,22 @@ import pl.supplier.domain.Requirements;
 public class TransformerTest {
 	@Inject
 	private DataTransformer dataTransformer;
-	
+
 	@Inject
- DefoultDataCollector dataCollector;
+	DefoultDataCollector dataCollector;
+
 	@Test
-	public void tranformTest() throws Exception{
-	
-		
-		assertEquals(prepareReq(),dataTransformer.transform(dataCollector.getOrders()));
-		
-		
-		}
-		
-	private Requirements prepareReq() throws Exception{
-		Requirements requirements=new Requirements();
+	public void tranformTest() throws Exception {
+
+		Requirements expected = prepareReq();
+		Requirements actual = dataTransformer.transform(dataCollector
+				.getOrders());
+		assertEquals(expected, actual);
+
+	}
+
+	private Requirements prepareReq() throws Exception {
+		Requirements requirements = new Requirements();
 		requirements.setBuyerDetails(prepareBuyer());
 		requirements.setDeliveryPriorytet("LOW");
 		requirements.getOrderDetails().addAll(preapreOrders());
@@ -55,62 +57,81 @@ public class TransformerTest {
 
 		buyer.setTradeDate(date2);
 		buyer.setId(1);
-		
 
 		return buyer;
 	}
 
 	private List<Order> preapreOrders() {
 		List<Order> orders = new ArrayList<Order>();
+		final String type="RTV";
+		int id=0;
 		Order order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("czajnik");
 		order.setPrice(0.4);
 		order.setQuatity(1);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("pralka");
 		order.setPrice(1.2);
 		order.setQuatity(1);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("czajnik2");
 		order.setPrice(2.2);
 		order.setQuatity(1);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("tv");
 		order.setPrice(2.2);
 		order.setQuatity(2);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("pralka");
 		order.setPrice(2.2);
 		order.setQuatity(1);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("pilot");
 		order.setPrice(7.5);
 		order.setQuatity(1);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("pilot");
 		order.setPrice(2.2);
 		order.setQuatity(1);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("baterie");
 		order.setPrice(3.2);
 		order.setQuatity(1);
 		orders.add(order);
 
 		order = new Order();
+		order.setId(id++);
+		order.setType(type);
 		order.setName("baterie");
 		order.setPrice(2.2);
 		order.setQuatity(1);

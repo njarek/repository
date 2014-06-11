@@ -1,4 +1,4 @@
-package pl.store.persistance;
+package pl.store.persistance.Interface;
 
 import java.util.List;
 

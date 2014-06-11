@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import pl.store.domain.Basket;
 import pl.store.domain.LifeCycleState;
 import pl.store.domain.LifeCycleEnum;
+import pl.store.persistance.Interface.UpdateBasketDao;
 
 public class DefoultUpdateExistingBasketDao implements UpdateBasketDao {
 

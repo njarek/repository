@@ -2,7 +2,7 @@ package pl.store.business.inbound;
 
 import pl.store.domain.Basket;
 import pl.store.persistance.DefoultUpdateExistingBasketDao;
-import pl.store.persistance.UpdateBasketDao;
+import pl.store.persistance.Interface.UpdateBasketDao;
 
 public class DefoultUpdateBasket implements UpdateBasket {
 

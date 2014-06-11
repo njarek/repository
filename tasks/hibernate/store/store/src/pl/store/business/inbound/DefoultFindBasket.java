@@ -2,7 +2,7 @@ package pl.store.business.inbound;
 
 import pl.store.domain.Basket;
 import pl.store.persistance.DefoultFindBasketDao;
-import pl.store.persistance.FindBasketDao;
+import pl.store.persistance.Interface.FindBasketDao;
 
 public class DefoultFindBasket implements FindBasket {
 

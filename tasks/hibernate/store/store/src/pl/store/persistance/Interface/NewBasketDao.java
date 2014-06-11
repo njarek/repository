@@ -1,7 +1,8 @@
-package pl.store.persistance;
+package pl.store.persistance.Interface;
 
 import pl.store.domain.Basket;
 import pl.store.domain.LifeCycleState;
+import pl.store.persistance.PersistaceException;
 
 public interface NewBasketDao {
 

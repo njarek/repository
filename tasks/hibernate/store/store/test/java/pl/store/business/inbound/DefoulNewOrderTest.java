@@ -11,9 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
-import pl.store.persistance.FindBasketDao;
-import pl.store.persistance.NewBasketDao;
 import pl.store.persistance.PersistaceException;
+import pl.store.persistance.Interface.FindBasketDao;
+import pl.store.persistance.Interface.NewBasketDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")

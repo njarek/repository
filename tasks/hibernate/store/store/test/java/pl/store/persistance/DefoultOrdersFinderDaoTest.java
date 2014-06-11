@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
 import pl.store.domain.OrderDrainer;
+import pl.store.persistance.Interface.OrderFinderDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
@@ -26,5 +27,11 @@ public class DefoultOrdersFinderDaoTest {
 	public void properDaveToDb() throws PersistaceException {
 		List<OrderDrainer> drainers = orderFinderDao.getOrders();
 		assertEquals(9, drainers.size());
+	}
+	
+	@Test
+	public void emptyOrders() throws PersistaceException {
+		List<OrderDrainer> drainers = orderFinderDao.getOrders();
+		assertEquals(0, drainers.size());
 	}
 }

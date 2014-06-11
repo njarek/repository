@@ -2,6 +2,8 @@ package pl.store.persistance;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Before;
@@ -12,6 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
+import pl.store.domain.LifeCycleEnum;
+import pl.store.persistance.Interface.FindBasketDao;
+import pl.store.persistance.Interface.NewBasketDao;
 
 
 
@@ -44,5 +49,13 @@ public class DefoulFindBasketDaoTest {
 		System.out.println(basket);
 		
 		assertTrue(basket!=null);
+	}
+	
+	@Test
+	public void checkFindingBasketByLifeCycle(){
+		List<Basket> baskets = findBasketDao.findBasketByLifecycle(LifeCycleEnum.MODIFIED);
+		System.out.println(baskets);
+		
+		assertTrue(baskets!=null);
 	}
 }

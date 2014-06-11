@@ -1,15 +1,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-
-	<bean id="dataCollector" class="pl.store.business.outbound.DefoultDataCollector" />
+<context:annotation-config />
+	<bean id="dataCollector" class="pl.store.business.outbound.DefoultDataCollector" >
+	<!-- <property name="findOrdersDao" ref="orderFinder"></property> -->
+	</bean>
 	<bean id="dataTransformer" class="pl.store.business.outbound.DefoultDataTransformer" />
 	<bean id="lifecycleUpdater" class="pl.store.persistance.DefoultLifecycleStatusUpdaterDao" />
 	<bean id="reuestSender" class="pl.store.business.outbound.TescoRequestSender"/>
-	<bean id="requestTask" class="pl.store.business.outbound.RequestScheduler" />
-	<bean id="orderFinder" class="pl.store.persistance.DefoultOrderFinderDao"/>
+	<bean id="requestTask" class="pl.store.business.outbound.RequestScheduler" >
+		<!-- <property name="dataCollector" ref="dataCollector"/> -->
+	</bean>
+	<bean id="orderFinder" class="pl.store.persistance.DefoultOrderFinderDao">
+	
+	</bean>
+	
 
 	<!-- Spring Quartz -->
 	<bean id="requestJob"
@@ -22,7 +31,7 @@
 	<!-- Simple Trigger, run every 5 seconds -->
 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="requestJob" />
-		<property name="repeatInterval" value="5000" />
+		<property name="repeatInterval" value="5000000000" />
 	</bean>
 
 	<!-- Cron Trigger, run every 5 seconds -->

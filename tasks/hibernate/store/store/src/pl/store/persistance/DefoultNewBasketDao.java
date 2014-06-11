@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import pl.store.domain.Basket;
 import pl.store.domain.LifeCycleState;
 import pl.store.domain.LifeCycleEnum;
+import pl.store.persistance.Interface.NewBasketDao;
 
 public class DefoultNewBasketDao implements NewBasketDao {
 
