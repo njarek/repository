@@ -3,10 +3,10 @@ package pl.store.domain;
 public class OrderDrainer {
 
 	private String description;
-	private int qty;
+	private long qty;
 	private double price;
 
-	public OrderDrainer(String description, int qty, double price) {
+	public OrderDrainer(String description, long qty, double price) {
 		super();
 		this.setDescription(description);
 		this.setQty(qty);
@@ -27,11 +27,11 @@ public class OrderDrainer {
 		this.description = description;
 	}
 
-	public int getQty() {
+	public long getQty() {
 		return qty;
 	}
 
-	public void setQty(int qty) {
+	public void setQty(long qty) {
 		this.qty = qty;
 	}
 

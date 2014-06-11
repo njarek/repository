@@ -8,6 +8,7 @@ import org.junit.experimental.categories.Categories.IncludeCategory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import pl.store.domain.Basket;
+import pl.store.domain.OrderDrainer;
 import pl.store.persistance.LifecycleStatusUpdaterDao;
 import pl.supplier.domain.Order;
 import pl.supplier.domain.Requirements;
@@ -29,7 +30,7 @@ public class RequestScheduler {
 	
 	
 	public void createAnsSendRequest(){
-		List<Order> baskets=dataCollector.getOrders();
+//		List<OrderDrainer> baskets=dataCollector.getOrders();
 //		Requirements requirements=dataTransformer.transform(baskets);
 //		
 //		String message=unmarshallRequirements(requirements);

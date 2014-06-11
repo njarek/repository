@@ -17,16 +17,14 @@ import pl.store.domain.OrderDrainer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
-public class DefoultPredaerFinderDaoTest {
+public class DefoultOrdersFinderDaoTest {
 
-
-	
 	@Inject
 	private OrderFinderDao orderFinderDao;
-	
+
 	@Test
-	public void properDaveToDb() throws PersistaceException{
-		List<OrderDrainer> drainers=orderFinderDao.getOrders();
-		System.out.println(drainers);
+	public void properDaveToDb() throws PersistaceException {
+		List<OrderDrainer> drainers = orderFinderDao.getOrders();
+		assertEquals(9, drainers.size());
 	}
 }

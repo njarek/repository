@@ -24,8 +24,9 @@ public class DefoultOrderFinderDao implements OrderFinderDao{
 		try {
 			tx = hibernateSession.beginTransaction();
 
-			drainers= hibernateSession.createQuery(" SELECT NEW pl.store.domain.OrderDrainer( i.i_description, sum(i.i_iquantity),i._i.price) from item i, basket b, lifecycle l where i.b_id=b.b_id and b.b_id=l.b_id and l.l_lifecycle='new' group by  i_description,I_price  order by i_description").list();
-			System.out.println(drainers);
+			drainers= hibernateSession.createQuery(" SELECT NEW pl.store.domain.OrderDrainer(  i.description, count(i.quantity),i.price)  from LifeCycleState as l inner join l.basket as b  inner join b.items as i where l.lifecycle='new' group by  i.description,i.quantity,i.price  ").list();
+
+			System.out.println(drainers.size());
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null)
@@ -37,10 +38,5 @@ public class DefoultOrderFinderDao implements OrderFinderDao{
 			}
 		}
 		return drainers;		
-	}
-
-	
-	public static void main(String[] args) {
-		
 	}
 }

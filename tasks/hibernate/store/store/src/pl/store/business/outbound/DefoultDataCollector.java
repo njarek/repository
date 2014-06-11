@@ -4,25 +4,18 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import pl.store.domain.OrderDrainer;
 import pl.store.persistance.OrderFinderDao;
 import pl.supplier.domain.Order;
 
 public class DefoultDataCollector implements DataCollector{
 
-//	@Inject
-//	private OrderFinder findOrders;
+	@Inject
+	private OrderFinderDao findOrdersDao;
 
 	@Override
-	public List<Order> getOrders() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OrderDrainer> getOrders() {
+		
+		return findOrdersDao.getOrders();
 	}
-	
-	
-//	@Override
-//	public List<Order> getOrders() {
-//		findOrders.find
-//		return null;
-//	}
-
 }
