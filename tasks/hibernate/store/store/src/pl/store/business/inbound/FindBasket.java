@@ -4,5 +4,5 @@ import pl.store.domain.Basket;
 
 public interface FindBasket {
 
-	Basket findBasket(Basket basket);
+	Basket findBasket(int id);
 }

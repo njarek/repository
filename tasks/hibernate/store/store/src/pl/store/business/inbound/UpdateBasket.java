@@ -6,5 +6,5 @@ public interface UpdateBasket {
 	
 	Basket updateBasket(Basket basket) ;
 
-	Basket blockBasketForUpdate(Basket basket);
+	Basket blockBasketForUpdate(int id);
 }

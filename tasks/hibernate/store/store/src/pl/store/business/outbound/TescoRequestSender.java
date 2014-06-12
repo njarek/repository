@@ -37,7 +37,6 @@ public class TescoRequestSender implements RequestSender {
 			System.out.println("Blad");
 			e.printStackTrace();
 		}
-		System.out.println(apiOutput);
 		return Boolean.parseBoolean(apiOutput);
 	}
 

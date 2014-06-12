@@ -20,28 +20,28 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name = "Item")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-@Table(name = "item" )
+@Table(name = "item")
 public class Item {
 
 	public Item() {
 
 	}
-	
+
 	@XmlTransient
 	private Basket basket;
 
-	@XmlAttribute(required = true)	
+	@XmlAttribute(required = true)
 	private int idItem;
-	
-	@XmlAttribute(required = true)	
+
+	@XmlAttribute(required = true)
 	private long version;
-	
-	@XmlElement(required = true)	
+
+	@XmlElement(required = true)
 	private String description;
-	
-	@XmlElement(required = true)	
+
+	@XmlElement(required = true)
 	private int quantity;
-	
+
 	@XmlElement(required = true)
 	private double price;
 
@@ -49,6 +49,13 @@ public class Item {
 		super();
 		this.description = description;
 		this.quantity = quantity;
+	}
+
+	public Item(String description, int quantity, double price) {
+		super();
+		this.description = description;
+		this.quantity = quantity;
+		this.price = price;
 	}
 
 	@Id
@@ -64,7 +71,7 @@ public class Item {
 	}
 
 	@Version
-	@Column(name="i_version")
+	@Column(name = "i_version")
 	public long getVersion() {
 		return version;
 	}
@@ -73,7 +80,7 @@ public class Item {
 		this.version = version;
 	}
 
-	@Column(name="I_DESCRIPTION")
+	@Column(name = "I_DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
@@ -82,7 +89,7 @@ public class Item {
 		this.description = description;
 	}
 
-	@Column(name="I_QUANTITY")
+	@Column(name = "I_QUANTITY")
 	public int getQuantity() {
 		return quantity;
 	}
@@ -91,7 +98,7 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	@Column(name="I_Price")
+	@Column(name = "I_Price")
 	public double getPrice() {
 		return price;
 	}
@@ -102,8 +109,9 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [idItem=" + idItem + ", version=" + version + ", description=" + description + ", quantity=" + quantity + ", price="
-				+ price + "]";
+		return "Item [idItem=" + idItem + ", version=" + version
+				+ ", description=" + description + ", quantity=" + quantity
+				+ ", price=" + price + "]";
 	}
 
 	@Override
@@ -141,8 +149,8 @@ public class Item {
 		return true;
 	}
 
-	@ManyToOne ()
-	@JoinColumn(name = "b_id",nullable = false)
+	@ManyToOne()
+	@JoinColumn(name = "b_id", nullable = false)
 	public Basket getBasket() {
 		return basket;
 	}
@@ -150,11 +158,5 @@ public class Item {
 	public void setBasket(Basket basket) {
 		this.basket = basket;
 	}
-
-	
-
-
-
-	
 
 }

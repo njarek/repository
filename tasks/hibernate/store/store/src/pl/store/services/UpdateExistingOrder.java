@@ -15,8 +15,8 @@ public class UpdateExistingOrder {
 
 	@POST
 	@Path("/request")
-	public Basket requestForUpdate(Basket basket) {
-		return updateBasket.blockBasketForUpdate(basket);
+	public Basket requestForUpdate(String id) {
+		return updateBasket.blockBasketForUpdate(Integer.parseInt(id));
 	}
 
 	@POST

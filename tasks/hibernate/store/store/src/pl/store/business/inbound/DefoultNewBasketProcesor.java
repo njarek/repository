@@ -1,11 +1,15 @@
 package pl.store.business.inbound;
 
+import javax.inject.Inject;
+
 import pl.store.domain.Basket;
 import pl.store.domain.BasketVisitor;
 import pl.store.persistance.PersistaceException;
 import pl.store.persistance.Interface.NewBasketDao;
 
 public class DefoultNewBasketProcesor implements ProcessNewBasket {
+	
+	@Inject
 	private NewBasketDao newOrderDao;
 	
 	@Override

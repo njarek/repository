@@ -81,11 +81,8 @@ public class DefoultUpdateExistingBasketDao implements UpdateBasketDao {
 
 			lifeCycleState = getLifeCycleByBasketId(hibernateSession, basket);
 			lifeCycleState.setLifecycleEnum(LifeCycleEnum.MODIFIED);
-			System.out.println(lifeCycleState);
 			// lifeCycle.setBasket(basket);
 			hibernateSession.merge(lifeCycleState);
-
-			System.out.println(basket);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null)

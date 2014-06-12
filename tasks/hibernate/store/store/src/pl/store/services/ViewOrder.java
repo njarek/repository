@@ -15,8 +15,8 @@ public class ViewOrder {
 	
 	@POST
 	@Path("/find")
-	public Basket findBasket(Basket basket) throws Exception {
-		return findBasket.findBasket(basket);
+	public Basket findBasket(String id) throws Exception {
+		return findBasket.findBasket(Integer.parseInt(id));
 
 	}
 
