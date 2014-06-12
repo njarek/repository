@@ -18,18 +18,7 @@
 		<property name="username" value="sa" />
 		<property name="password" value="sa" />
 	</bean> 
-
-	<bean id="findBasketDao" class="pl.store.persistance.DefoultFindBasketDao">
-		<property name="factory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="saveNewBasketDao" class="pl.store.persistance.DefoultNewBasketDao">
-		<property name="factory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="updateBasketDao" class="pl.store.persistance.DefoultUpdateExistingBasketDao">
-		<property name="factory" ref="sessionFactory"></property>
-	</bean>
+<bean id="schedulerFactory" class="pl.store.services.UpdateExistingOrder"></bean>
 
 	
 </beans>

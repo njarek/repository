@@ -5,22 +5,17 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import org.junit.experimental.categories.Categories.IncludeCategory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import pl.store.domain.Basket;
 import pl.store.domain.OrderDrainer;
-import pl.store.persistance.Interface.LifecycleStatusUpdaterDao;
-import pl.supplier.domain.Order;
+import pl.supplier.domain.ObjectFactory;
 import pl.supplier.domain.Requirements;
 
 /**
  * @author niedoroj
- *
+ * 
  */
 public class RequestScheduler {
 
@@ -33,12 +28,9 @@ public class RequestScheduler {
 	@Inject
 	private RequestSender requestSender;
 
-	@Inject
-	private LifecycleStatusUpdaterDao lifecycleDao;
-
 	static JAXBContext jaxbContext;
 
-	public RequestScheduler()  {
+	public RequestScheduler() {
 		try {
 			jaxbContext = JAXBContext.newInstance(Requirements.class);
 		} catch (JAXBException e) {
@@ -47,9 +39,17 @@ public class RequestScheduler {
 		}
 	}
 
-	public void createAnsSendRequest()  {
+	public void createAnsSendRequest() {
+		System.out.println("Preparing new Order...");
+
 		List<OrderDrainer> baskets = getDataCollector().getOrders();
 		Requirements requirements = dataTransformer.transform(baskets);
+
+		if (requirements.getOrderDetails().size() <= 0) {
+			System.out.println("Empty order");
+			return;
+		}
+
 		System.out.println("i'm unmarshaling req " + requirements);
 		String message = marshallRequirements(requirements);
 		try {
@@ -63,15 +63,18 @@ public class RequestScheduler {
 
 	}
 
-	private String marshallRequirements(Requirements requirements)  {
+	private String marshallRequirements(Requirements requirements) {
+		ObjectFactory factory = new ObjectFactory();
+		JAXBElement<Requirements> reqElement = factory.createTesco(requirements);
+
 		Marshaller jaxbMarshaller;
-		StringWriter stringWriter=null;
+		StringWriter stringWriter = null;
 		try {
 			jaxbMarshaller = jaxbContext.createMarshaller();
-		
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		 stringWriter = new StringWriter();
-		jaxbMarshaller.marshal(requirements, stringWriter);
+
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			stringWriter = new StringWriter();
+			jaxbMarshaller.marshal(reqElement, stringWriter);
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,8 +84,8 @@ public class RequestScheduler {
 	}
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"applicationContext.xml");
+		// ApplicationContext applicationContext = new
+		// ClassPathXmlApplicationContext("applicationContext.xml");
 		// RequestScheduler
 		// requestScheduler=applicationContext.getBean(RequestScheduler.class);
 		// requestScheduler.createAnsSendRequest();

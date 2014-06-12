@@ -42,7 +42,7 @@ public class TransformerTest {
 	private Requirements prepareReq() throws Exception {
 		Requirements requirements = new Requirements();
 		requirements.setBuyerDetails(prepareBuyer());
-		requirements.setDeliveryPriorytet("LOW");
+		requirements.setDeliveryPriorytet("Low");
 		requirements.getOrderDetails().addAll(preapreOrders());
 		return requirements;
 	}

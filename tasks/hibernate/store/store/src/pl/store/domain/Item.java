@@ -58,6 +58,7 @@ public class Item {
 		return idItem;
 	}
 
+	@SuppressWarnings("unused")
 	private void setIdItem(int idItem) {
 		this.idItem = idItem;
 	}

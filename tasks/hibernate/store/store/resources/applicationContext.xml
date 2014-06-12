@@ -24,7 +24,7 @@
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean id="saveNewBasket" class="pl.store.business.inbound.DefoultNewBasketProcesor">
-		<property name="newOrderDao" ref="saveNewBasketDao"></property>
-	</bean>
+	<bean id="saveNewBasket" class="pl.store.business.inbound.DefoultNewBasketProcesor"/>	
+	<bean id="updateBasket" class="pl.store.business.inbound.DefoultUpdateBasket"/>
+	<bean id="findBasket" class="pl.store.business.inbound.DefoultFindBasket"/>
 </beans>

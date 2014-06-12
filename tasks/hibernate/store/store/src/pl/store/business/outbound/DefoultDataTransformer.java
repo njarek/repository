@@ -19,7 +19,7 @@ public class DefoultDataTransformer implements DataTransformer{
 	@Override
 	public Requirements transform(List<OrderDrainer> baskets) {
 		Requirements requirements = new Requirements();
-		requirements.setDeliveryPriorytet("LOW");
+		requirements.setDeliveryPriorytet("Low");
 		Buyer buyer=createConstantBuyer();
 		requirements.setBuyerDetails(buyer);
 		List<Order> orders=new ArrayList<Order>();

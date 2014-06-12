@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import pl.store.domain.OrderDrainer;
 import pl.store.persistance.Interface.OrderFinderDao;
-import pl.supplier.domain.Order;
 
 public class DefoultDataCollector implements DataCollector{
 

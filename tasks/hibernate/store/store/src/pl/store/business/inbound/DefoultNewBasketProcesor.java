@@ -9,9 +9,15 @@ public class DefoultNewBasketProcesor implements ProcessNewBasket {
 	private NewBasketDao newOrderDao;
 	
 	@Override
-	public Basket addNewBasket(Basket basket) throws PersistaceException {
+	public Basket addNewBasket(Basket basket)  {
 		new BasketVisitor().VisitBaksket(basket);	
-		return newOrderDao.saveBasket(basket);
+		Basket newBasket=null;
+		try {
+			newBasket = newOrderDao.saveBasket(basket);
+		} catch (PersistaceException e) {
+			e.printStackTrace();
+		}
+		return newBasket;
 	}
 
 	public NewBasketDao getNewOrderDao() {

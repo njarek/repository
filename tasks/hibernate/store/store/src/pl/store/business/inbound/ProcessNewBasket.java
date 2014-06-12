@@ -6,6 +6,6 @@ import pl.store.persistance.PersistaceException;
 
 public interface ProcessNewBasket {
 
-	Basket addNewBasket(Basket basket) throws PersistaceException;
+	Basket addNewBasket(Basket basket) ;
 	
 }

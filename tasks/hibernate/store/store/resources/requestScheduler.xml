@@ -31,7 +31,7 @@
 	<!-- Simple Trigger, run every 5 seconds -->
 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="requestJob" />
-		<property name="repeatInterval" value="5000000000" />
+		<property name="repeatInterval" value="5000" />
 	</bean>
 
 	<!-- Cron Trigger, run every 5 seconds -->
@@ -42,7 +42,7 @@
 
 	</bean>
 
-	 <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	 <bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="jobDetails">
 			<list>
 				<ref bean="requestJob" />

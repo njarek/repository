@@ -13,10 +13,15 @@ public class DefoultUpdateBasket implements UpdateBasket {
 	}
 
 	@Override
-	public Basket updateBasket(Basket basket) throws Exception {
-		
+	public Basket updateBasket(Basket basket) {
 
-		return orderDao.updateBasket(basket);
+		Basket newBasket = null;
+		try {
+			newBasket = orderDao.updateBasket(basket);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return newBasket;
 	}
 
 	@Override

@@ -11,10 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -80,7 +77,7 @@ public class Basket {
 		this.name = name;
 	}
 
-	@OneToMany(fetch=FetchType.EAGER, targetEntity=Item.class, cascade=CascadeType.ALL, mappedBy="basket")
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Item.class, cascade = CascadeType.ALL, mappedBy = "basket")
 	public Set<Item> getItems() {
 		return items;
 	}

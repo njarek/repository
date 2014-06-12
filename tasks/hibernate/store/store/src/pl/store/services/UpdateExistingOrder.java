@@ -1,36 +1,28 @@
 package pl.store.services;
 
+import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import pl.store.business.inbound.DefoultUpdateBasket;
 import pl.store.business.inbound.UpdateBasket;
 import pl.store.domain.Basket;
 
 @Path("/storeupdate")
 public class UpdateExistingOrder {
 
-	private UpdateBasket order;
-
-	public UpdateExistingOrder() {
-		order = new DefoultUpdateBasket();
-	}
+	@Inject
+	private UpdateBasket updateBasket;
 
 	@POST
 	@Path("/request")
 	public Basket requestForUpdate(Basket basket) {
-		return order.blockBasketForUpdate(basket);
+		return updateBasket.blockBasketForUpdate(basket);
 	}
 
 	@POST
 	@Path("/update")
 	public Basket updateBasket(Basket basket) {
-		try {
-			return order.updateBasket(basket);
-		} catch (Exception e) {
-			return null;
-		}
-	
-
+		return updateBasket.updateBasket(basket);
 	}
+
 }

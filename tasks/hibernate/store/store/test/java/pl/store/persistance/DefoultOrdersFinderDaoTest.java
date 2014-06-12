@@ -27,11 +27,9 @@ public class DefoultOrdersFinderDaoTest {
 	public void properDaveToDb() throws PersistaceException {
 		List<OrderDrainer> drainers = orderFinderDao.getOrders();
 		assertEquals(9, drainers.size());
-	}
-	
-	@Test
-	public void emptyOrders() throws PersistaceException {
-		List<OrderDrainer> drainers = orderFinderDao.getOrders();
+		
+		drainers = orderFinderDao.getOrders();
 		assertEquals(0, drainers.size());
 	}
+	
 }
