@@ -11,8 +11,11 @@ import javax.inject.Inject;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,13 +25,19 @@ import pl.supplier.domain.Requirements;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContextTest.xml")
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class TransformerTest {
 	@Inject
 	private DataTransformer dataTransformer;
 
 	@Inject
-	DefoultDataCollector dataCollector;
+	private DefoultDataCollector dataCollector;
 
+	@Before
+	public void init(){
+		System.out.println("elo");
+	}
+	
 	@Test
 	public void tranformTest() throws Exception {
 

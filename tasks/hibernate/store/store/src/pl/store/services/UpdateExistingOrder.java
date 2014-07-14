@@ -4,14 +4,14 @@ import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import pl.store.business.inbound.UpdateBasket;
+import pl.store.business.inbound.InboundBasket;
 import pl.store.domain.Basket;
 
 @Path("/storeupdate")
 public class UpdateExistingOrder {
 
 	@Inject
-	private UpdateBasket updateBasket;
+	private InboundBasket updateBasket;
 
 	@POST
 	@Path("/request")

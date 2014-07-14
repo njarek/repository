@@ -51,7 +51,7 @@ public class DefoultDataTransformer implements DataTransformer{
 			date2 = DatatypeFactory.newInstance()
 					.newXMLGregorianCalendar(c);
 		} catch (DatatypeConfigurationException e) {
-			System.out.println("Error whi;e creating current date");
+			System.out.println("Error while creating current date");
 		}
 
 		buyer.setTradeDate(date2);

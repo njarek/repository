@@ -11,10 +11,6 @@ public class DefoultFindBasket implements FindBasket {
 	@Inject
 	private FindBasketDao findOrderDao;
 
-	public DefoultFindBasket() {
-		findOrderDao = new DefoultFindBasketDao();
-	}
-
 	@Override
 	public Basket findBasket(int id) {
 		return findOrderDao.findBasketById(id);

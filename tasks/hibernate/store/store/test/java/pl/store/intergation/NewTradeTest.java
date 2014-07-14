@@ -17,7 +17,7 @@ public class NewTradeTest {
 	
 	@Before
 	public void setup() throws Throwable {
-	  mTomcat = new Tomcat();
+	 /* mTomcat = new Tomcat();
 	  mTomcat.setPort(0);
 	  mTomcat.setBaseDir(mWorkingDir);
 	  mTomcat.getHost().setAppBase(mWorkingDir);
@@ -36,16 +36,12 @@ public class NewTradeTest {
 	  
 	  
 	  mTomcat.start();
-
+*/
 	}
 	
 	
 	
-	private WebArchive  createWebArchive() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 
 
 	private String getApplicationId() {
