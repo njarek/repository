@@ -17,8 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
 import pl.store.domain.LifeCycleEnum;
-import pl.store.persistance.Interface.FindBasketDao;
-import pl.store.persistance.Interface.NewBasketDao;
+import pl.store.persistance.Interface.BasketDao;
 
 
 
@@ -27,11 +26,10 @@ import pl.store.persistance.Interface.NewBasketDao;
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DefoulFindBasketDaoTest {
 
-	@Inject
-	private FindBasketDao findBasketDao;
+
 	
 	@Inject 
-	private NewBasketDao newOrderDao;
+	private BasketDao basketDao;
 	
 	private int basketId;
 	
@@ -42,13 +40,13 @@ public class DefoulFindBasketDaoTest {
 		item.setPrice(99.9);
 		basket.addItem(item);
 				
-		Basket basketnew = newOrderDao.saveBasket(basket);
+		Basket basketnew = basketDao.saveBasket(basket);
 		basketId=basketnew.getId();
 	}
 	
 	@Test
 	public void checkFindingBasketById(){
-		Basket basket = findBasketDao.findBasketById(basketId);
+		Basket basket = basketDao.findBasketById(basketId);
 		System.out.println(basket);
 		
 		assertTrue(basket!=null);
@@ -56,7 +54,7 @@ public class DefoulFindBasketDaoTest {
 	
 	@Test
 	public void checkFindingBasketByLifeCycle(){
-		List<Basket> baskets = findBasketDao.findBasketByLifecycle(LifeCycleEnum.MODIFIED);
+		List<Basket> baskets = basketDao.findBasketByLifecycle(LifeCycleEnum.MODIFIED);
 		System.out.println(baskets);
 		
 		assertTrue(baskets!=null);

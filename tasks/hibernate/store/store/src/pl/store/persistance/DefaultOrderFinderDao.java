@@ -11,7 +11,7 @@ import org.hibernate.Transaction;
 import pl.store.domain.OrderDrainer;
 import pl.store.persistance.Interface.OrderFinderDao;
 
-public class DefoultOrderFinderDao implements OrderFinderDao{
+public class DefaultOrderFinderDao implements OrderFinderDao{
 
 	@Inject
 	private SessionFactory factory;

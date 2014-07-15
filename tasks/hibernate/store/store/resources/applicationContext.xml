@@ -13,21 +13,18 @@
 	<import resource="classpath:pl/store/database/hibernate.xml" />
 	<import resource="classpath:requestScheduler.xml" />
 
-	<bean id="findBasketDao" class="pl.store.persistance.DefoultFindBasketDao">
+	<bean id="basketDao" class="pl.store.persistance.DefaultBasketDao">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean id="saveNewBasketDao" class="pl.store.persistance.DefoultNewBasketDao">
+	<bean id="lifecycleDao" class="pl.store.persistance.LifecycleDaoDefault">
 		<property name="factory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean id="updateBasketDao" class="pl.store.persistance.DefoultUpdateExistingBasketDao">
-		<property name="factory" ref="sessionFactory"></property>
-	</bean>
 	
-	<bean id="saveNewBasket" class="pl.store.business.inbound.DefoultNewBasketProcesor"/>	
-	<bean id="updateBasket" class="pl.store.business.inbound.DefoultUpdateBasket"/>
-	<bean id="findBasket" class="pl.store.business.inbound.DefoultFindBasket"/>
+	
+	<bean id="saveNewBasket" class="pl.store.business.inbound.InboundBasketDefault"/>	
+	
 	
 	<bean id="newBasketServices" class="pl.store.services.NewOrder"/>
 	<bean id="findBasketServices" class="pl.store.services.ViewOrder"/>

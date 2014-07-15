@@ -1,10 +1,10 @@
 package pl.store.persistance;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import javax.inject.Inject;
 
+import org.dom4j.tree.FlyweightCDATA;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.DirtiesContext;
@@ -12,10 +12,11 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.store.business.inbound.InboundBasket;
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
-import pl.store.persistance.Interface.FindBasketDao;
-import pl.store.persistance.Interface.NewBasketDao;
+import pl.store.persistance.Interface.BasketDao;
+import pl.store.persistance.Interface.LifecycleDao;
 
 
 
@@ -23,12 +24,14 @@ import pl.store.persistance.Interface.NewBasketDao;
 @ContextConfiguration("classpath:applicationContextTest.xml")
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DefoulNewBasketDaoTest {
-
-	@Inject
-	private NewBasketDao newOrderDao;
 	
 	@Inject
-	private FindBasketDao findOrderDao;
+	private BasketDao basketDao;
+	
+	@Inject
+	private LifecycleDao lifecycleDao; 
+	@Inject
+	private InboundBasket inboundBasket;
 	
 	@Test
 	public void properDaveToDb() throws PersistaceException{
@@ -38,7 +41,7 @@ public class DefoulNewBasketDaoTest {
 		basket.addItem(item);
 		item.setBasket(basket);
 				
-		Basket basketnew = newOrderDao.saveBasket(basket);
+		Basket basketnew = basketDao.saveBasket(basket);
 		System.out.println(basket);
 		assertEquals(basket,basketnew);
 	}
@@ -52,13 +55,13 @@ public class DefoulNewBasketDaoTest {
 		item.setPrice(99.9);
 		basket.addItem(item);
 		item.setBasket(basket);	
-		basket= newOrderDao.saveBasket(basket);
-		Basket basketnew =findOrderDao.findBasketById(basket.getId());
+		basket= inboundBasket.addNewBasket(basket);
+		Basket basketnew =basketDao.findBasketById(basket.getId());
 		System.out.println(basket);
 		System.out.println(basketnew);
-		System.out.println(newOrderDao.getLifeCycleState().getLifecycle());
-		assertEquals("new",newOrderDao.getLifeCycleState().getLifecycle());
-		assertEquals(basketnew.getId(),newOrderDao.getLifeCycleState().getBasket().getId());
+		System.out.println(lifecycleDao.getLifecycleByBasketId(basketnew.getId()).getLifecycle());
+		assertEquals("new",lifecycleDao.getLifecycleByBasketId(basketnew.getId()).getLifecycle());
+		assertEquals(basketnew.getId(),lifecycleDao.getLifecycleByBasketId(basketnew.getId()).getBasket().getId());
 		}
 	}
 }

@@ -2,11 +2,9 @@ package pl.store.persistance;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import pl.store.domain.Basket;
 import pl.store.domain.LifeCycleEnum;
@@ -17,9 +15,9 @@ public class DefaultBasketDao implements BasketDao {
 
 	@Override
 	public Basket findBasketById(int id) {
-
-		Basket basket = (Basket) factory.openSession().get(Basket.class, id);
-		closeSession();
+		Session hibernateSession = getFactory().openSession();
+		Basket basket = (Basket) hibernateSession.get(Basket.class, id);
+		closeSession(hibernateSession);
 
 		return basket;
 	}
@@ -31,8 +29,8 @@ public class DefaultBasketDao implements BasketDao {
 		Query query = hibernateSession
 				.createQuery("select b from LifeCycleState as l inner join l.basket as b where l.lifecycle= :lifecycle");
 		query.setParameter("lifecycle", lifeCycle.getLifecycle());
-		List<Basket> baskets = query.list();
-		closeSession();
+		List<Basket> baskets =  query.list();
+		closeSession(hibernateSession);
 		return baskets;
 	}
 
@@ -41,7 +39,7 @@ public class DefaultBasketDao implements BasketDao {
 		Session hibernateSession = factory.openSession();
 
 		hibernateSession.save(basket);
-		closeSession();
+		closeSession(hibernateSession);
 		return basket;
 	}
 
@@ -50,7 +48,8 @@ public class DefaultBasketDao implements BasketDao {
 		Session hibernateSession = getFactory().openSession();
 
 		hibernateSession.merge(newBasket);
-		closeSession();
+		hibernateSession.flush();
+		closeSession(hibernateSession);
 		return newBasket;
 
 	}
@@ -61,13 +60,13 @@ public class DefaultBasketDao implements BasketDao {
 		Session hibernateSession = getFactory().openSession();
 
 		Basket basket = (Basket) hibernateSession.get(Basket.class, id);
-		closeSession();
+		closeSession(hibernateSession);
 		return basket;
 	}
 
-	private void closeSession() {
-		if (factory.getCurrentSession() != null && factory.getCurrentSession().isOpen()) {
-			factory.getCurrentSession().close();
+	private void closeSession(Session hibernateSession) {
+		if (hibernateSession != null && hibernateSession.isOpen()) {
+			hibernateSession.close();
 		}
 	}
 

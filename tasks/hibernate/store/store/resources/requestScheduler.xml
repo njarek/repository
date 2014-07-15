@@ -10,12 +10,12 @@
 	<!-- <property name="findOrdersDao" ref="orderFinder"></property> -->
 	</bean>
 	<bean id="dataTransformer" class="pl.store.business.outbound.DefoultDataTransformer" />
-	<bean id="lifecycleUpdater" class="pl.store.persistance.DefoultLifecycleStatusUpdaterDao" />
+	
 	<bean id="reuestSender" class="pl.store.business.outbound.TescoRequestSender"/>
 	<bean id="requestTask" class="pl.store.business.outbound.RequestScheduler" >
 		<!-- <property name="dataCollector" ref="dataCollector"/> -->
 	</bean>
-	<bean id="orderFinder" class="pl.store.persistance.DefoultOrderFinderDao">
+	<bean id="orderFinder" class="pl.store.persistance.DefaultOrderFinderDao">
 	
 	</bean>
 	

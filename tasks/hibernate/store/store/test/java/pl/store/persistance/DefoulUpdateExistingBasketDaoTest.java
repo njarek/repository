@@ -1,24 +1,23 @@
 package pl.store.persistance;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import javax.inject.Inject;
 
-import org.hibernate.StaleObjectStateException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.test.annotation.ExpectedException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.store.business.inbound.InboundBasket;
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
-import pl.store.persistance.Interface.FindBasketDao;
-import pl.store.persistance.Interface.NewBasketDao;
-import pl.store.persistance.Interface.UpdateBasketDao;
+import pl.store.persistance.Interface.BasketDao;
+import pl.store.persistance.Interface.LifecycleDao;
 
 
 
@@ -28,13 +27,10 @@ import pl.store.persistance.Interface.UpdateBasketDao;
 public class DefoulUpdateExistingBasketDaoTest {
 
 	@Inject
-	private UpdateBasketDao updateOrderDao;
+	private BasketDao basketDao;
+	@Inject private InboundBasket inboundBasket;
+	@Inject private LifecycleDao lifecycleDao;
 	
-	@Inject
-	private NewBasketDao newOrderDao;
-	
-	@Inject
-	private FindBasketDao findOrderDao;
 	
 	private int basketId;
 	private int lifecycleId;
@@ -46,47 +42,49 @@ public class DefoulUpdateExistingBasketDaoTest {
 		item.setPrice(99.9);
 		basket.addItem(item);
 		item.setBasket(basket);		
-		Basket basketnew = newOrderDao.saveBasket(basket);
+		Basket basketnew = inboundBasket.addNewBasket(basket);
 		basketId=basketnew.getId();
-		lifecycleId=newOrderDao.getLifeCycleState().getId();
+		lifecycleId=lifecycleDao.getLifecycleByBasketId(basketId).getId();
+		System.out.println(lifecycleId);
 	}
 	
 	@Test
 	public void properUpdateBasket() throws Exception{
-		Basket basket=updateOrderDao.blockBasketWhileUpdating(basketId);
-		assertEquals("modified",updateOrderDao.getLifeCycleState().getLifecycle());
+		Basket basket=inboundBasket.blockBasketForUpdate(basketId);
+		assertEquals("modified",lifecycleDao.getLifecycleByBasketId(basketId).getLifecycle());
 		basket.setName("new name");
 		Item item =new Item("baterie",3);
 		basket.addItem(item);
 		item.setBasket(basket);
-		basket=updateOrderDao.updateBasket(basket);
+		basket=inboundBasket.updateBasket(basket);
 		
 		System.out.println(basket);
 				
-		assertEquals("new",updateOrderDao.getLifeCycleState().getLifecycle());
+		assertEquals("new",lifecycleDao.getLifecycleByBasketId(basket.getId()).getLifecycle());
 	}
 	
-	@Test(expected=Exception.class)
+	@Test()//expected=PersistaceException.class
+	@ExpectedException(PersistaceException.class)
 	public void transactionLock() throws Exception{
-		Basket basket=updateOrderDao.blockBasketWhileUpdating(basketId);
-		assertEquals("modified",updateOrderDao.getLifeCycleState().getLifecycle());
+		Basket basket=inboundBasket.blockBasketForUpdate(basketId);
+		assertEquals("modified",lifecycleDao.getLifecycleByBasketId(basketId).getLifecycle());
 		basket.setName("new name");
 		Item item =new Item("baterie",3);
 		basket.addItem(item);
 		item.setBasket(basket);	
-		Basket basket2=updateOrderDao.updateBasket(basket);
-		Basket basket3=updateOrderDao.updateBasket(basket);
+		Basket basket2=inboundBasket.updateBasket(basket);
+		Basket basket3=inboundBasket.updateBasket(basket);
 		System.out.println(basket);
 
 	}
 	
 	@Test(expected=Exception.class)
 	public void transactionLifeCycle() throws Exception{
-		Basket basket=findOrderDao.findBasketById(basketId);
+		Basket basket=basketDao.findBasketById(basketId);
 		basket.setName("new name");
 		Item item =new Item("baterie",3);
 		basket.addItem(item);	
-		Basket basket2=updateOrderDao.updateBasket(basket);
+		Basket basket2=inboundBasket.updateBasket(basket);
 
 	}
 }

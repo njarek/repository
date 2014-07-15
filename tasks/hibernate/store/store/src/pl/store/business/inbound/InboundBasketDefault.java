@@ -51,6 +51,7 @@ public class InboundBasketDefault implements InboundBasket {
 				throw new PersistaceException("You have to block basket for update first"); 
 			}
 			lifeCycleState.setLifecycleEnum(LifeCycleEnum.NEW);
+			lifecycleDao.updateLifecycle(lifeCycleState);
 			newBasket = basketDao.updateBasket(basket);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +64,9 @@ public class InboundBasketDefault implements InboundBasket {
 	public Basket blockBasketForUpdate(int id) {
 		LifeCycleState lifeCycleState=lifecycleDao.getLifecycleByBasketId(id);
 		lifeCycleState.setLifecycleEnum(LifeCycleEnum.MODIFIED);
+		Basket basket=basketDao.getBasketById(id);
+		lifeCycleState.setBasket(basket);
 		lifecycleDao.updateLifecycle(lifeCycleState);
-		return basketDao.getBasketById(id);
+		return basket;
 	}
 }
