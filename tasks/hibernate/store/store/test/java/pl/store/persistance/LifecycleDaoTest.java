@@ -62,7 +62,7 @@ public class LifecycleDaoTest {
 		assertNotNull(cycleState);
 		cycleState.setLifecycleEnum(LifeCycleEnum.SENT);
 		cycleState=lifecycleDao.updateLifecycle(cycleState);
-		assertEquals(LifeCycleEnum.NEW.getLifecycle(),cycleState.getLifecycle());
+		assertEquals(LifeCycleEnum.SENT.getLifecycle(),cycleState.getLifecycle());
 	}
 
 }
