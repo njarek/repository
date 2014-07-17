@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.store.domain.OrderDrainer;
