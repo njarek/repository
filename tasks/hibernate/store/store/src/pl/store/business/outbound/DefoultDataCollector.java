@@ -5,12 +5,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import pl.store.domain.OrderDrainer;
-import pl.store.persistance.Interface.OrderFinderDao;
+import pl.store.persistance.Interface.OrderDao;
 
 public class DefoultDataCollector implements DataCollector{
 
 	@Inject
-	private OrderFinderDao findOrdersDao;
+	private OrderDao findOrdersDao;
 
 	@Override
 	public List<OrderDrainer> getOrders() {
@@ -18,11 +18,11 @@ public class DefoultDataCollector implements DataCollector{
 		return getFindOrdersDao().getOrders();
 	}
 
-	public OrderFinderDao getFindOrdersDao() {
+	public OrderDao getFindOrdersDao() {
 		return findOrdersDao;
 	}
 
-	public void setFindOrdersDao(OrderFinderDao findOrdersDao) {
+	public void setFindOrdersDao(OrderDao findOrdersDao) {
 		this.findOrdersDao = findOrdersDao;
 	}
 }

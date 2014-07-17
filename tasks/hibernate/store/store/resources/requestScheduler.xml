@@ -15,7 +15,7 @@
 	<bean id="requestTask" class="pl.store.business.outbound.RequestScheduler" >
 		<!-- <property name="dataCollector" ref="dataCollector"/> -->
 	</bean>
-	<bean id="orderFinder" class="pl.store.persistance.DefaultOrderFinderDao">
+	<bean id="orderFinder" class="pl.store.persistance.DefaultOrderDao">
 	
 	</bean>
 	

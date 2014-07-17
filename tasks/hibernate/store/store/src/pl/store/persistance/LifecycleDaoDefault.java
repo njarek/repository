@@ -38,7 +38,7 @@ public class LifecycleDaoDefault implements LifecycleDao {
 
 		return lifeCycleState;
 	}
-
+	@Override
 	public LifeCycleState getLifecycleByBasketId(int id) {
 		Session hibernateSession = factory.openSession();
 		Criteria criteria = hibernateSession.createCriteria(LifeCycleState.class).add(Restrictions.eq("basket.id", id));

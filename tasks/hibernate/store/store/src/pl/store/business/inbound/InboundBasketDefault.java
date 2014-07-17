@@ -22,7 +22,7 @@ public class InboundBasketDefault implements InboundBasket {
 
 	@Override
 	public Basket findBasket(int id) {
-		return basketDao.findBasketById(id);
+		return basketDao.getBasketById(id);
 	}
 
 	@Override

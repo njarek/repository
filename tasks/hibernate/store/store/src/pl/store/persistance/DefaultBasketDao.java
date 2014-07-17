@@ -13,15 +13,7 @@ import pl.store.persistance.Interface.BasketDao;
 public class DefaultBasketDao implements BasketDao {
 	private SessionFactory factory;
 
-	@Override
-	public Basket findBasketById(int id) {
-		Session hibernateSession = getFactory().openSession();
-		Basket basket = (Basket) hibernateSession.get(Basket.class, id);
-		closeSession(hibernateSession);
-
-		return basket;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Basket> findBasketByLifecycle(LifeCycleEnum lifeCycle) {
 

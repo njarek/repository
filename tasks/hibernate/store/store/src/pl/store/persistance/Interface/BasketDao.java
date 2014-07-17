@@ -7,8 +7,6 @@ import pl.store.domain.LifeCycleEnum;
 import pl.store.persistance.PersistaceException;
 
 public interface BasketDao {
-
-	Basket findBasketById(int id);
 	
 	List<Basket> findBasketByLifecycle(LifeCycleEnum lifeCycle);
 	

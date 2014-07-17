@@ -54,6 +54,7 @@ public class Basket {
 		return id;
 	}
 
+	@SuppressWarnings("unused")
 	private void setId(int id) {
 		this.id = id;
 	}
@@ -86,6 +87,7 @@ public class Basket {
 		items.add(item);
 	}
 
+	@SuppressWarnings("unused")
 	private void setItems(Set<Item> Items) {
 		this.items = Items;
 	}
