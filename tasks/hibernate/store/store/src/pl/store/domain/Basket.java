@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -19,6 +20,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Where;
 
 @XmlRootElement(name = "Basket")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -41,6 +44,10 @@ public class Basket {
 
 	@XmlElement(required = true)
 	private Set<Item> items = new HashSet<Item>(0);
+
+	private Set<AgdItem> agdItems = new HashSet<AgdItem>(0);
+
+	private Set<Fridge> fridges = new HashSet<Fridge>(0);
 
 	public Basket(String name) {
 		super();
@@ -78,7 +85,8 @@ public class Basket {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Item.class, cascade = CascadeType.ALL, mappedBy = "basket")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "b_id")
 	public Set<Item> getItems() {
 		return items;
 	}
@@ -92,9 +100,32 @@ public class Basket {
 		this.items = Items;
 	}
 
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "b_id")
+	@Where(clause = "discriminator='AGD'")
+	public Set<AgdItem> getAgdItems() {
+		return agdItems;
+	}
+
+	public void setAgdItems(Set<AgdItem> agdItems) {
+		this.agdItems = agdItems;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "b_id")
+	@Where(clause = "discriminator='Fridge'")
+	public Set<Fridge> getFridges() {
+		return fridges;
+	}
+
+	public void setFridges(Set<Fridge> fridges) {
+		this.fridges = fridges;
+	}
+
 	@Override
 	public String toString() {
-		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", items=" + items + "]";
+		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", items=" + items + ", agdItems=" + agdItems
+				+ ", fridges=" + fridges + "]";
 	}
 
 	@Override

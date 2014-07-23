@@ -26,6 +26,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			 
 			 	<value>pl.store.domain.Basket</value>
 			 	<value>pl.store.domain.Item</value>
+			 	<value>pl.store.domain.AgdItem</value>
+			 	<value>pl.store.domain.Fridge</value>
 			 	<value>pl.store.domain.LifeCycleState</value>
 				
 			</list>

@@ -17,7 +17,9 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.store.domain.AgdItem;
 import pl.store.domain.Basket;
+import pl.store.domain.Fridge;
 import pl.store.domain.Item;
 import pl.store.domain.LifeCycleEnum;
 import pl.store.persistance.Interface.BasketDao;
@@ -59,13 +61,29 @@ public class BasketDaoTest {
 	}
 
 	@Test
-	public void properDaveToDb() throws PersistaceException {
+	public void properSaveToDb() throws PersistaceException {
 		Basket basket = new Basket("new");
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
 		item.setBasket(basket);
+		AgdItem agdItem = new AgdItem();
+		agdItem.setDescription("lodowka");
+		agdItem.setPrice(1120.99);
+		agdItem.setStoreLocation("A9");
+		agdItem.setBasket(basket);
+		basket.getAgdItems().add(agdItem);
 
+		Fridge fridge = new Fridge();
+		fridge.setColor("white");
+		fridge.setDescription("lodowka>?");
+		fridge.setPrice(1221.11);
+		fridge.setStoreLocation("A0");
+		fridge.setQuantity(2);
+		fridge.setBasket(basket);
+		basket.getFridges().add(fridge);
+
+		System.out.println("===========================");
 		Basket basketnew = basketDao.saveBasket(basket);
 		System.out.println(basket);
 		assertEquals(basket, basketnew);
