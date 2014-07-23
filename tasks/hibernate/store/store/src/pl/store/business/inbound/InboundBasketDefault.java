@@ -16,7 +16,7 @@ public class InboundBasketDefault implements InboundBasket {
 
 	@Inject
 	private BasketDao basketDao;
-	
+
 	@Inject
 	private LifecycleDao lifecycleDao;
 
@@ -45,10 +45,10 @@ public class InboundBasketDefault implements InboundBasket {
 		new BasketVisitor().VisitBaksket(basket);
 		Basket newBasket = null;
 		try {
-			
+
 			LifeCycleState lifeCycleState = lifecycleDao.getLifecycleByBasketId(basket.getId());
-			if(!lifeCycleState.getLifecycle().equals("modified")){
-				throw new PersistaceException("You have to block basket for update first"); 
+			if (!lifeCycleState.getLifecycle().equals("modified")) {
+				throw new PersistaceException("You have to block basket for update first");
 			}
 			lifeCycleState.setLifecycleEnum(LifeCycleEnum.NEW);
 			lifecycleDao.updateLifecycle(lifeCycleState);
@@ -62,9 +62,9 @@ public class InboundBasketDefault implements InboundBasket {
 	@Override
 	@Transactional
 	public Basket blockBasketForUpdate(int id) {
-		LifeCycleState lifeCycleState=lifecycleDao.getLifecycleByBasketId(id);
+		LifeCycleState lifeCycleState = lifecycleDao.getLifecycleByBasketId(id);
 		lifeCycleState.setLifecycleEnum(LifeCycleEnum.MODIFIED);
-		Basket basket=basketDao.getBasketById(id);
+		Basket basket = basketDao.getBasketById(id);
 		lifeCycleState.setBasket(basket);
 		lifecycleDao.updateLifecycle(lifeCycleState);
 		return basket;

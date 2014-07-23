@@ -45,8 +45,7 @@ public class OrderDrainer {
 
 	@Override
 	public String toString() {
-		return "OrderDrainer [description=" + description + ", qty=" + qty
-				+ ", price=" + price + "]";
+		return "OrderDrainer [description=" + description + ", qty=" + qty + ", price=" + price + "]";
 	}
 
 }

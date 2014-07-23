@@ -26,68 +26,69 @@ import pl.store.persistance.Interface.BasketDao;
 @ContextConfiguration("classpath:applicationContextTest.xml")
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class BasketDaoTest {
-	
-	@Inject 
+
+	@Inject
 	private BasketDao basketDao;
-	
+
 	private int basketId;
-	
+
 	@Before
-	public void init() throws PersistaceException{
-		Basket basket=new Basket("new");
+	public void init() throws PersistaceException {
+		Basket basket = new Basket("new");
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
-				
+
 		Basket basketnew = basketDao.saveBasket(basket);
-		basketId=basketnew.getId();
+		basketId = basketnew.getId();
 	}
-	
+
 	@Test
-	public void checkFindingBasketById(){
+	public void checkFindingBasketById() {
 		Basket basket = basketDao.getBasketById(basketId);
 		System.out.println(basket);
-		
-		assertTrue(basket!=null);
+
+		assertTrue(basket != null);
 	}
-	
+
 	@Test
-	public void checkFindingBasketByLifeCycle(){
+	public void checkFindingBasketByLifeCycle() {
 		List<Basket> baskets = basketDao.findBasketByLifecycle(LifeCycleEnum.MODIFIED);
-		System.out.println(baskets);		
-		assertTrue(baskets!=null);
+		System.out.println(baskets);
+		assertTrue(baskets != null);
 	}
-	
+
 	@Test
-	public void properDaveToDb() throws PersistaceException{
-		Basket basket=new Basket("new");
+	public void properDaveToDb() throws PersistaceException {
+		Basket basket = new Basket("new");
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
 		basket.addItem(item);
 		item.setBasket(basket);
-				
+
 		Basket basketnew = basketDao.saveBasket(basket);
 		System.out.println(basket);
-		assertEquals(basket,basketnew);
+		assertEquals(basket, basketnew);
 	}
+
 	@Test
-	public void updateBasketTest() throws Exception{
-		Basket basket=basketDao.getBasketById(basketId);
+	public void updateBasketTest() throws Exception {
+		Basket basket = basketDao.getBasketById(basketId);
 		basket.setName("new name");
-		Item item =new Item("baterie",3);
-		basket.addItem(item);	
-		Basket basket2=basketDao.updateBasket(basket);
-		assertEquals(basket,basket2);
+		Item item = new Item("baterie", 3);
+		basket.addItem(item);
+		Basket basket2 = basketDao.updateBasket(basket);
+		assertEquals(basket, basket2);
 	}
-	
-	@Test(expected=StaleObjectStateException.class)
-	public void cocurrentUpdateTest() throws Exception{
-		Basket basket=basketDao.getBasketById(basketId);
+
+	@Test(expected = StaleObjectStateException.class)
+	public void cocurrentUpdateTest() throws Exception {
+		Basket basket = basketDao.getBasketById(basketId);
 		basket.setName("new name");
-		Item item =new Item("baterie",3);
-		basket.addItem(item);	
-		Basket basket2=basketDao.updateBasket(basket);
-		assertEquals(basket,basket2);
+		Item item = new Item("baterie", 3);
+		basket.addItem(item);
+		Basket basket2 = basketDao.updateBasket(basket);
+		assertEquals(basket, basket2);
 		basketDao.updateBasket(basket);
 		fail();
 	}

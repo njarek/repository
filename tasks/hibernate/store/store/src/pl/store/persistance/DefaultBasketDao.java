@@ -21,7 +21,7 @@ public class DefaultBasketDao implements BasketDao {
 		Query query = hibernateSession
 				.createQuery("select b from LifeCycleState as l inner join l.basket as b where l.lifecycle= :lifecycle");
 		query.setParameter("lifecycle", lifeCycle.getLifecycle());
-		List<Basket> baskets =  query.list();
+		List<Basket> baskets = query.list();
 		closeSession(hibernateSession);
 		return baskets;
 	}

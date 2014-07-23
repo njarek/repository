@@ -7,14 +7,14 @@ import javax.inject.Inject;
 import pl.store.domain.OrderDrainer;
 import pl.store.persistance.Interface.OrderDao;
 
-public class DefoultDataCollector implements DataCollector{
+public class DefoultDataCollector implements DataCollector {
 
 	@Inject
 	private OrderDao findOrdersDao;
 
 	@Override
 	public List<OrderDrainer> getOrders() {
-		
+
 		return getFindOrdersDao().getOrders();
 	}
 

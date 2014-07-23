@@ -15,7 +15,6 @@ import pl.store.persistance.Interface.LifecycleDao;
 public class LifecycleDaoDefault implements LifecycleDao {
 
 	private SessionFactory factory;
-	
 
 	@Override
 	public void updateLifecycle(List<Basket> baskets, boolean sendRequest) {
@@ -28,7 +27,7 @@ public class LifecycleDaoDefault implements LifecycleDao {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public LifeCycleState updateLifecycle(LifeCycleState lifeCycleState) {
 		Session hibernateSession = factory.openSession();
@@ -38,6 +37,7 @@ public class LifecycleDaoDefault implements LifecycleDao {
 
 		return lifeCycleState;
 	}
+
 	@Override
 	public LifeCycleState getLifecycleByBasketId(int id) {
 		Session hibernateSession = factory.openSession();

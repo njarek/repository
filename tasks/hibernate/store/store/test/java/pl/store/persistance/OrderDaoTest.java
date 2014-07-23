@@ -17,12 +17,12 @@ import pl.store.persistance.Interface.OrderDao;
 @ContextConfiguration("classpath:applicationContextTest.xml")
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class OrderDaoTest {
-	
-	@Inject 
+
+	@Inject
 	private OrderDao orderDao;
-	
+
 	@Test
-	public void getOredersTest(){
+	public void getOredersTest() {
 		assertNotNull(orderDao.getOrders());
 	}
 }

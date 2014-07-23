@@ -12,7 +12,7 @@ public class ViewOrder {
 
 	@Inject
 	private InboundBasket inboundBasket;
-	
+
 	@POST
 	@Path("/find")
 	public Basket findBasket(String id) throws Exception {

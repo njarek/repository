@@ -1,7 +1,7 @@
 package pl.store.persistance;
 
-public class PersistaceException extends Exception{
-	
+public class PersistaceException extends Exception {
+
 	/**
 	 * 
 	 */
@@ -10,12 +10,13 @@ public class PersistaceException extends Exception{
 	public PersistaceException() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public PersistaceException(String message) {
 		super(message);
 	}
-	
+
 	public PersistaceException(String message, Throwable cause) {
-		super(message,cause);
+		super(message, cause);
 	}
 
 }

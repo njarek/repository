@@ -26,8 +26,9 @@ public class InboundBasketTest {
 
 	@Inject
 	private BasketDao basketDao;
-	
-	@Inject private LifecycleDao lifecycleDao;
+
+	@Inject
+	private LifecycleDao lifecycleDao;
 
 	@Inject
 	private InboundBasket inboundBasket;
@@ -41,50 +42,49 @@ public class InboundBasketTest {
 
 	@Test
 	public void addNewBasketTest() {
-		Basket basket= new Basket("new");
+		Basket basket = new Basket("new");
 		basket = inboundBasket.addNewBasket(basket);
-		Basket basket2= basketDao.getBasketById(basket.getId());
+		Basket basket2 = basketDao.getBasketById(basket.getId());
 		assertEquals(basket2, basket);
 		LifeCycleState cycleState = lifecycleDao.getLifecycleByBasketId(basket.getId());
-		assertEquals(LifeCycleEnum.NEW.getLifecycle(),cycleState.getLifecycle());
+		assertEquals(LifeCycleEnum.NEW.getLifecycle(), cycleState.getLifecycle());
 	}
 
 	@Test
 	public void updateBasketTest() {
-		Basket basket= inboundBasket.blockBasketForUpdate(1);
+		Basket basket = inboundBasket.blockBasketForUpdate(1);
 		basket.setName("Updated");
-		basket= inboundBasket.updateBasket(basket);
-		Basket basket2= basketDao.getBasketById(1);
+		basket = inboundBasket.updateBasket(basket);
+		Basket basket2 = basketDao.getBasketById(1);
 		assertEquals(basket2, basket);
 	}
 
 	@Test
 	public void blockBasketForUpdateTest() {
-		LifeCycleState cycleState= lifecycleDao.getLifecycleByBasketId(2);
-		assertEquals(LifeCycleEnum.NEW.getLifecycle(),cycleState.getLifecycle());
+		LifeCycleState cycleState = lifecycleDao.getLifecycleByBasketId(2);
+		assertEquals(LifeCycleEnum.NEW.getLifecycle(), cycleState.getLifecycle());
 		inboundBasket.blockBasketForUpdate(2);
-		cycleState= lifecycleDao.getLifecycleByBasketId(2);
-		assertEquals(LifeCycleEnum.MODIFIED.getLifecycle(),cycleState.getLifecycle());
-	}
-	
-	@Test
-	public void unsuccesfullUpdateTest(){
-		Basket basket= basketDao.getBasketById(1);
-		basket.setName("Updated");
-		basket= inboundBasket.updateBasket(basket);
-		
-		assertNull( basket);
-	}
-	
-	@Test
-	public void concurrentUpdate(){
-		Basket basket= inboundBasket.blockBasketForUpdate(1);
-		basket.setName("Updated");
-		Basket basket2= inboundBasket.updateBasket(basket);
-		assertNotNull( basket2);
-		Basket basket3=inboundBasket.updateBasket(basket);
-		assertNull(basket3);
+		cycleState = lifecycleDao.getLifecycleByBasketId(2);
+		assertEquals(LifeCycleEnum.MODIFIED.getLifecycle(), cycleState.getLifecycle());
 	}
 
+	@Test
+	public void unsuccesfullUpdateTest() {
+		Basket basket = basketDao.getBasketById(1);
+		basket.setName("Updated");
+		basket = inboundBasket.updateBasket(basket);
+
+		assertNull(basket);
+	}
+
+	@Test
+	public void concurrentUpdate() {
+		Basket basket = inboundBasket.blockBasketForUpdate(1);
+		basket.setName("Updated");
+		Basket basket2 = inboundBasket.updateBasket(basket);
+		assertNotNull(basket2);
+		Basket basket3 = inboundBasket.updateBasket(basket);
+		assertNull(basket3);
+	}
 
 }

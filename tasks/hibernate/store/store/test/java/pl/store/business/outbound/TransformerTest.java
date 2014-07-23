@@ -34,16 +34,15 @@ public class TransformerTest {
 	private DefoultDataCollector dataCollector;
 
 	@Before
-	public void init(){
+	public void init() {
 		System.out.println("elo");
 	}
-	
+
 	@Test
 	public void tranformTest() throws Exception {
 
 		Requirements expected = prepareReq();
-		Requirements actual = dataTransformer.transform(dataCollector
-				.getOrders());
+		Requirements actual = dataTransformer.transform(dataCollector.getOrders());
 		assertEquals(expected, actual);
 
 	}
@@ -61,8 +60,7 @@ public class TransformerTest {
 		buyer.setContracting("JarekShop");
 		GregorianCalendar c = new GregorianCalendar();
 		c.setTime(new Date(12));
-		XMLGregorianCalendar date2 = DatatypeFactory.newInstance()
-				.newXMLGregorianCalendar(c);
+		XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 
 		buyer.setTradeDate(date2);
 		buyer.setId(1);
@@ -72,8 +70,8 @@ public class TransformerTest {
 
 	private List<Order> preapreOrders() {
 		List<Order> orders = new ArrayList<Order>();
-		final String type="RTV";
-		int id=0;
+		final String type = "RTV";
+		int id = 0;
 		Order order = new Order();
 		order.setId(id++);
 		order.setType(type);

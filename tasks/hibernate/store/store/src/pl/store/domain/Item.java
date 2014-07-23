@@ -109,17 +109,15 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [idItem=" + idItem + ", version=" + version
-				+ ", description=" + description + ", quantity=" + quantity
-				+ ", price=" + price + "]";
+		return "Item [idItem=" + idItem + ", version=" + version + ", description=" + description + ", quantity=" + quantity + ", price="
+				+ price + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -141,8 +139,7 @@ public class Item {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (Double.doubleToLongBits(price) != Double
-				.doubleToLongBits(other.price))
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		if (quantity != other.quantity)
 			return false;
