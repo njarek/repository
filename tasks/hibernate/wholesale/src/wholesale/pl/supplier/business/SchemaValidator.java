@@ -15,16 +15,16 @@ public class SchemaValidator {
 
 	private static final String MAIN_XSD = "pl/supplier/xsd/main.xsd";
 	private Validator validator;
-	
-	public SchemaValidator() throws SAXException{
+
+	public SchemaValidator() throws SAXException {
 		URL url = this.getClass().getClassLoader().getResource(MAIN_XSD);
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = factory.newSchema(url);
 		validator = schema.newValidator();
 	}
-	
+
 	public boolean checkOder(String order) {
-		try {		
+		try {
 			StringReader reader = new StringReader(order);
 			validator.validate(new StreamSource(reader));
 		} catch (Exception e) {

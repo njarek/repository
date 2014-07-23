@@ -8,20 +8,16 @@ import org.xml.sax.SAXException;
 import wholesale.pl.supplier.business.OrderProcesor;
 import wholesale.pl.supplier.business.TescoOrderProcesor;
 
-
-
-
 @Path("/suplier")
-
 public class OrderReciever {
 
 	@POST
 	@Path("/order")
-	public String getOreder(String order) throws SAXException{
-		
+	public String getOreder(String order) throws SAXException {
+
 		OrderProcesor tescoOrder = new TescoOrderProcesor();
-		
-		return tescoOrder.processOrder(order)+"";
-		
+
+		return tescoOrder.processOrder(order) + "";
+
 	}
 }
