@@ -1,4 +1,5 @@
 package pl.client;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
@@ -8,71 +9,58 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 public class Main {
-    private static String id="basket id";
- 
-    public static void main(String... args) throws Exception {
- 
-        final Options options = createOptions();
-        final CommandLine line = getCommandLine(options, args);
- 
-        if (line.hasOption("help")) {
-            help(options);
-            return;
-        } else if (line.hasOption("update")){
-        	System.out.println("updateing "+Integer.valueOf(line.getOptionValue("update")));
-        	
-        	
-        }  else if (line.hasOption("find")){
-        	System.out.println("looking for "+Integer.valueOf(line.getOptionValue("find")));
-        	System.out.println("basket found "+new FindBasket().findBasket(Integer.valueOf(line.getOptionValue("find"))));
-        	
-        }  else if (line.hasOption("new")){
-        	System.out.println("adding new");
-        	new NewBasket().sendNewBasket();
-        }  
-    }
- 
- 
-    private static CommandLine getCommandLine(final Options options, final String[] args)
-        throws Exception {
-        final CommandLineParser parser = new GnuParser();
-        final CommandLine line;
- 
-        try {
-            line = parser.parse(options, args);
-        } catch (ParseException e) {
-            help(options);
-            throw new Exception("Unable to process command line options");
-        }
- 
-        return line;
-    }
- 
-    @SuppressWarnings("static-access")
-    private static Options createOptions() {
-        final Options options = new Options();
-        options.addOption("help", false, "USAGE: basket [-" + id + " int]");
-        options.addOption(OptionBuilder
-                .withType(Integer.class)
-                .withArgName("int")
-                .hasArg()
-                .withDescription( " - updates "+id )
-                .create("update"));
-        options.addOption(OptionBuilder
-                .withType(Integer.class)
-                .withArgName("int")
-                .hasArg()
-                .withDescription(" - looks for "+id)
-                .create("find"));
-        options.addOption(OptionBuilder
-                .withDescription(" - ann new  ")
-                .create("new"));
- 
-        return options;
-    }
- 
-    private static void help(final Options options) {
-        final HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("FeeLifecycleTask", options);
-    }
+	private static String id = "basket id";
+
+	public static void main(String... args) throws Exception {
+
+		final Options options = createOptions();
+		final CommandLine line = getCommandLine(options, args);
+
+		if (line.hasOption("help")) {
+			help(options);
+			return;
+		} else if (line.hasOption("update")) {
+			System.out.println("updateing " + Integer.valueOf(line.getOptionValue("update")));
+
+		} else if (line.hasOption("find")) {
+			System.out.println("looking for " + Integer.valueOf(line.getOptionValue("find")));
+			System.out.println("basket found " + new FindBasket().findBasket(Integer.valueOf(line.getOptionValue("find"))));
+
+		} else if (line.hasOption("new")) {
+			System.out.println("adding new");
+			new NewBasket().sendNewBasket();
+		}
+	}
+
+	private static CommandLine getCommandLine(final Options options, final String[] args) throws Exception {
+		final CommandLineParser parser = new GnuParser();
+		final CommandLine line;
+
+		try {
+			line = parser.parse(options, args);
+		} catch (ParseException e) {
+			help(options);
+			throw new Exception("Unable to process command line options");
+		}
+
+		return line;
+	}
+
+	@SuppressWarnings("static-access")
+	private static Options createOptions() {
+		final Options options = new Options();
+		options.addOption("help", false, "USAGE: basket [-" + id + " int]");
+		options.addOption(OptionBuilder.withType(Integer.class).withArgName("int").hasArg().withDescription(" - updates " + id)
+				.create("update"));
+		options.addOption(OptionBuilder.withType(Integer.class).withArgName("int").hasArg().withDescription(" - looks for " + id)
+				.create("find"));
+		options.addOption(OptionBuilder.withDescription(" - ann new  ").create("new"));
+
+		return options;
+	}
+
+	private static void help(final Options options) {
+		final HelpFormatter formatter = new HelpFormatter();
+		formatter.printHelp("FeeLifecycleTask", options);
+	}
 }

@@ -29,7 +29,7 @@ public class Utility {
 		String basketXml = stringWriter.getBuffer().toString();
 		return basketXml;
 	}
-	
+
 	public HttpPost preapreStringPostRequest(String message, String mediaType, String Host) throws UnsupportedEncodingException {
 		HttpPost postRequest = new HttpPost(Host);
 		StringEntity input = new StringEntity(message);
@@ -37,7 +37,8 @@ public class Utility {
 		postRequest.setEntity(input);
 		return postRequest;
 	}
-	public Basket unamrshalResponse(HttpResponse response,JAXBContext jaxbContext) throws IOException, JAXBException {
+
+	public Basket unamrshalResponse(HttpResponse response, JAXBContext jaxbContext) throws IOException, JAXBException {
 		HttpEntity httpEntity = response.getEntity();
 		String apiOutput = EntityUtils.toString(httpEntity);
 		System.out.println(apiOutput);
