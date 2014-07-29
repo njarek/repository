@@ -39,6 +39,7 @@ public class BasketDaoTest {
 		Basket basket = new Basket("new");
 		Item item = new Item("tv", 1);
 		item.setPrice(99.9);
+		item.setBasket(basket);
 		basket.addItem(item);
 
 		Basket basketnew = basketDao.saveBasket(basket);
@@ -55,6 +56,8 @@ public class BasketDaoTest {
 
 	@Test
 	public void checkFindingBasketByLifeCycle() {
+		
+		System.out.println("++++++++++++++++++++++++++++++");
 		List<Basket> baskets = basketDao.findBasketByLifecycle(LifeCycleEnum.MODIFIED);
 		System.out.println(baskets);
 		assertTrue(baskets != null);
@@ -72,7 +75,7 @@ public class BasketDaoTest {
 		agdItem.setPrice(1120.99);
 		agdItem.setStoreLocation("A9");
 		agdItem.setBasket(basket);
-		basket.getAgdItems().add(agdItem);
+		basket.addItem(agdItem);
 
 		Fridge fridge = new Fridge();
 		fridge.setColor("white");
@@ -81,16 +84,20 @@ public class BasketDaoTest {
 		fridge.setStoreLocation("A0");
 		fridge.setQuantity(2);
 		fridge.setBasket(basket);
-		basket.getFridges().add(fridge);
+		basket.addItem(fridge);
 
 		System.out.println("===========================");
 		Basket basketnew = basketDao.saveBasket(basket);
 		System.out.println(basket);
-		assertEquals(basket, basketnew);
+		System.out.println(basketnew);
+		assertEquals(basket, basketDao.getBasketById(basketnew.getId()));
+		
+		System.out.println(basketDao.getBasketById(basketnew.getId()));
 	}
 
 	@Test
 	public void updateBasketTest() throws Exception {
+		System.out.println("*********************************************************");
 		Basket basket = basketDao.getBasketById(basketId);
 		basket.setName("new name");
 		Item item = new Item("baterie", 3);

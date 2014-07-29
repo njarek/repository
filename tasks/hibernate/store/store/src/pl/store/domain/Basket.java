@@ -1,7 +1,5 @@
 package pl.store.domain;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,18 +8,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.annotations.Where;
 
 @XmlRootElement(name = "Basket")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -45,17 +42,14 @@ public class Basket {
 	@XmlElement(required = true)
 	private Set<Item> items = new HashSet<Item>(0);
 
-	private Set<AgdItem> agdItems = new HashSet<AgdItem>(0);
-
-	private Set<Fridge> fridges = new HashSet<Fridge>(0);
-
 	public Basket(String name) {
 		super();
 		this.name = name;
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "id_gen")
+	@TableGenerator(name = "id_gen", table = "GENERATOR_TABLE", pkColumnName = "key_name", valueColumnName = "next", pkColumnValue = "basketd", allocationSize = 30, initialValue = 10000)
 	@Column(name = "b_id", unique = true, nullable = false)
 	public int getId() {
 		return id;
@@ -85,8 +79,8 @@ public class Basket {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "b_id")
+	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Column(name = "i_id")
 	public Set<Item> getItems() {
 		return items;
 	}
@@ -100,32 +94,9 @@ public class Basket {
 		this.items = Items;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "b_id")
-	@Where(clause = "discriminator='AGD'")
-	public Set<AgdItem> getAgdItems() {
-		return agdItems;
-	}
-
-	public void setAgdItems(Set<AgdItem> agdItems) {
-		this.agdItems = agdItems;
-	}
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "b_id")
-	@Where(clause = "discriminator='Fridge'")
-	public Set<Fridge> getFridges() {
-		return fridges;
-	}
-
-	public void setFridges(Set<Fridge> fridges) {
-		this.fridges = fridges;
-	}
-
 	@Override
 	public String toString() {
-		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", items=" + items + ", agdItems=" + agdItems
-				+ ", fridges=" + fridges + "]";
+		return "Basket [id=" + id + ", version=" + version + ", name=" + name + ", items=" + items;
 	}
 
 	@Override

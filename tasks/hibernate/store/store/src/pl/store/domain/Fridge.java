@@ -1,13 +1,17 @@
 package pl.store.domain;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "item")
-@DiscriminatorValue("Fridge")
+@Table(name = "Fridge")
+@AttributeOverrides({ @AttributeOverride(name = "description", column = @Column(name = "I_DESCRIPTION")),
+		@AttributeOverride(name = "quantity", column = @Column(name = "I_QUANTITY")),
+		@AttributeOverride(name = "price", column = @Column(name = "I_Price")),
+		@AttributeOverride(name = "storeLocation", column = @Column(name = "I_location")) })
 public class Fridge extends AgdItem {
 
 	private String color;

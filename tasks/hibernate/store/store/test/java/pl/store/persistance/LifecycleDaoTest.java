@@ -3,10 +3,9 @@ package pl.store.persistance;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.DirtiesContext;
@@ -15,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.store.domain.Basket;
+import pl.store.domain.Item;
 import pl.store.domain.LifeCycleEnum;
 import pl.store.domain.LifeCycleState;
 import pl.store.persistance.Interface.BasketDao;
@@ -29,15 +29,19 @@ public class LifecycleDaoTest {
 	private LifecycleDao lifecycleDao;
 	@Inject
 	private BasketDao basketDao;
+	private int basketId;
+	
+	@Before
+	public void init() throws PersistaceException {
+		Basket basket = new Basket("new");
+		Item item = new Item("tv", 1);
+		item.setPrice(99.9);
+		item.setBasket(basket);
+		basket.addItem(item);
 
-	public void updateLifecycleTest(List<Basket> baskets, String status) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void updateLifecycleTest(List<Basket> baskets, boolean sendRequest) {
-		// TODO Auto-generated method stub
-
+		Basket basketnew = basketDao.saveBasket(basket);
+		lifecycleDao.saveNewLifecycle(basketnew);
+		basketId = basketnew.getId();
 	}
 
 	@Test
@@ -53,13 +57,13 @@ public class LifecycleDaoTest {
 
 	@Test
 	public void getLifecycleByBasketIdTest() {
-		LifeCycleState cycleState = lifecycleDao.getLifecycleByBasketId(1);
+		LifeCycleState cycleState = lifecycleDao.getLifecycleByBasketId(basketId);
 		assertNotNull(cycleState);
 	}
 
 	@Test
 	public void updateLifecycleTest() {
-		LifeCycleState cycleState = lifecycleDao.getLifecycleByBasketId(1);
+		LifeCycleState cycleState = lifecycleDao.getLifecycleByBasketId(basketId);
 		assertNotNull(cycleState);
 		cycleState.setLifecycleEnum(LifeCycleEnum.SENT);
 		cycleState = lifecycleDao.updateLifecycle(cycleState);

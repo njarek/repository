@@ -1,3 +1,12 @@
+drop  SEQUENCE HIBERNATE_SEQUENCE if exists;
+create SEQUENCE HIBERNATE_SEQUENCE;
+
+drop table GENERATOR_TABLE if exists;
+create table GENERATOR_TABLE (
+    key_name varchar(80),
+    next integer
+);
+
 drop table pojo if exists;
 create table pojo(
 id bigint auto_increment, 
@@ -19,9 +28,31 @@ b_id bigint,
 I_DESCRIPTION varchar2(255),
 I_QUANTITY bigint,
 I_price double,
-I_sotoreLocation varchar2(255),
+ FOREIGN KEY (b_id) REFERENCES basket(b_id) 
+);
+
+drop table agd if exists;
+create table agd(
+i_id bigint primary key auto_increment , 
+i_version bigint,
+b_id bigint,
+I_DESCRIPTION varchar2(255),
+I_QUANTITY bigint,
+I_price double,
+I_location varchar2(255),
+ FOREIGN KEY (b_id) REFERENCES basket(b_id) 
+);
+
+drop table fridge if exists;
+create table fridge(
+i_id bigint primary key auto_increment , 
+i_version bigint,
+b_id bigint,
+I_DESCRIPTION varchar2(255),
+I_QUANTITY bigint,
+I_price double,
+I_location varchar2(255),
 I_color varchar2(255),
-discriminator VARCHAR(20) ,
  FOREIGN KEY (b_id) REFERENCES basket(b_id) 
 );
 
@@ -34,33 +65,3 @@ l_lifecycle varchar2(255),
  FOREIGN KEY (b_id) REFERENCES basket(b_id) 
 );
 
-
-insert into pojo(number,name) values(22,'elo');
-
-insert into basket(b_version,b_name) values(1,'moj');
-
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(1,1,'tv',1,2.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(1,1,'baterie',4,3.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(1,1,'pilot',1,7.5,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(1,1,'pralka',1,1.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(1,1,'czajnik',2,0.4,'Item');
-
-insert into basket(b_version,b_name) values(2,'moj2');
-
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(2,1,'tv',1,2.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(2,1,'baterie',4,2.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(2,1,'pilot',1,2.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(2,1,'pralka',1,2.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(2,1,'czajnik2',2,2.2,'Item');
-
-insert into basket(b_version,b_name) values(3,'moj3');
-
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(3,1,'tv',1,2.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(3,1,'baterie',4,3.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(3,1,'pilot',1,7.5,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(3,1,'pralka',1,1.2,'Item');
-insert into item(b_id,i_version,I_DESCRIPTION,I_QUANTITY,I_price,discriminator) values(3,1,'czajnik',2,0.4,'Item');
-
-insert into LIFECYCLE(b_id,l_version,l_lifecycle) values(1,1,'new');
-insert into LIFECYCLE(b_id,l_version,l_lifecycle) values(2,1,'new');
-insert into LIFECYCLE(b_id,l_version,l_lifecycle) values(3,1,'modified');

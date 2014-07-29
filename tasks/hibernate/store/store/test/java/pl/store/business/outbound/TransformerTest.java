@@ -19,6 +19,11 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.store.domain.Basket;
+import pl.store.domain.Item;
+import pl.store.persistance.PersistaceException;
+import pl.store.persistance.Interface.BasketDao;
+import pl.store.persistance.Interface.LifecycleDao;
 import pl.supplier.domain.Buyer;
 import pl.supplier.domain.Order;
 import pl.supplier.domain.Requirements;
@@ -32,10 +37,22 @@ public class TransformerTest {
 
 	@Inject
 	private DefoultDataCollector dataCollector;
+	@Inject
+	private LifecycleDao lifecycleDao;
+	@Inject
+	private BasketDao basketDao;
 
 	@Before
-	public void init() {
+	public void init() throws PersistaceException {
 		System.out.println("elo");
+		Basket basket = new Basket("new");
+		Item item = new Item("tv", 1);
+		item.setPrice(99.9);
+		item.setBasket(basket);
+		basket.addItem(item);
+
+		Basket basketnew = basketDao.saveBasket(basket);
+		lifecycleDao.saveNewLifecycle(basketnew);
 	}
 
 	@Test
@@ -75,73 +92,9 @@ public class TransformerTest {
 		Order order = new Order();
 		order.setId(id++);
 		order.setType(type);
-		order.setName("czajnik");
-		order.setPrice(0.4);
-		order.setQuatity(1);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
-		order.setName("pralka");
-		order.setPrice(1.2);
-		order.setQuatity(1);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
-		order.setName("czajnik2");
-		order.setPrice(2.2);
-		order.setQuatity(1);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
 		order.setName("tv");
-		order.setPrice(2.2);
-		order.setQuatity(2);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
-		order.setName("pralka");
-		order.setPrice(2.2);
 		order.setQuatity(1);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
-		order.setName("pilot");
-		order.setPrice(7.5);
-		order.setQuatity(1);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
-		order.setName("pilot");
-		order.setPrice(2.2);
-		order.setQuatity(1);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
-		order.setName("baterie");
-		order.setPrice(3.2);
-		order.setQuatity(1);
-		orders.add(order);
-
-		order = new Order();
-		order.setId(id++);
-		order.setType(type);
-		order.setName("baterie");
-		order.setPrice(2.2);
-		order.setQuatity(1);
+		order.setPrice(99.9);
 		orders.add(order);
 
 		return orders;

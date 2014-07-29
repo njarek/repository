@@ -1,13 +1,18 @@
 package pl.store.domain;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "item")
-@DiscriminatorValue("AGD")
+@Table(name = "agd")
+@AttributeOverrides({
+    @AttributeOverride(name="description", column=@Column(name="I_DESCRIPTION")),
+    @AttributeOverride(name="quantity", column=@Column(name="I_QUANTITY")),
+    @AttributeOverride(name="price", column=@Column(name="I_Price"))
+})
 public class AgdItem extends Item {
 
 	public AgdItem() {
@@ -16,7 +21,7 @@ public class AgdItem extends Item {
 
 	private String storeLocation;
 
-	@Column(name = "I_sotoreLocation")
+	@Column(name = "I_location")
 	public String getStoreLocation() {
 		return storeLocation;
 	}

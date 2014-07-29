@@ -22,6 +22,7 @@ public class DefaultBasketDao implements BasketDao {
 				.createQuery("select b from LifeCycleState as l inner join l.basket as b where l.lifecycle= :lifecycle");
 		query.setParameter("lifecycle", lifeCycle.getLifecycle());
 		List<Basket> baskets = query.list();
+		hibernateSession.flush();
 		closeSession(hibernateSession);
 		return baskets;
 	}
@@ -31,6 +32,7 @@ public class DefaultBasketDao implements BasketDao {
 		Session hibernateSession = factory.openSession();
 
 		hibernateSession.save(basket);
+		hibernateSession.flush();
 		closeSession(hibernateSession);
 		return basket;
 	}
@@ -52,6 +54,7 @@ public class DefaultBasketDao implements BasketDao {
 		Session hibernateSession = getFactory().openSession();
 
 		Basket basket = (Basket) hibernateSession.get(Basket.class, id);
+		hibernateSession.flush();
 		closeSession(hibernateSession);
 		return basket;
 	}
