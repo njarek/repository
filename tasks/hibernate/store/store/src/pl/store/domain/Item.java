@@ -10,7 +10,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "item")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Item {
 
 	public Item() {
@@ -62,17 +61,8 @@ public class Item {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator="id_gen")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "i_id", unique = true, nullable = false)
-	@TableGenerator(
-		    name="id_gen",
-		    table="GENERATOR_TABLE",
-		    pkColumnName = "key_name",
-		    valueColumnName = "next",
-		    pkColumnValue="itemid",
-		    allocationSize=30,
-		    initialValue = 10000
-		)
 	public int getIdItem() {
 		return idItem;
 	}

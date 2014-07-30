@@ -1,17 +1,13 @@
 package pl.store.domain;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Fridge")
-@AttributeOverrides({ @AttributeOverride(name = "description", column = @Column(name = "I_DESCRIPTION")),
-		@AttributeOverride(name = "quantity", column = @Column(name = "I_QUANTITY")),
-		@AttributeOverride(name = "price", column = @Column(name = "I_Price")),
-		@AttributeOverride(name = "storeLocation", column = @Column(name = "I_location")) })
+@PrimaryKeyJoinColumn(name="f_id")
 public class Fridge extends AgdItem {
 
 	private String color;

@@ -10,9 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -48,8 +48,7 @@ public class Basket {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "id_gen")
-	@TableGenerator(name = "id_gen", table = "GENERATOR_TABLE", pkColumnName = "key_name", valueColumnName = "next", pkColumnValue = "basketd", allocationSize = 30, initialValue = 10000)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "b_id", unique = true, nullable = false)
 	public int getId() {
 		return id;
@@ -79,8 +78,8 @@ public class Basket {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "basket", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(name = "i_id")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "b_id")
 	public Set<Item> getItems() {
 		return items;
 	}

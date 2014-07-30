@@ -33,27 +33,16 @@ I_price double,
 
 drop table agd if exists;
 create table agd(
-i_id bigint primary key auto_increment , 
-i_version bigint,
-b_id bigint,
-I_DESCRIPTION varchar2(255),
-I_QUANTITY bigint,
-I_price double,
+a_id bigint primary key auto_increment , 
 I_location varchar2(255),
- FOREIGN KEY (b_id) REFERENCES basket(b_id) 
+ FOREIGN KEY (a_id) REFERENCES item(i_id) 
 );
 
 drop table fridge if exists;
 create table fridge(
-i_id bigint primary key auto_increment , 
-i_version bigint,
-b_id bigint,
-I_DESCRIPTION varchar2(255),
-I_QUANTITY bigint,
-I_price double,
-I_location varchar2(255),
+f_id bigint primary key auto_increment , 
 I_color varchar2(255),
- FOREIGN KEY (b_id) REFERENCES basket(b_id) 
+ FOREIGN KEY (f_id) REFERENCES agd(a_id) 
 );
 
 drop table LIFECYCLE if exists;
