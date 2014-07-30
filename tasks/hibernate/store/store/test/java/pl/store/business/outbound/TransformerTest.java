@@ -19,6 +19,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.store.domain.AgdItem;
 import pl.store.domain.Basket;
 import pl.store.domain.Item;
 import pl.store.persistance.PersistaceException;
@@ -51,8 +52,20 @@ public class TransformerTest {
 		item.setBasket(basket);
 		basket.addItem(item);
 
-		Basket basketnew = basketDao.saveBasket(basket);
-		lifecycleDao.saveNewLifecycle(basketnew);
+		basketDao.saveBasket(basket);
+		lifecycleDao.saveNewLifecycle(basket);
+		
+		Basket basket2 = new Basket("new2");
+		AgdItem item2 = new AgdItem();
+		item2.setDescription("cos");
+		item2.setPrice(99.9);
+		item2.setQuantity(1);
+		item2.setBasket(basket2);
+		item2.setStoreLocation("a3");
+		basket2.addItem(item2);
+
+		basketDao.saveBasket(basket2);
+		lifecycleDao.saveNewLifecycle(basket2);
 	}
 
 	@Test
@@ -89,6 +102,15 @@ public class TransformerTest {
 		List<Order> orders = new ArrayList<Order>();
 		final String type = "RTV";
 		int id = 0;
+			
+		Order order2 = new Order();
+		order2.setId(id++);
+		order2.setType(type);
+		order2.setQuatity(1);
+		order2.setName("cos");
+		order2.setPrice(99.9);
+		orders.add(order2);
+		
 		Order order = new Order();
 		order.setId(id++);
 		order.setType(type);
