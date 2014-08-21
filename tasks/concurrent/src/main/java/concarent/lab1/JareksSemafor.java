@@ -6,26 +6,23 @@ import java.util.concurrent.locks.Lock;
 
 public class JareksSemafor implements Lock {
 
-	private boolean isLocked = false;
 	private int numberOfAcceptableThreads;
-	private int currentThread=0;
+	private int threadCount = 0;
 
 	public JareksSemafor(int numberOfThreads) {
-		this.numberOfAcceptableThreads = numberOfThreads;
+		this.setNumberOfAcceptableThreads(numberOfThreads);
 	}
 
 	public void lock() {
 
 		synchronized (this) {
-			currentThread++;
 			try {
-				while (isLocked && currentThread>=numberOfAcceptableThreads ) {
-					System.out.println("locked for thread");
-					
+				while (getCurrentThread() >= getNumberOfAcceptableThreads()) {
+					// System.out.println("locked for thread");
+
 					this.wait();
 				}
-				
-				isLocked = true;
+				threadCount++;
 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -52,15 +49,30 @@ public class JareksSemafor implements Lock {
 	}
 
 	public synchronized void unlock() {
-		currentThread--;
-		isLocked = false;
-		this.notify();
+		threadCount--;
+		this.notifyAll();
 
 	}
 
 	public Condition newCondition() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int getNumberOfAcceptableThreads() {
+		return numberOfAcceptableThreads;
+	}
+
+	public void setNumberOfAcceptableThreads(int numberOfAcceptableThreads) {
+		this.numberOfAcceptableThreads = numberOfAcceptableThreads;
+	}
+
+	public int getCurrentThread() {
+		return threadCount;
+	}
+
+	public void setCurrentThread(int currentThread) {
+		this.threadCount = currentThread;
 	}
 
 }
