@@ -1,7 +1,5 @@
 package concarent.lab1;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class SynchronizedIncremetatorByLocks {
 
@@ -33,44 +31,6 @@ public class SynchronizedIncremetatorByLocks {
 		incrementThread1.start();
 		}
 
-//		Thread incrementThread2 = new Thread(new Runnable() {
-//			public void run() {
-//				try {
-//					increment("thread2");
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//
-//		Thread incrementThread3 = new Thread(new Runnable() {
-//			public void run() {
-//				try {
-//					increment("thread3");
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//
-//		Thread incrementThread4 = new Thread(new Runnable() {
-//			public void run() {
-//				try {
-//					increment("thread4");
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//
-//		incrementThread1.start();
-//		incrementThread2.start();
-//		incrementThread3.start();
-//		incrementThread4.start();
-
 	}
 
 	public void increment(String threadName) throws InterruptedException {
@@ -83,7 +43,6 @@ public class SynchronizedIncremetatorByLocks {
 		Thread.sleep(1000);
 		for (int i = 0; i < 10000; i++) {
 			increment++;
-			// System.out.println("plus " + increment);
 		}
 		lock.unlock();
 		System.out.println("thread " + threadName + " left synchronized scope");

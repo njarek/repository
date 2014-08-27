@@ -2,9 +2,6 @@ package concarent.lab2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-
-import concarent.lab1.JareksLock;
 
 public class BlockingQueue {
 	private List<String> lista = new ArrayList<String>();
