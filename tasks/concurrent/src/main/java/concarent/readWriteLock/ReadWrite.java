@@ -14,14 +14,14 @@ public class ReadWrite {
 
 	public static void main(String[] args) {
 		final ReadWrite rw = new ReadWrite();
-
+		
 		for (int i = 0; i < 3; i++) {
 			final int threadNr = i;
 
 			Thread reader1Thread = new Thread(new Runnable() {
 				public void run() {
 					while (true) {
-						System.out.println(threadNr + " is readinig value " + rw.getValue());
+						rw.printValue(threadNr);
 					}
 
 				}
@@ -34,7 +34,6 @@ public class ReadWrite {
 			public void run() {
 				while (true) {
 					int o=new Random().nextInt(20);
-					System.out.println("new value is "+o);
 					rw.setValue(o);
 				}
 
@@ -43,9 +42,10 @@ public class ReadWrite {
 		writeThread.start();
 	}
 
-	public int getValue() {
+	public int printValue(int threadNr) {
 		rLock.lock();
 		try {
+			System.out.println(threadNr + " is readinig value " + value);
 			return value;
 		} finally {
 			rLock.unlock();
@@ -57,6 +57,7 @@ public class ReadWrite {
 		try {
 			Thread.sleep(2000);
 			this.value = value;
+			System.out.println("new value is "+value);
 		} catch (InterruptedException e) {
 		} finally {
 			wLock.unlock();
