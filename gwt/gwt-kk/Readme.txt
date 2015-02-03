@@ -1,0 +1,1 @@
+clean gwt:clean compile gwt:compile package

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="kk">
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='pl.jw.gwt_kk.kk' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/kk/greet" class="pl.jw.gwt_kk.server.GreetingServiceImpl" />
+
+</module>
