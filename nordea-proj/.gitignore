@@ -1,0 +1,10 @@
+/build/
+/target/
+/build
+/target
+/bin
+.settings/
+.classpath
+/java/
+.project
+/Users/
