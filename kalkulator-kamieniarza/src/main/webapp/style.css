@@ -1,0 +1,236 @@
+@CHARSET "UTF-8";
+
+html,div,body,table,p,ul,li,form,input,label,select {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background-color: white;
+}
+
+label {
+	cursor: default;
+}
+
+#page {
+	position: absolute;
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#menu {
+	position: fixed;
+	width: 100%;
+	height: 80px;
+	top: 0;
+	background: linear-gradient(to right, rgb(9, 85, 11), rgb(255, 230, 37));
+}
+
+#menuLogo {
+	position: fixed;
+	width: 200px;
+	height: 80px;
+	left: 50px;
+	top: 0;
+}
+
+#menuLogo h1 {
+	position: absolute;
+	left: 0;
+	top: -15px;
+	color: white;
+	font-family: "Cursive"
+}
+
+#buttons {
+	position: absolute;
+	width: 600px;
+	height: 100%;
+	left: 250px;
+	top: 0;
+	vertical-align: middle;
+}
+
+#buttons label.ui-state-default {
+	background: rgb(9, 85, 11);
+	color: white;
+	top: 30px;
+}
+
+#buttons label.ui-state-hover {
+	background: rgb(17, 61, 21);
+}
+
+#buttons label.ui-state-active {
+	background: rgb(62, 153, 64);
+	vertical-align: middle;
+	color: rgb(255, 230, 37);
+	top: 25px;
+}
+
+.przycisk.ui-state-default {
+	background: rgb(9, 85, 11);
+	color: white;
+	top: 30px;
+}
+
+.przycisk.ui-state-hover {
+	background: rgb(17, 61, 21);
+}
+
+.przycisk.ui-state-active {
+	background: rgb(62, 153, 64);
+	vertical-align: middle;
+	color: rgb(255, 230, 37);
+	top: 25px;
+}
+
+#add {
+	position: fixed;
+	z-index: 0;
+	width: 200px;
+	height: 80%;
+	top: 100px;
+	right: 0;
+	bottom: 50px;
+}
+
+#hide {
+	cursor: pointer;
+	position: absolute;
+	z-index: 0;
+	width: 20px;
+	height: 50px;
+	top: 0;
+	left: 0;
+	background-image: url("image/strzalki.png");
+}
+
+#newAdd {
+	position: absolute;
+	z-index: 0;
+	width: 180px;
+	height: 100%;
+	top: 0;
+	right: 0;
+	background: linear-gradient(to top, rgb(255, 230, 37), rgb(9, 85, 11));
+}
+
+#adtaily {
+	width: 140px;
+	margin: 20px;
+}
+
+.main {
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+#content {
+	position: absolute;
+	height: auto;
+	width:inherit;
+	top: 0;
+	left: 0;
+z-index: -1;
+
+}
+
+#formDiv{
+	display: table;
+    margin: 0 auto;
+}
+
+#Program input {
+	height: 25px;
+	border-radius: 5px;
+}
+
+table {
+	width: 750px;
+	border: none;
+}
+
+.ui-accordion-header {
+	background: rgb(17, 61, 21);
+	width: 800px;
+	color: white;
+}
+
+.ui-accordion-content {
+	background: rgb(62, 153, 64);
+	vertical-align: middle;
+	color: rgb(255, 230, 37);
+	top: 25px;
+	width: 770px;
+}
+
+fieldset {
+	border: none;
+}
+
+.selecting {
+	width: 400px;
+	background: rgb(62, 153, 64);
+	border: none;
+}
+
+.invalidElem {
+	border: medium solid red;
+}
+
+.errorMsg {
+	color: rgb(166, 50, 0);
+}
+
+.wazne {
+	font-size: 25px;
+	font-weight: bold;
+	
+}
+
+#wyniki {
+	font-size: 20px;
+	display: table;
+    margin: 0 auto;
+}
+
+#wyniki h2{
+	margin-top:50px;
+	
+}
+
+#wyniki table {
+	 
+	width: 300px;
+}
+
+
+#wyniki table tr:nth-child(odd) {
+	color: rgb(255, 230, 37);
+	background-color: rgb(9, 85, 11);
+}
+
+#wyniki table  tr:nth-child(even) {
+	color: rgb(9, 85, 11);
+	background-color: rgb(255, 230, 37);
+}
+
+
+#futter {
+	position: fixed;
+	z-index: 0;
+	width: 100%;
+	height: 20px;
+	background: linear-gradient(to right, rgb(255, 230, 37), rgb(9, 85, 11));
+	bottom: 0;
+}
+
+#futter div {
+	color: white;
+	position: absolute;
+	width: 200px;
+	right: 0;
+}

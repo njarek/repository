@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords"
+	content="program dla kamieniarzy, kalkulator kamieniarza, oprogramowanie kamieniarskie, program, nagrobki, tablice napisowe, oprogramowanie dla kamieniarzy, program kamieniarski, portal kamieniarski, oirtal, reklama kamieniarska, reklama dla kamieniarzy " />
+<meta name="description"
+	content="Serwis Kalkulator Kamieniarza jest to Portal kamieniarski oferujący proste w obsłudze oprogramowanie dla kamieniarzy. Program ten gwarantuje oszczędność czasu i pieniędzy podczas projektowania nagrobków i tablic napisowych" />
+<meta name="robots" content="index,follow" />
+<meta name="Author" content="Jarosław Niedorozow" />
+
+
+
+
+<title>Portal Kamieniarski, Oprogramowanie dla Kamieniarzy - "Kalkulator Kamieniarza"</title>
+<link rel="Shortcut icon" href="favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="scripts/jquery-ui-1.11.1/jquery-ui.min.css" />
+<link rel="Stylesheet" type="text/css" href="style.css" />
+<script src="scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="scripts/jquery-ui-1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+<script src="scripts/jquery-ui-1.11.1/js-corners.js" type="text/javascript"></script>
+<script src="scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="scripts/manuButtons.js" type="text/javascript"></script>
+<script src="scripts/adds.js" type="text/javascript"></script>
+<script src="scripts/form.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div id="page">
+		<div id="content">
+			<noscript>Wacz js</noscript>
+			<div id="Home" class="main">main</div>
+			<div id="Nazwenictwo" class="main">nazewnictwo</div>
+			<div id="Program" class="main">
+				<div id="formDiv">
+				<form id="tombForm">
+					<h2>Ceny</h2>
+					<div id="ceny">
+						<div id="ceny_za_metr">
+							<h3>Ceny Podstawowe</h3>
+							<div id="ceny_podstawowe">
+
+								<table>
+									<tr>
+										<td><label for="cena_za_metr">Cena za metr kwadratowy </label></td>
+										<td><input id="cena_za_metr" value="500" class="ceny"></td>
+									</tr>
+								</table>
+
+
+							</div>
+							<h3>Ceny Rozszerzone</h3>
+							<div id="ceny_rozszerzone">
+								<table>
+									<tr>
+										<td><label for="cena_za_metr_okldzin">Cena za metr kwadratowy okładziń</label></td>
+										<td><input id="cena_za_metr_okldzin" value="500" class="ceny"></td>
+										<td><label for="grubosc_okldzin">Grubosc</label></td>
+										<td><input id="grubosc_okldzin" value="5" class="grubosci"></td>
+									</tr>
+									<tr>
+										<td><label for="cena_za_metr_scian">Cena za metr kwadratowy ścian</label></td>
+										<td><input id="cena_za_metr_scian" value="500" class="ceny"></td>
+										<td><label for="grubosc_scian">Grubosc</label></td>
+										<td><input id="grubosc_scian" value="5" class="grubosci"></td>
+									</tr>
+									<tr>
+										<td><label for="cena_za_metr_nakrywy">Cena za metr kwadratowy nakrywy </label></td>
+										<td><input id="cena_za_metr_nakrywy" value="500" class="ceny"></td>
+										<td><label for="grubosc_nakrywy">Grubosc</label></td>
+										<td><input id="grubosc_nakrywy" value="5" class="grubosci"></td>
+									</tr>
+									<tr>
+										<td><label for="cena_za_metr_gradus">Cena za metr kwadratowy gradusa </label></td>
+										<td><input id="cena_za_metr_gradus" value="500" class="ceny"></td>
+										<td><label for="grubosc_gradus">Grubosc</label></td>
+										<td><input id="grubosc_gradus" value="6" class="grubosci"></td>
+									</tr>
+
+								</table>
+
+							</div>
+						</div>
+
+					</div>
+					<h2>Wymiary</h2>
+					<div id="wymiary_podstawowe_accordion">
+						<h3>Wymiary Podstawowe</h3>
+
+
+						<div id="wymiary_podstawowe">
+							<table>
+								<tr>
+									<td><label for="wusokosc_scian">Wysokosc </label></td>
+									<td><input id="wusokosc_scian" value="30" class="wymiary_male"></td>
+								</tr>
+								<tr>
+									<td><label for="szerokosc">Szerokosc </label></td>
+									<td><input id="szerokosc" value="120" class="wymiary_duze"></td>
+								</tr>
+								<tr>
+									<td><label for="dlugosc">Dlugosc </label></td>
+									<td><input id="dlugosc" value="250" class="wymiary_duze"></td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+
+					<div id="wymiary_rozszerzone_accordion">
+						<h3>Wymiary Rozszerzone</h3>
+						<div id="wymiary_rozszerzone">
+							<table>
+								<tr>
+									<td><label for="szerokosc_okladziny_przedniej">Szerokosc przedniej okladziny </label></td>
+									<td><input id="szerokosc_okladziny_przedniej" value="25" class="wymiary_male"></td>
+
+									<td><label for="szerokosc_gradusa">Szerokosc Gradusa </label></td>
+									<td><input id="szerokosc_gradusa" value="30" class="wymiary_male"></td>
+
+
+								</tr>
+								<tr>
+									<td><label for="szerokosc_okladziny_tylnej">Szerokosc tylnej okladziny </label></td>
+									<td><input id="szerokosc_okladziny_tylnej" value="15" class="wymiary_male"></td>
+
+									<td><label for="wypust_gradusa">Wypust Gradusa </label></td>
+									<td><input id="wypust_gradusa" value="2" class="wymiary_male"></td>
+								</tr>
+								<tr>
+									<td><label for="szerokosc_okladziny_dlugiej">Szerokosc dlugich okladzin </label></td>
+									<td><input id="szerokosc_okladziny_dlugiej" value="15" class="wymiary_male"></td>
+									<td><label for="okap">Okap </label></td>
+									<td><input id="okap" value="5" class="wymiary_male"></td>
+								</tr>
+
+
+							</table>
+
+						</div>
+
+					</div>
+					<div>
+						<h2>Wykonczenia</h2>
+						<div id="wykonczeniadiv">
+							<h3>Wykonczenia / Cena za metr</h3>
+							<table>
+								<tr>
+									<td><label for="wykonczenia">Wykonczenie Nakrywy</label></td>
+									<td>
+										<fieldset>
+											<select name="wykonczenia" id="wykonczenia" class="selecting">
+												<option value="proste" selected="selected">Proste</option>
+												<option value="cw1">Cwiercwalek promien: 1cm</option>
+												<option value="cw2">Cwiercwalek promien: 2cm</option>
+												<option value="cw3">Cwiercwalek promien: 1/2 grubosci plyty</option>
+												<option value="cw4">Cwiercwalek promien: grubosci plyty</option>
+												<option value="fa1">Faza promien: 1cm</option>
+												<option value="fa2">Faza promien: 2cm</option>
+												<option value="fa3">Faza promien: 1/2 grubosci plyty</option>
+												<option value="fa4">Faza promien: grubosci plyty</option>
+												<option value="inne">Inne</option>
+											</select>
+										</fieldset>
+									</td>
+									<td>Cena</td>
+									<td><input id="cena_wykonczenia_nakrywy" class="ceny" value="100"></td>
+								</tr>
+
+								<tr>
+									<td><label for="wykonczenia_nakrywy_przod">Wykonczenie nakrywy z przodu</label></td>
+									<td>
+										<fieldset>
+											<select name="wykonczenia_nakrywy_przod" id="wykonczenia_nakrywy_przod" class="selecting">
+												<option value="proste" selected="selected">Proste</option>
+												<option value="luk">Luk</option>
+												<option value="fala">Fala</option>
+											</select>
+										</fieldset>
+									</td>
+									<td>Cena</td>
+									<td><input id="cena_wykonczenia_nakrywy_z_przodu" class="ceny" value="100"></td>
+								</tr>
+
+								<tr>
+									<td><label for="wykonczenia_okladzin">Wykonczenie Okladzin</label></td>
+									<td>
+										<fieldset>
+											<select name="wykonczenia_okladzin" id="wykonczenia_okladzin" class="selecting">
+												<option value="proste" selected="selected">Proste</option>
+												<option value="cw1">Cwiercwalek promien: 1cm</option>
+												<option value="cw2">Cwiercwalek promien: 2cm</option>
+												<option value="cw3">Cwiercwalek promien: 1/2 grubosci plyty</option>
+												<option value="cw4">Cwiercwalek promien: grubosci plyty</option>
+												<option value="fa1">Faza promien: 1cm</option>
+												<option value="fa2">Faza promien: 2cm</option>
+												<option value="fa3">Faza promien: 1/2 grubosci plyty</option>
+												<option value="fa4">Faza promien: grubosci plyty</option>
+												<option value="inne">Inne</option>
+											</select>
+										</fieldset>
+									</td>
+									<td>Cena</td>
+									<td><input id="cena_wykonczenia_okladzin" class="ceny" value="100"></td>
+								</tr>
+
+								<tr>
+									<td><label for="wykonczenia_okladzin_przod">Wykonczenie nakrywy z przodu</label></td>
+									<td>
+										<fieldset>
+											<select name="wykonczenia_okladzin_przod" id="wykonczenia_okladzin_przod" class="selecting">
+												<option value="proste" selected="selected">Proste</option>
+												<option value="luk">Luk</option>
+												<option value="fala">Fala</option>
+											</select>
+										</fieldset>
+									</td>
+									<td>Cena</td>
+									<td><input id="cena_wykonczenia_okladzin_z_przodu" class="ceny" value="100"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div id="buttonDiv">
+						<button id="submit" type="submit" class="przycisk">Oblicz</button>
+					</div>
+				</form>
+				</div>
+				<div id="wyniki">
+					<div >
+						<button id="pobierz" type="submit" class="przycisk">Pobierz pdf</button>
+						</div>
+						<div>
+						<button id="powrot" type="submit" class="przycisk">Powrot do formularza</button>
+					</div>
+					<h2>Wyniki</h2>
+					<table>
+						<tr>
+							<td>Cena</td>
+							<td><label id="wynik_cena" class="wazne"></label></td>
+						</tr>
+						<tr>
+							<td>Ilosc materialu w metrach kwadratowych</td>
+							<td><label id="wynik_zuzycie" class="wazne"></label></td>
+						</tr>
+						<tr>
+							<td>Dlugosc Cwiercwalka</td>
+							<td><label id="wynik_cwiercwalek"></label></td>
+						</tr>
+						<tr>
+							<td>Dlugosc Profilu</td>
+							<td><label id="wynik_profilu"></label></td>
+						</tr>
+
+						<tr>
+							<td>Powierzchnia Nakrywy</td>
+							<td><label id="wynik_nakrywa"></label></td>
+						</tr>
+						<tr>
+							<td>Cena Nakrywy</td>
+							<td><label id="wynik_nakrywa_cena"></label></td>
+						</tr>
+
+						<tr>
+							<td>Powierzchnia Gradusa</td>
+							<td><label id="wynik_gradus"></label></td>
+						</tr>
+						<tr>
+							<td>Cena Gradusa</td>
+							<td><label id="wynik_gradus_cena"></label></td>
+						</tr>
+
+						<tr>
+							<td>Powierzchnia Scian</td>
+							<td><label id="wynik_scian"></label></td>
+						</tr>
+						<tr>
+							<td>Cena Scian</td>
+							<td><label id="wynik_scian_cena"></label></td>
+						</tr>
+
+						<tr>
+							<td>Powierzchnia Okladzin</td>
+							<td><label id="wynik_okladzin"></label></td>
+						</tr>
+						<tr>
+							<td>Cena Okladzin</td>
+							<td><label id="wynik_okladzin_cena"></label></td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
+
+		
+
+		<div id="Kontakt" class="main">Kontakt</div>
+</div>
+		<div id="menu">
+			<div id="menuLogo">
+				<h1>Kalkulator Kamieniarza</h1>
+			</div>
+			<div id="buttons">
+				<input type="radio" name="menuButton" id="bmain" checked /> <label for="bmain">Home</label> <input type="radio" name="menuButton"
+					id="bnazewnictwo" /><label for="bnazewnictwo">Nazwenictwo</label> <input type="radio" name="menuButton" id="bcalculate" /><label
+					for="bcalculate">Program</label> <input type="radio" name="menuButton" id="bcontact" /><label for="bcontact">Kontakt</label>
+			</div>
+		</div>
+		<div id="add">
+
+			<div id="newAdd">
+				<div id="adtaily">
+					<script type="text/javascript" id="AdTaily_Widget" src="http://static.adtaily.pl/widget.js#321aq8m6U6Kgeiw"></script>
+					<noscript>
+						<a href="http://www.adtaily.pl">Reklama w internecie</a>
+					</noscript>
+				</div>
+			</div>
+			<div id="hide"></div>
+		</div>
+		<div id="futter">
+			<div>&copy; Jarosław Niedorozow</div>
+
+		</div>
+
+
+	</div>
+
+</body>
+</html>
