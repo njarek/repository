@@ -12,3 +12,7 @@ git reset --hard upstream/master
  git pull $jakas_nazqwa move
 
 git commit
+
+
+Czyszczenie lokalnego repo:
+git branch --merged | grep -v "\*" | grep -v "YOUR_BRANCH_TO_KEEP" | xargs -n 1 git branch -d
